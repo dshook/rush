@@ -3,9 +3,11 @@ module.exports = HomeActivity;
 /**
  * @constructor
  */
-function HomeActivity()
+function HomeActivity($root, storage, transport)
 {
-
+  this.$root     = $root;
+  this.transport = transport;
+  this.storage   = storage;
 }
 
 /**
@@ -13,5 +15,5 @@ function HomeActivity()
  */
 HomeActivity.prototype.onStart = function()
 {
-  console.log('Hello, Earf!');
+
 };
