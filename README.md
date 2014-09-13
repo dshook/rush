@@ -1,5 +1,14 @@
 # Project Template
 
+## Project Structure
+
+* `app/client` All client-side code
+* `app/server` All server code
+* `app/node_modules` Local libraries and shared code
+* `public` Web root of the node app
+* `public/dist` Output directory for client artifacts
+* `style` LESS style sheets
+
 ## What ya got
 
 * Browserify v5 compiler
@@ -40,3 +49,4 @@ $ npm test
 ## Server
 
 Port is `12345` or `PORT` environment variable (or use a local `.env` file)
+
