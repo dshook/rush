@@ -1,6 +1,25 @@
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
+  // Add more libs to this array to push more stuff out to the vendor bundle
+  var VENDOR_LIBS = [
+
+    // 3rd party
+    'activities',
+    'billy',
+    'bluebird',
+    'debug',
+    'httpinvoke',
+    'jquery',
+    'typedef',
+    'underscore',
+
+    // local libs
+    'activity-service',
+    'http-transport',
+    'local-storage'
+  ];
+
   grunt.initConfig({
 
     jshint: {
@@ -20,9 +39,25 @@ module.exports = function(grunt) {
         src: ['./app/client/main.js'],
         dest: './public/dist/main.js',
         options: {
-          browserifyOptions: { debug: true }
+          external: VENDOR_LIBS,
+          browserifyOptions: {
+            debug: true
+          }
+        }
+      },
+
+      vendor: {
+        src: [],
+        dest: './public/dist/vendor.js',
+        options: {
+          require: VENDOR_LIBS,
+          browserifyOptions: {
+            basedir: './app',
+            debug: true
+          }
         }
       }
+
     },
 
     less: {
@@ -51,6 +86,7 @@ module.exports = function(grunt) {
     'jshint:client',
     'jshint:lib',
     'clean:client',
+    'browserify:vendor',
     'browserify:client',
     'less:client'
   ]);
