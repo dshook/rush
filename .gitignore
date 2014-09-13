@@ -1,0 +1,10 @@
+# output
+public/dist
+
+# deps
+public/bower_components
+node_modules
+
+# local config
+.env
+
