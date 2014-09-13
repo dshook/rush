@@ -1,6 +1,6 @@
 var Application     = require('billy');
 var ActivityService = require('activity-service');
-var BrowserService  = require('browser-service');
+var Browser         = require('./services/Browser.js');
 
 // Root container
 var app = new Application();
@@ -10,7 +10,7 @@ global.debug = require('debug');
 global.app = app;
 
 // Services
-app.service(BrowserService);
+app.service(Browser);
 app.service(ActivityService);
 
 // Configs

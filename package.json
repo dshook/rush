@@ -2,7 +2,8 @@
   "name": "project-template",
   "version": "0.1.0",
   "scripts": {
-    "start": "node ./app/server/main.js"
+    "start": "node ./app/server/main.js",
+    "build": "grunt client"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

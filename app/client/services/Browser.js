@@ -1,4 +1,4 @@
-module.exports = BrowserService;
+module.exports = Browser;
 
 var HttpTransport = require('http-transport');
 var LocalStorage  = require('local-storage');
@@ -12,7 +12,7 @@ var $             = require('jquery');
  * * `dom.root` query selector for the app root DOM node (defaults to body)
  * @constructor
  */
-function BrowserService(app, config)
+function Browser(app, config)
 {
   var namespace = config.get('storage.namespace', 'app-storage');
 
