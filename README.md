@@ -1,24 +1,8 @@
 # Project Template
 
-## Project Structure
+## Requirements
 
-* `app/client` All client-side code
-* `app/server` All server code
-* `app/node_modules` Local libraries and shared code
-* `public` Web root of the node app
-* `public/dist` Output directory for client artifacts
-* `style` LESS style sheets
-
-## What ya got
-
-* Browserify v5 compiler
-* NodeJS server app
-* Grunt task runner
-* LESS css pre-procesor
-* Bootstrap 3 style framework
-* Activities state management
-* billy application harness
-* tape testing library
+* NodeJS
 
 ## How to use
 
@@ -45,6 +29,26 @@ Run automated testing
 ```
 $ npm test
 ```
+
+## Project Structure
+
+* `app/client` All client-side code
+* `app/server` All server code
+* `app/node_modules` Local libraries and shared code
+* `public` Web root of the node app
+* `public/dist` Output directory for client artifacts
+* `style` LESS style sheets
+
+## What ya got
+
+* Browserify v5 compiler
+* NodeJS server app
+* Grunt task runner
+* LESS css pre-procesor
+* Bootstrap 3 style framework
+* Activities state management
+* billy application harness
+* tape testing library
 
 ## Server
 
