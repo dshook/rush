@@ -2,7 +2,9 @@ module.exports = Browser;
 
 var HttpTransport = require('http-transport');
 var LocalStorage  = require('local-storage');
+var Promise       = require('bluebird');
 var $             = require('jquery');
+var debug         = require('debug')('Browser');
 
 /**
  * Setup local storage and HTTP transports
@@ -22,3 +24,16 @@ function Browser(app, config)
   app.register('storage', new LocalStorage(namespace)).asInstance();
   app.register('$root', $(selector)).asInstance();
 }
+
+/**
+ * Wait for page to load
+ */
+Browser.prototype.start = function()
+{
+  return new Promise(function(resolve, reject) {
+    $(function() {
+      debug('page ready');
+      resolve();
+    });
+  });
+};

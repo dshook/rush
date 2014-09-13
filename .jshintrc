@@ -62,5 +62,9 @@
     "rhino"       : false,
     "worker"      : false,
     "wsh"         : false,
-    "yui"         : false
+    "yui"         : false,
+
+    "globals": {
+      "Promise": true
+    }
 }
