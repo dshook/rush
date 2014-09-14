@@ -6,7 +6,7 @@ module.exports = {
   port: process.env.PORT || 12345,
 
   // location to host static files
-  webroot: path.resolve(path.join(__dirname, '../../public')),
+  webroot: path.resolve(path.join(__dirname, '../../../public')),
 
   // used for securing cookies etc
   cookieSecret: 'shhhh'
