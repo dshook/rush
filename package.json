@@ -1,18 +1,22 @@
 {
   "name": "project-template",
   "version": "0.1.0",
+  "repository": "https://bitbucket.org/dshook/rush",
   "scripts": {
     "start": "node ./app/server/main.js",
     "build": "grunt client"
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-browserify": "^3.0.1",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-less": "^0.11.4",
-    "grunt-contrib-watch": "^0.6.1",
-    "load-grunt-tasks": "^0.6.0"
+    "del": "^1.1.1",
+    "gulp": "^3.8.x",
+    "gulp-browserify": "^0.5.x",
+    "gulp-jshint": "^1.9.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-sass": "^1.1.0",
+    "gulp-sequence": "^0.3.1",
+    "gulp-sourcemaps": "^1.2.8",
+    "load-grunt-tasks": "^0.6.0",
+    "run-sequence": "^1.0.2"
   },
   "dependencies": {
     "activities": "^1.1.3",
