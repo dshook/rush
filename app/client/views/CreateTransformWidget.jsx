@@ -1,9 +1,13 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  handleAdd(){
+    this.props.onClick();
+  },
+
   render() {
     return (
-      <div className="transform-widget">
+      <div onClick={this.handleAdd} className="transform-widget">
         <p><i className="fa fa-plus"></i> Add</p>
       </div>
     )

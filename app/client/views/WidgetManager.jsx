@@ -11,11 +11,17 @@ module.exports = React.createClass({
     return <TransformWidget {...widget} />
   },
 
+  addWidget(){
+    var widgets = this.state.widgets;
+    widgets.push({name: 'New'});
+    this.setState({widgets: widgets});
+  },
+
   render() {
     return (
       <div className="widgets">
         {this.state.widgets.map(this.renderWidget)}
-        <CreateTransformWidget />
+        <CreateTransformWidget onClick={this.addWidget} />
       </div>
     )
   }
