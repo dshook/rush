@@ -93,7 +93,7 @@ gulp.task('client', function() {
 });
 
 gulp.task('watch', function() {
-  //gulp.watch('/**/*.less', ['less']);
+  gulp.watch('./style/**/*.scss', ['sass']);
   gulp.watch('./app/client/**/*.js', ['browserify-client']);
   gulp.watch('./app/client/**/*.jsx', ['browserify-client']);
 });

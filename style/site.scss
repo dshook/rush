@@ -1,9 +1,12 @@
-$font-stack:    Helvetica, sans-serif;
-$primary-color: #333;
-$secondary-color: #248;
+@import 'normalize';
+@import 'colors';
+@import 'fonts';
+
+@import 'layout';
 
 body {
   font: 100% $font-stack;
-  color: $primary-color;
-  background: $secondary-color;
+  font-size: $font-size;
+  color: $base6;
+  background: $base0;
 }
