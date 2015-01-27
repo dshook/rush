@@ -18,7 +18,7 @@ function Browser(app, config)
 {
   var namespace = config.get('storage.namespace', 'app-storage');
 
-  var selector = config.get('dom.rootSelector', 'body');
+  var selector = config.get('dom.rootSelector', '.layout');
 
   app.register('transport', new HttpTransport()).asInstance();
   app.register('storage', new LocalStorage(namespace)).asInstance();

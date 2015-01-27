@@ -1,4 +1,5 @@
 var React = require('react');
+var test =  React.createFactory(require('../views/layout.jsx'));
 
 module.exports = HomeActivity;
 
@@ -17,4 +18,5 @@ function HomeActivity($root, storage, transport)
  */
 HomeActivity.prototype.onStart = function()
 {
+  React.render(new test({text: 'Hello React'}), this.$root[0]);
 };
