@@ -1,5 +1,5 @@
 $header-height: 2em;
-$footer-height: 7em;
+$footer-height: 3em;
 $layout-padding: 0.5em;
 
 .header{
@@ -10,6 +10,7 @@ $layout-padding: 0.5em;
   right: 0;
   height: $header-height;
   padding: $layout-padding;
+  position: fixed;
 
   h1{
     margin: 0;
@@ -18,10 +19,10 @@ $layout-padding: 0.5em;
 
 .main{
   position: absolute;
-  top: $header-height;
+  top: $header-height + (2 * $layout-padding);
   left: 0;
   right: 0;
-  bottom: $footer-height;
+  bottom: $footer-height + (2 * $layout-padding);
   padding: $layout-padding;
 }
 

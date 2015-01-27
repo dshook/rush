@@ -3,7 +3,11 @@
 @import 'fonts';
 @import 'fa/font-awesome';
 
+@import 'mixins/clearfix';
+@import 'mixins/vertical-align';
+
 @import 'layout';
+@import 'transformWidget';
 
 body {
   font: 100% $font-stack;

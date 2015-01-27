@@ -1,0 +1,25 @@
+$widget-width: 10em;
+$widget-height: 20em;
+
+.widgets{
+  @extend %clearfix;
+
+  height: 100%;
+
+  .transform-widget{
+    width: $widget-width;
+    height: $widget-height;
+
+    border: 1px $base6 dashed;
+    margin: 1em;
+    text-align: center;
+
+    float: left;
+
+
+    p{
+      margin: 0;
+      @extend %vertical-align;
+    }
+  }
+}

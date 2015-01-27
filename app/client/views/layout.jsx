@@ -1,14 +1,15 @@
 var React = require('react');
+var WidgetManager = require('./WidgetManager.jsx');
 
 module.exports = React.createClass({
   render: function() {
     return (
-      <div class="wrapper">
+      <div className="wrapper">
         <div className="header">
           <h1><i className="fa fa-bolt"></i> Rush</h1>
         </div>
         <div className="main">
-          <p>Main Content</p>
+          <WidgetManager />
         </div>
         <div className="footer">
           <p>Footer Content</p>
