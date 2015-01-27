@@ -5,7 +5,7 @@ module.exports = React.createClass({
     return (
       <div class="wrapper">
         <div className="header">
-          <h1>Rush</h1>
+          <h1><i className="fa fa-bolt"></i> Rush</h1>
         </div>
         <div className="main">
           <p>Main Content</p>

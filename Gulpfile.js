@@ -75,7 +75,6 @@ gulp.task('sass', function () {
   gulp.src('./style/site.scss')
     .pipe(sass({errLogToConsole: true}))
     .pipe(gulp.dest('./public/dist/'));
-  
 });
 
 /* 
