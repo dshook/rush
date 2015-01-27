@@ -19,3 +19,4 @@ app.config('navigator', require('./config/navigator.js'));
 
 // Boot
 app.start();
+
