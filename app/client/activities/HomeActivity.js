@@ -1,5 +1,5 @@
-var React  = require('react');
-var Layout = React.createFactory(require('../views/Layout.jsx'));
+var React        = require('react');
+var Layout       = React.createFactory(require('../views/Layout.jsx'));
 
 module.exports = HomeActivity;
 

@@ -1,5 +1,6 @@
 var React = require('react');
 var WidgetManager = require('./WidgetManager.jsx');
+var ModalTemplate = require('./ModalTemplate.jsx');
 
 module.exports = React.createClass({
   render: function() {
@@ -14,6 +15,7 @@ module.exports = React.createClass({
         <div className="footer">
           <p>Footer Content</p>
         </div>
+        <ModalTemplate />
       </div>
     )
   }

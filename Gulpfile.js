@@ -20,6 +20,7 @@ var VENDOR_LIBS = [
   'httpinvoke',
   'typedef',
   'underscore',
+  'vanilla-modal',
 
   // local libs
   'activity-service',
@@ -69,7 +70,6 @@ gulp.task('browserify-client', function() {
   })
   .pipe(gulp.dest('./public/dist/'));
 });
-
 
 gulp.task('sass', function () {
   gulp.src('./style/site.scss')

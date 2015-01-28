@@ -1,5 +1,5 @@
-$widget-width: 10em;
-$widget-height: 20em;
+$widget-width: 15em;
+$widget-height: 25em;
 
 .widgets{
   @extend %clearfix;
@@ -10,16 +10,29 @@ $widget-height: 20em;
     width: $widget-width;
     height: $widget-height;
 
-    border: 1px $base6 dashed;
+    border: 1px $base6 solid;
     margin: 1em;
     text-align: center;
 
     float: left;
 
+    &.add{
+      border: 1px $base6 dashed;
+    }
 
     p{
       margin: 0;
       @extend %vertical-align;
     }
   }
+}
+
+.widget-container{
+  display: none;
+}
+
+.widget-modal{
+  @extend %clearfix;
+  background: $base3;
+  padding: 1em;
 }

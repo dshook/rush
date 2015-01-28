@@ -1,10 +1,12 @@
+//mixins
+@import 'mixins/clearfix';
+@import 'mixins/vertical-align';
+
 @import 'normalize';
 @import 'colors';
 @import 'fonts';
 @import 'fa/font-awesome';
-
-@import 'mixins/clearfix';
-@import 'mixins/vertical-align';
+@import 'modal';
 
 @import 'layout';
 @import 'transformWidget';

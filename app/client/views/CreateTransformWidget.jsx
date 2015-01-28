@@ -7,7 +7,7 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <div onClick={this.handleAdd} className="transform-widget">
+      <div onClick={this.handleAdd} className="transform-widget add">
         <p><i className="fa fa-plus"></i> Add</p>
       </div>
     )
