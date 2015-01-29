@@ -11,9 +11,9 @@ module.exports = React.createClass({
     return <TransformWidget {...widget} />
   },
 
-  addWidget(){
+  addWidget(name){
     var widgets = this.state.widgets;
-    widgets.push({name: 'New'});
+    widgets.push({name: name});
     this.setState({widgets: widgets});
   },
 
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     return (
       <div className="widgets">
         {this.state.widgets.map(this.renderWidget)}
-        <CreateTransformWidget onClick={this.addWidget} />
+        <CreateTransformWidget onAdd={this.addWidget} />
       </div>
     )
   }

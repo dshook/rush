@@ -11,8 +11,8 @@ module.exports = React.createClass({
     return (
       <div className="transform-widget" onClick={this.open}>
         <p>Name {this.props.name}</p>
-        <div id="widget-1" className="widget-container">
-          <div className="widget-modal">
+        <div id="widget-1" className="modal-container">
+          <div className="modal-widget">
             <p>Modal content here!</p>
           </div>
         </div>

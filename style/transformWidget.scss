@@ -27,12 +27,21 @@ $widget-height: 25em;
   }
 }
 
-.widget-container{
+.modal-container{
   display: none;
 }
 
-.widget-modal{
+.modal-widget{
   @extend %clearfix;
   background: $base3;
-  padding: 1em;
+  padding: 2em;
+
+  //widget selection
+  .widget-type{
+    padding: 1em;
+    margin: 1em;
+    background: $base4;
+    cursor: pointer;
+  }
 }
+
