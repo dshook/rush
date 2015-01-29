@@ -11,7 +11,7 @@ module.exports = React.createClass({
         {this.props.widgetTypes.map(function(item, i) {
           var boundClick = this.handleAdd.bind(this, item);
           return (
-            <div onClick={boundClick} className="widget-type">
+            <div onClick={boundClick} key={item} className="widget-type">
               <span>{item}</span>
             </div>
           );

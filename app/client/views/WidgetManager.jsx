@@ -4,16 +4,25 @@ var TransformWidget = require('./TransformWidget.jsx');
 
 module.exports = React.createClass({
   getInitialState() {
-    return {widgets: [{name: 'First Widget'}]};
+    return {
+      maxKey: 1,
+      widgets: [{name: 'First Widget', key: 1}]
+    };
   },
   
   renderWidget(widget){
-    return <TransformWidget {...widget} />
+    return <TransformWidget {...widget} reactKey={widget.key} remove={this.removeWidget} />
   },
 
   addWidget(name){
     var widgets = this.state.widgets;
-    widgets.push({name: name});
+    var nextKey = this.state.maxKey + 1;
+    widgets.push({name: name, key: nextKey});
+    this.setState({maxKey: nextKey, widgets: widgets});
+  },
+
+  removeWidget(key){
+    var widgets = this.state.widgets.filter(x => x.key !== key);
     this.setState({widgets: widgets});
   },
 

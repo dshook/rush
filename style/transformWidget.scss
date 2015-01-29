@@ -9,6 +9,7 @@ $widget-height: 25em;
   .transform-widget{
     width: $widget-width;
     height: $widget-height;
+    position: relative;
 
     border: 1px $base6 solid;
     margin: 1em;
@@ -23,6 +24,15 @@ $widget-height: 25em;
     p{
       margin: 0;
       @extend %vertical-align;
+    }
+
+    .remove{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: $red;
+
+      @extend %button-normal;
     }
   }
 }

@@ -8,10 +8,18 @@ module.exports = React.createClass({
     this.openModal(ModalBody);
   },
 
+  remove(e){
+    this.props.remove(this.props.reactKey);
+    e.stopPropagation();
+  },
+
   render() {
     return (
       <div className="transform-widget" onClick={this.open}>
         <p>Name {this.props.name}</p>
+        <div className="remove" onClick={this.remove}>
+          <span>Remove</span>
+        </div>
       </div>
     )
   }
