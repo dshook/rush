@@ -1,12 +1,13 @@
-var gulp       = require('gulp');
-var browserify = require('gulp-browserify');
-var to5ify     = require('6to5ify');
-var del        = require('del');
-var jshint     = require('gulp-jshint');
-var rename     = require('gulp-rename');
-var sass       = require('gulp-sass');
-var sourcemaps = require('gulp-sourcemaps');
-var sequence   = require('run-sequence');
+var gulp        = require('gulp');
+var browserify  = require('browserify');
+var to5ify      = require('6to5ify');
+var del         = require('del');
+var jshint      = require('gulp-jshint');
+var rename      = require('gulp-rename');
+var sass        = require('gulp-sass');
+var sourcemaps  = require('gulp-sourcemaps');
+var vinylSource = require('vinyl-source-stream');
+var sequence    = require('run-sequence');
 
 // Add more libs to this array to push more stuff out to the vendor bundle
 var VENDOR_LIBS = [
@@ -23,13 +24,13 @@ var VENDOR_LIBS = [
   'vanilla-modal',
 
   // local libs
-  'activity-service',
-  'http-transport',
-  'local-storage'
+  './app/node_modules/activity-service',
+  './app/node_modules/http-transport',
+  './app/node_modules/local-storage'
 ];
 
 gulp.task('clean', function() {
-  del.sync(['./public/dist']);
+  return del(['./public/dist']);
 });
 
 gulp.task('lint', function() {
@@ -40,39 +41,46 @@ gulp.task('lint', function() {
 
 // vendor libraries
 gulp.task('browserify-vendor', function() {
-    // Single entry point to browserify
-    gulp.src('./app/gulp/noop.js', { read: false })
-    .pipe(browserify({
-      debug : false,
-      insertGlobals : true,
-    }))
-    .on('prebundle', function(bundle) {
-      VENDOR_LIBS.forEach(function(el){
-        bundle.require(el);
-      });
-    })
-    .pipe(rename('vendor.js'))
-    .pipe(gulp.dest('./public/dist/'));
+  var bundleStream = browserify({
+    //entries: ['./app/gulp/noop.js'],
+    read: false,
+    debug: false,
+    insertGlobals: true
+  })
+  .require(VENDOR_LIBS)
+  .bundle();
+
+  var bundle = function() {
+    return bundleStream
+      .pipe(vinylSource('noop.js'))
+      .pipe(rename('vendor.js'))
+      .pipe(gulp.dest('./public/dist/'));
+  };
+
+  return bundle();
 });
 
 // client code
 gulp.task('browserify-client', function() {
-  // Single entry point to browserify
-  gulp.src('./app/client/main.js')
-  .pipe(browserify({
+  var bundleStream = browserify({
+    entries: ['./app/client/main.js'],
     transform: ['6to5ify'],
-    debug : true,
-  }))
-  .on('prebundle', function(bundle) {
-    VENDOR_LIBS.forEach(function(el){
-      bundle.external(el);
-    });
+    debug: true
   })
-  .pipe(gulp.dest('./public/dist/'));
+  .external(VENDOR_LIBS)
+  .bundle();
+
+  var bundle = function() {
+    return bundleStream
+      .pipe(vinylSource('main.js'))
+      .pipe(gulp.dest('./public/dist/'));
+  };
+
+  return bundle();
 });
 
 gulp.task('sass', function () {
-  gulp.src('./style/site.scss')
+  return gulp.src('./style/site.scss')
     .pipe(sass({errLogToConsole: true}))
     .pipe(gulp.dest('./public/dist/'));
 });
@@ -85,9 +93,7 @@ gulp.task('client', function() {
   return sequence(
     'lint',
     'clean',
-    'browserify-vendor',
-    'browserify-client',
-    'sass'
+    ['browserify-vendor', 'browserify-client', 'sass']
   );
 });
 
