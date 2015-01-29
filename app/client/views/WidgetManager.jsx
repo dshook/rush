@@ -1,13 +1,22 @@
-var React = require('react');
+var React                 = require('react');
 var CreateTransformWidget = require('./CreateTransformWidget.jsx');
-var TransformWidget = require('./TransformWidget.jsx');
+var TransformWidget       = require('./TransformWidget.jsx');
+var $                     = require('jQuery');
 
 module.exports = React.createClass({
   getInitialState() {
     return {
-      maxKey: 1,
-      widgets: [{name: 'First Widget', key: 1}]
+      maxKey: null,
+      widgets: []
     };
+  },
+
+  componentDidMount: function() {
+    $.get(this.props.source, function(result) {
+      if (this.isMounted()) {
+        this.setState(result);
+      }
+    }.bind(this));
   },
   
   renderWidget(widget){

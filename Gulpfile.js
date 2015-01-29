@@ -33,7 +33,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('lint', function() {
-  return gulp.src(['./app/server/**/*.js', './app/server/**/*.js'])
+  return gulp.src(['./app/server/**/*.js', './app/client/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });

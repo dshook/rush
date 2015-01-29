@@ -18,5 +18,5 @@ function HomeActivity($root, storage, transport)
  */
 HomeActivity.prototype.onStart = function()
 {
-  React.render(new Layout({text: 'Hello React'}), this.$root[0]);
+  React.render(new Layout({source: '/api/widgets'}), this.$root[0]);
 };
