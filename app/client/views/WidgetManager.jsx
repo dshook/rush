@@ -1,7 +1,6 @@
 var React                 = require('react');
 var CreateTransformWidget = require('./CreateTransformWidget.jsx');
 var TransformWidget       = require('./TransformWidget.jsx');
-var $                     = require('jQuery');
 
 module.exports = React.createClass({
 
@@ -14,11 +13,12 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    $.get(this.state.dataSource, function(result) {
-      if (this.isMounted()) {
-        this.setState(result);
-      }
-    }.bind(this));
+    this.props.transport.get(this.state.dataSource)
+      .then(result => {
+        if (this.isMounted()) {
+          this.setState(result.body);
+        }
+      });
   },
   
   renderWidget(widget){

@@ -10,7 +10,7 @@ module.exports = React.createClass({
           <h1><i className="fa fa-bolt"></i> Rush</h1>
         </div>
         <div className="main">
-          <WidgetManager source={this.props.source} />
+          <WidgetManager {...this.props} />
         </div>
         <div className="footer">
           <p>Footer Content</p>

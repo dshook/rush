@@ -59,6 +59,7 @@ gulp.task('browserify-vendor', function() {
 
   var bundle = function() {
     return bundleStream
+      .on("error", handleError)
       .pipe(vinylSource('noop.js'))
       .pipe(rename('vendor.js'))
       .pipe(gulp.dest('./public/dist/'));
