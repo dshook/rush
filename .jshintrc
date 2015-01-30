@@ -39,7 +39,7 @@
     "iterator"     : false,
     "lastsemic"    : false,
     "laxbreak"     : false,
-    "laxcomma"     : false,
+    "laxcomma"     : true,
     "loopfunc"     : false,
     "moz"          : false,
     "multistr"     : false,

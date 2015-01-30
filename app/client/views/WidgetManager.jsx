@@ -4,15 +4,17 @@ var TransformWidget       = require('./TransformWidget.jsx');
 var $                     = require('jQuery');
 
 module.exports = React.createClass({
+
   getInitialState() {
     return {
+      dataSource: '/api/widgets',
       maxKey: null,
       widgets: []
     };
   },
 
   componentDidMount: function() {
-    $.get(this.props.source, function(result) {
+    $.get(this.state.dataSource, function(result) {
       if (this.isMounted()) {
         this.setState(result);
       }

@@ -7,6 +7,8 @@ var rename      = require('gulp-rename');
 var sass        = require('gulp-sass');
 var sourcemaps  = require('gulp-sourcemaps');
 var vinylSource = require('vinyl-source-stream');
+var vinylBuffer = require('vinyl-buffer');
+var uglify      = require('gulp-uglify');
 var sequence    = require('run-sequence');
 
 // Add more libs to this array to push more stuff out to the vendor bundle
@@ -29,8 +31,14 @@ var VENDOR_LIBS = [
   './app/node_modules/local-storage'
 ];
 
+//Catch build errors and emit end so watch doesn't bail
+function handleError(err){
+  console.log(err.toString());
+  this.emit('end');
+};
+
 gulp.task('clean', function() {
-  return del(['./public/dist']);
+  return del(['./public/dist/**/*']);
 });
 
 gulp.task('lint', function() {
@@ -63,15 +71,20 @@ gulp.task('browserify-vendor', function() {
 gulp.task('browserify-client', function() {
   var bundleStream = browserify({
     entries: ['./app/client/main.js'],
-    transform: ['6to5ify'],
     debug: true
   })
   .external(VENDOR_LIBS)
-  .bundle();
+  .transform(to5ify)
+  .bundle()
 
   var bundle = function() {
     return bundleStream
+      .on("error", handleError)
       .pipe(vinylSource('main.js'))
+      .pipe(vinylBuffer())
+      .pipe(sourcemaps.init({loadMaps: true}))
+      //.pipe(uglify())
+      .pipe(sourcemaps.write('./maps/'))
       .pipe(gulp.dest('./public/dist/'));
   };
 
