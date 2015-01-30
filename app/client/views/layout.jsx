@@ -7,7 +7,9 @@ module.exports = React.createClass({
     return (
       <div className="wrapper">
         <div className="header">
-          <h1><i className="fa fa-bolt"></i> Rush</h1>
+          <div className="cozy">
+            <h1><i className="fa fa-bolt"></i> Rush</h1>
+          </div>
         </div>
         <div className="main">
           <WidgetManager {...this.props} />
