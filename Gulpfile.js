@@ -42,7 +42,6 @@ gulp.task('lint', function() {
 // vendor libraries
 gulp.task('browserify-vendor', function() {
   var bundleStream = browserify({
-    //entries: ['./app/gulp/noop.js'],
     read: false,
     debug: false,
     insertGlobals: true
