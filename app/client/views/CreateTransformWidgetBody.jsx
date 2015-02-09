@@ -1,7 +1,9 @@
-var React = require('react');
+var React         = require('react');
+var WidgetActions = require('../actions/WidgetActions');
 
 module.exports = React.createClass({
   handleAdd(name){
+    WidgetActions.addWidget(name);
     this.props.onAdd(name);
   },
 

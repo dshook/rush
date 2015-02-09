@@ -9,7 +9,6 @@ module.exports = React.createClass({
   },
   onAdd(name){
     this.closeModal();
-    this.props.onAdd(name);
   },
   addClick(){
     this.openModal(ModalBody, 

@@ -1,6 +1,7 @@
-var React     = require('react');
-var Modal     = require('./mixins/Modal.jsx');
-var ModalBody = require('./TransformWidgetBody.jsx');
+var React         = require('react');
+var Modal         = require('./mixins/Modal.jsx');
+var ModalBody     = require('./TransformWidgetBody.jsx');
+var WidgetActions = require('../actions/WidgetActions');
 
 module.exports = React.createClass({
   mixins: [Modal],
@@ -9,7 +10,7 @@ module.exports = React.createClass({
   },
 
   remove(e){
-    this.props.remove(this.props.reactKey);
+    WidgetActions.removeWidget(this.props.reactKey);
     e.stopPropagation();
   },
 

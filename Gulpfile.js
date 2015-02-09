@@ -72,11 +72,14 @@ gulp.task('browserify-vendor', function() {
 gulp.task('browserify-client', function() {
   var bundleStream = browserify({
     entries: ['./app/client/main.js'],
-    debug: true
+    debug: true,
   })
   .external(VENDOR_LIBS)
-  .transform(to5ify)
-  .bundle()
+  .transform(to5ify.configure({
+    experimental: true,
+    playground: true
+  }))
+  .bundle();
 
   var bundle = function() {
     return bundleStream
@@ -104,7 +107,7 @@ gulp.task('sass', function () {
 
 gulp.task('client', function() {
   return sequence(
-    'lint',
+    //'lint',
     'clean',
     ['browserify-vendor', 'browserify-client', 'sass']
   );

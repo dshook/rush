@@ -30,7 +30,7 @@
     "boss"         : true,
     "debug"        : true,
     "eqnull"       : false,
-    "esnext"       : false,
+    "esnext"       : true,
     "evil"         : false,
     "expr"         : true,
     "funcscope"    : false,
