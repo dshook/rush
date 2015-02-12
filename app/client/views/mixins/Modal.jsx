@@ -24,7 +24,10 @@ module.exports = {
 
   },
   closeModal: function() {
-    React.unmountComponentAtNode(document.getElementById(this._reactId));
+    var modalDiv = document.getElementById(this._reactId);
+    if(modalDiv){
+      React.unmountComponentAtNode(modalDiv);
+    }
     $('#' + this._id).remove();
     if(this._modal){
       this._modal.destroy();

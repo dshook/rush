@@ -1,22 +1,23 @@
 var widgetActions = require('../actions/WidgetActions');
-var ev            = require('../messenger/Messenger').event;
 var messenger     = require('../messenger/AppMessenger');
 var BaseStore     = require('./BaseStore');
-var $             = require('jQuery');
 
 class WidgetStore extends BaseStore{
-	constructor(){
+	constructor(transport){
     super();
 
     this.messenger = messenger;    
+    this.transport = transport;
 
     this.dataSource = '/api/widgets';
     this._widgets = [];
 
-    $.get(this.dataSource, result => {
-    	this._widgets = result;
-      this.messenger.trigger(this.change);
-    });
+    this.transport
+      .get(this.dataSource)
+      .then(result => {
+      	this._widgets = result.body;
+        this.emitChange();
+      });
   }
 
   get widgets() {
@@ -33,7 +34,7 @@ class WidgetStore extends BaseStore{
     this.messenger.setHandler(this.change, fn);
   }
 
-  [ev(widgetActions.add)](widget){
+  [messenger.ev(widgetActions.add)](widget){
     var nextKey = this.maxKey + 1;
     widget.key = nextKey;
     this._widgets.push(widget);
@@ -41,11 +42,11 @@ class WidgetStore extends BaseStore{
     this.emitChange();
   }
 
-  [ev(widgetActions.remove)](key){
+  [messenger.ev(widgetActions.remove)](key){
     this._widgets = this._widgets.filter(x => x.key !== key);
     this.emitChange();
   }
 }
 
 
-module.exports = new WidgetStore();
+module.exports = WidgetStore;

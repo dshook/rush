@@ -1,5 +1,5 @@
 var React = require('react');
-var WidgetManager = require('./WidgetManager.jsx');
+import {WidgetManager} from './WidgetManager.jsx';
 var ModalTemplate = require('./ModalTemplate.jsx');
 
 module.exports = React.createClass({
@@ -19,6 +19,6 @@ module.exports = React.createClass({
         </div>
         <ModalTemplate />
       </div>
-    )
+    );
   }
 });

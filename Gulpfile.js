@@ -51,7 +51,7 @@ gulp.task('lint', function() {
 gulp.task('browserify-vendor', function() {
   var bundleStream = browserify({
     read: false,
-    debug: false,
+    debug: true,
     insertGlobals: true
   })
   .require(VENDOR_LIBS)
@@ -69,7 +69,7 @@ gulp.task('browserify-vendor', function() {
 });
 
 // client code
-gulp.task('browserify-client', function() {
+gulp.task('browserify-client', ['lint'], function() {
   var bundleStream = browserify({
     entries: ['./app/client/main.js'],
     debug: true,

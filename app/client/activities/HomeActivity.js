@@ -6,11 +6,10 @@ module.exports = HomeActivity;
 /**
  * @constructor
  */
-function HomeActivity($root, storage, transport)
+function HomeActivity($root, widgetStore)
 {
-  this.$root     = $root;
-  this.transport = transport;
-  this.storage   = storage;
+  this.$root       = $root;
+  this.widgetStore = widgetStore;
 }
 
 /**
@@ -21,8 +20,7 @@ HomeActivity.prototype.onStart = function()
   //init layout with all deps passed down
   React.render(
     new Layout({
-      transport: this.transport,
-      storage: this.storage,
+      stores: {widgetStore: this.widgetStore}
     })
     , this.$root[0]
   );

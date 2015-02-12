@@ -4,33 +4,35 @@ var TransformWidget       = require('./TransformWidget.jsx');
 var WidgetStore           = require('../stores/WidgetStore');
 var messenger             = require('../messenger/AppMessenger.js');
 
-module.exports = React.createClass({
+export class WidgetManager extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.widgetStore = props.stores.widgetStore;
+    this.state = this.getState();
+  }
 
   getState() {
-      return {
-          widgets: WidgetStore.widgets
-      };
-  },
+    return {
+        widgets: this.widgetStore.widgets
+    };
+  }
   
-  getInitialState() {
-    return this.getState();
-  },
-
-  [messenger.ev(WidgetStore.change)] : function(){
+  [messenger.ev(this.widgetStore.change)](){
     this.setState(this.getState());
-  },
+  }
 
   componentDidMount() {
     messenger.bindInstance(this);
-  },
+  }
 
   componentWillUnmount() {
     messenger.unbindInstance(this);
-  },
+  }
   
   renderWidget(widget){
     return <TransformWidget {...widget} reactKey={widget.key} />;
-  },
+  }
 
   render() {
     return (
@@ -40,4 +42,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}
