@@ -6,15 +6,14 @@ class BaseStore {
 
   constructor() {
     this.messenger = messenger;
-    //autobind(this);
+    messenger.bindInstance(this);
+    this.change = CHANGE_EVENT;
   }
 
-  emitChange(data) {
+  emitChange(a, b) {
+  	this.messenger.trigger(this.change, a, b);
   }
 
-  subscribe(fn){
-    this.messenger.setHandler(CHANGE_EVENT, fn);
-  }
 }
 
 module.exports = BaseStore;

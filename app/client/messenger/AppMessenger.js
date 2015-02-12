@@ -1,3 +1,7 @@
 var messenger = require('./Messenger');
+var ev = require('./Messenger').event;
 
-module.exports = new messenger();
+var appMessenger = new messenger();
+appMessenger.ev = ev;
+
+module.exports = appMessenger;

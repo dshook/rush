@@ -4,15 +4,11 @@ var messenger     = require('../messenger/AppMessenger');
 var BaseStore     = require('./BaseStore');
 var $             = require('jQuery');
 
-var change = 'WidgetStore: Change';
-
 class WidgetStore extends BaseStore{
 	constructor(){
     super();
 
-    messenger.bindInstance(this);
     this.messenger = messenger;    
-    this.change = change;
 
     this.dataSource = '/api/widgets';
     this._widgets = [];
@@ -42,16 +38,12 @@ class WidgetStore extends BaseStore{
     widget.key = nextKey;
     this._widgets.push(widget);
 
-    this.messenger.trigger(this.change);
+    this.emitChange();
   }
 
   [ev(widgetActions.remove)](key){
     this._widgets = this._widgets.filter(x => x.key !== key);
-    this.messenger.trigger(this.change);
-  }
-
-  [ev(change)](){
-    console.log('widget store change');
+    this.emitChange();
   }
 }
 

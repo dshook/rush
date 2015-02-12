@@ -2,7 +2,6 @@ var React                 = require('react');
 var CreateTransformWidget = require('./CreateTransformWidget.jsx');
 var TransformWidget       = require('./TransformWidget.jsx');
 var WidgetStore           = require('../stores/WidgetStore');
-var ev                    = require('../messenger/Messenger.js').event;
 var messenger             = require('../messenger/AppMessenger.js');
 
 module.exports = React.createClass({
@@ -17,13 +16,16 @@ module.exports = React.createClass({
     return this.getState();
   },
 
-  [ev(WidgetStore.change)] : function(){
+  [messenger.ev(WidgetStore.change)] : function(){
     this.setState(this.getState());
   },
 
   componentDidMount() {
     messenger.bindInstance(this);
-    //WidgetStore.subscribe(() => this.setState(this.getState()));
+  },
+
+  componentWillUnmount() {
+    messenger.unbindInstance(this);
   },
   
   renderWidget(widget){
