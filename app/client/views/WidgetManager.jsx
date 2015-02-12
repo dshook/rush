@@ -2,6 +2,8 @@ var React                 = require('react');
 var CreateTransformWidget = require('./CreateTransformWidget.jsx');
 var TransformWidget       = require('./TransformWidget.jsx');
 var WidgetStore           = require('../stores/WidgetStore');
+import {WidgetStore} from '../stores/WidgetStore';
+import {change} from '../stores/WidgetStore';
 var messenger             = require('../messenger/AppMessenger.js');
 
 export class WidgetManager extends React.Component {
@@ -18,7 +20,7 @@ export class WidgetManager extends React.Component {
     };
   }
   
-  [messenger.ev(this.widgetStore.change)](){
+  [messenger.ev(change)](){
     this.setState(this.getState());
   }
 

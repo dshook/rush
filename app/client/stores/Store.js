@@ -1,7 +1,7 @@
 module.exports = Store;
 
 var debug       = require('debug')('Store');
-var WidgetStore = require('./WidgetStore.js');
+import {WidgetStore} from'./WidgetStore.js';
 
 /**
  * Setup local storage and HTTP transports

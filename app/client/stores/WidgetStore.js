@@ -2,10 +2,13 @@ var widgetActions = require('../actions/WidgetActions');
 var messenger     = require('../messenger/AppMessenger');
 var BaseStore     = require('./BaseStore');
 
-class WidgetStore extends BaseStore{
+export var change = 'WidgetStore: Change';
+
+export class WidgetStore extends BaseStore{
 	constructor(transport){
     super();
 
+    this.change = change;
     this.messenger = messenger;    
     this.transport = transport;
 
@@ -30,10 +33,6 @@ class WidgetStore extends BaseStore{
     return max;
   }
 
-  subscribe(fn){
-    this.messenger.setHandler(this.change, fn);
-  }
-
   [messenger.ev(widgetActions.add)](widget){
     var nextKey = this.maxKey + 1;
     widget.key = nextKey;
@@ -48,5 +47,3 @@ class WidgetStore extends BaseStore{
   }
 }
 
-
-module.exports = WidgetStore;
