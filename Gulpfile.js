@@ -35,7 +35,7 @@ var VENDOR_LIBS = [
 function handleError(err){
   console.log(err.toString());
   this.emit('end');
-};
+}
 
 gulp.task('clean', function() {
   return del(['./public/dist/**/*']);
@@ -59,7 +59,7 @@ gulp.task('browserify-vendor', function() {
 
   var bundle = function() {
     return bundleStream
-      .on("error", handleError)
+      .on('error', handleError)
       .pipe(vinylSource('noop.js'))
       .pipe(rename('vendor.js'))
       .pipe(gulp.dest('./public/dist/'));
@@ -83,7 +83,7 @@ gulp.task('browserify-client', function() {
 
   var bundle = function() {
     return bundleStream
-      .on("error", handleError)
+      .on('error', handleError)
       .pipe(vinylSource('main.js'))
       .pipe(vinylBuffer())
       .pipe(sourcemaps.init({loadMaps: true}))
@@ -107,7 +107,7 @@ gulp.task('sass', function () {
 
 gulp.task('client', function() {
   return sequence(
-    //'lint',
+    'lint',
     'clean',
     ['browserify-vendor', 'browserify-client', 'sass']
   );

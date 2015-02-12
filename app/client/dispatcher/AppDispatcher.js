@@ -19,7 +19,7 @@ var Dispatcher = {
   },
 
   subscribe(fn){
-    var handler
+    var handler;
     emitter.on(EVENT, fn);
     return {
       remove() {

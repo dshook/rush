@@ -15,7 +15,7 @@
     "nonbsp"        : true,
     "nonew"         : false,
     "plusplus"      : false,
-    "quotmark"      : "single",
+    "quotmark"      : false,
     "undef"         : true,
     "unused"        : false,
     "strict"        : false,
@@ -24,7 +24,7 @@
     "maxdepth"      : false,
     "maxstatements" : false,
     "maxcomplexity" : false,
-    "maxlen"        : 100,
+    "maxlen"        : 120,
 
     "asi"          : false,
     "boss"         : true,

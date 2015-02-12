@@ -51,8 +51,7 @@ SymbolRegistry.prototype.createFactory = function(scopeName)
       throw new Error('must supply an event symbol');
     }
 
-    var s = Symbol(
-      scopeName.toString() + ':' + eventSymbol.toString() + type.id);
+    var s = scopeName.toString() + ':' + eventSymbol.toString() + type.id;
 
     type.methodSymbol = s;
     type.eventFactory = factory;
@@ -64,7 +63,7 @@ SymbolRegistry.prototype.createFactory = function(scopeName)
     methodTypes.push(type);
 
     return s;
-  }
+  };
 
   return factory;
 };
