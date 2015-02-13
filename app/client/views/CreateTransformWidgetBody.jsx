@@ -1,11 +1,11 @@
-var React         = require('react');
-var WidgetActions = require('../actions/WidgetActions');
+import React from 'react';
+import WidgetActions from '../actions/WidgetActions';
 
-module.exports = React.createClass({
+export default class CreateTransformWidgetBody extends React.Component {
   handleAdd(name){
     WidgetActions.addWidget(name);
     this.props.onAdd(name);
-  },
+  }
 
   render() {
     return (
@@ -19,6 +19,6 @@ module.exports = React.createClass({
           );
         }, this)}
       </div>
-    )
+    );
   }
-})
+}

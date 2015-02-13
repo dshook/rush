@@ -1,6 +1,6 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
+export default class ModalTemplate extends React.Component {
   render() {
     return (
       <div className="modal">
@@ -9,6 +9,6 @@ module.exports = React.createClass({
           <div className="modal-content"></div>
         </div>
       </div>
-    )
+    );
   }
-});
+}

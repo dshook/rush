@@ -1,6 +1,6 @@
-var React        = require('react');
-var VanillaModal = require('vanilla-modal');
-var $            = require('jquery');
+import React from 'react';
+import VanillaModal from 'vanilla-modal';
+import $ from 'jquery';
 
 module.exports = {
   componentWillMount: function() {

@@ -1,7 +1,7 @@
-var React         = require('react');
-var Modal         = require('./mixins/Modal.jsx');
-var ModalBody     = require('./TransformWidgetBody.jsx');
-var WidgetActions = require('../actions/WidgetActions');
+import React from 'react';
+import Modal from './mixins/Modal.jsx';
+import ModalBody from './TransformWidgetBody.jsx';
+import WidgetActions from '../actions/WidgetActions';
 
 module.exports = React.createClass({
   mixins: [Modal],
@@ -22,6 +22,6 @@ module.exports = React.createClass({
           <span>Remove</span>
         </div>
       </div>
-    )
+    );
   }
 });

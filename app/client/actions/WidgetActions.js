@@ -1,7 +1,7 @@
-var messenger = require('../messenger/AppMessenger');
+import messenger from '../messenger/AppMessenger';
 
-var add = Symbol('Widget: Add');
-var remove = Symbol('Widget: Remove');
+var add = 'Widget: Add';
+var remove = 'Widget: Remove';
 
 module.exports = {
   add: add,

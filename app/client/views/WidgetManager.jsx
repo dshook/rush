@@ -1,12 +1,10 @@
-var React                 = require('react');
-var CreateTransformWidget = require('./CreateTransformWidget.jsx');
-var TransformWidget       = require('./TransformWidget.jsx');
-var WidgetStore           = require('../stores/WidgetStore');
-import {WidgetStore} from '../stores/WidgetStore';
-import {change} from '../stores/WidgetStore';
-var messenger             = require('../messenger/AppMessenger.js');
+import React from 'react';
+import CreateTransformWidget from './CreateTransformWidget.jsx';
+import TransformWidget from './TransformWidget.jsx';
+import {WidgetStore, change} from '../stores/WidgetStore';
+import messenger from '../messenger/AppMessenger.js';
 
-export class WidgetManager extends React.Component {
+export default class WidgetManager extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,7 +31,9 @@ export class WidgetManager extends React.Component {
   }
   
   renderWidget(widget){
-    return <TransformWidget {...widget} reactKey={widget.key} />;
+    return (
+      <TransformWidget {...widget} reactKey={widget.key} />
+    );
   }
 
   render() {

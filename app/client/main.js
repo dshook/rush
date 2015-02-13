@@ -1,7 +1,7 @@
-var Application     = require('billy');
-var ActivityService = require('activity-service');
-var Browser         = require('./services/Browser.js');
-var Store           = require('./stores/Store.js');
+import Application from 'billy';
+import ActivityService from 'activity-service';
+import Browser from './services/Browser.js';
+import Store from './stores/Store.js';
 
 // Root container
 var app = new Application();

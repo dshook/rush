@@ -1,6 +1,6 @@
-var React = require('react');
-var Modal = require('./mixins/Modal.jsx');
-var ModalBody = require('./CreateTransformWidgetBody.jsx');
+import React from 'react';
+import Modal from './mixins/Modal.jsx';
+import ModalBody from './CreateTransformWidgetBody.jsx';
 
 module.exports = React.createClass({
   mixins: [Modal],

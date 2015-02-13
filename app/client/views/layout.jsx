@@ -1,9 +1,9 @@
-var React = require('react');
-import {WidgetManager} from './WidgetManager.jsx';
-var ModalTemplate = require('./ModalTemplate.jsx');
+import React from 'react';
+import WidgetManager from './WidgetManager.jsx';
+import ModalTemplate from './ModalTemplate.jsx';
 
-module.exports = React.createClass({
-  render: function() {
+export default class Layout extends React.Component {
+  render() {
     return (
       <div className="wrapper">
         <div className="header">
@@ -21,4 +21,4 @@ module.exports = React.createClass({
       </div>
     );
   }
-});
+}

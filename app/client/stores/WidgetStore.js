@@ -1,6 +1,6 @@
-var widgetActions = require('../actions/WidgetActions');
-var messenger     = require('../messenger/AppMessenger');
-var BaseStore     = require('./BaseStore');
+import widgetActions from '../actions/WidgetActions';
+import messenger from '../messenger/AppMessenger';
+import BaseStore from './BaseStore';
 
 export var change = 'WidgetStore: Change';
 

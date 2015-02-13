@@ -1,6 +1,4 @@
-module.exports = Store;
-
-var debug       = require('debug')('Store');
+var debug = require('debug')('Store');
 import {WidgetStore} from'./WidgetStore.js';
 
 /**
@@ -11,7 +9,7 @@ import {WidgetStore} from'./WidgetStore.js';
  * * `dom.root` query selector for the app root DOM node (defaults to body)
  * @constructor
  */
-function Store(app, transport, config)
+export default function Store(app, transport, config)
 {
   app.register('widgetStore', new WidgetStore(transport)).asInstance();
 }

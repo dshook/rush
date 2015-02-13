@@ -1,7 +1,6 @@
-var messenger = require('./Messenger');
-var ev = require('./Messenger').event;
+import messenger from './Messenger';
 
 var appMessenger = new messenger();
-appMessenger.ev = ev;
+appMessenger.ev = messenger.event;
 
 module.exports = appMessenger;

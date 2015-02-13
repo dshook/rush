@@ -1,6 +1,6 @@
-var messenger = require('../messenger/AppMessenger');
+import messenger from '../messenger/AppMessenger';
 
-class BaseStore {
+export default class BaseStore {
 
   constructor() {
     this.messenger = messenger;
@@ -12,5 +12,3 @@ class BaseStore {
   }
 
 }
-
-module.exports = BaseStore;

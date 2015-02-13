@@ -1,11 +1,11 @@
-var React = require('react');
+import React from 'react';
 
-module.exports = React.createClass({
+export default class TransformWidgetBody extends React.Component {
   render() {
     return (
       <div className="modal-widget">
         <p>Modal content here!</p>
       </div>
-    )
+    );
   }
-})
+}

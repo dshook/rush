@@ -1,27 +1,22 @@
-var React        = require('react');
-var Layout       = React.createFactory(require('../views/Layout.jsx'));
+import React from 'react';
+import layout from '../views/Layout.jsx';
 
-module.exports = HomeActivity;
-
-/**
- * @constructor
- */
-function HomeActivity($root, widgetStore)
+export default class HomeActivity
 {
-  this.$root       = $root;
-  this.widgetStore = widgetStore;
+	constructor($root, widgetStore){
+	  this.$root       = $root;
+	  this.widgetStore = widgetStore;
+	}
+
+	onStart(){
+		var Layout = React.createFactory(layout);
+	  //init layout with all deps passed down
+	  React.render(
+	    new Layout({
+	      stores: {widgetStore: this.widgetStore}
+	    })
+	    , this.$root[0]
+	  );
+	}
 }
 
-/**
- * @private
- */
-HomeActivity.prototype.onStart = function()
-{
-  //init layout with all deps passed down
-  React.render(
-    new Layout({
-      stores: {widgetStore: this.widgetStore}
-    })
-    , this.$root[0]
-  );
-};
