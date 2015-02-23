@@ -1,6 +1,6 @@
 var gulp        = require('gulp');
 var browserify  = require('browserify');
-var to5ify      = require('6to5ify');
+var babelify    = require('babelify');
 var del         = require('del');
 var jshint      = require('gulp-jshint');
 var rename      = require('gulp-rename');
@@ -69,13 +69,13 @@ gulp.task('browserify-vendor', function() {
 });
 
 // client code
-gulp.task('browserify-client', ['lint'], function() {
+gulp.task('browserify-client', function() {
   var bundleStream = browserify({
     entries: ['./app/client/main.js'],
     debug: true,
   })
   .external(VENDOR_LIBS)
-  .transform(to5ify.configure({
+  .transform(babelify.configure({
     experimental: true,
     playground: true
   }))
