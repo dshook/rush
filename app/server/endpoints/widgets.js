@@ -9,8 +9,11 @@ function widgets()
   router.get('/', function(req, res) {
     res.send(
       [
-        {name: 'First Widget', key: 1},
-        {name: 'Second Widget', key: 2}
+        {
+          name: 'Sql Server',
+          provider: 'sqlServer',
+          key: 1
+        },
       ]
     );
   });

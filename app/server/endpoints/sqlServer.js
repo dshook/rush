@@ -21,6 +21,7 @@ function sqlServer(){
   var router = new Router();
 
   router.get('/', function(req, res){
+    res.setHeader('content-type', 'text/plain');
     var db = new sqlServerProvider(config_local);
     db.connect();
 

@@ -1,5 +1,6 @@
 var debug = require('debug')('Store');
 import {WidgetStore} from'./WidgetStore.js';
+import {AppStore} from'./AppStore.js';
 
 /**
  * Setup local storage and HTTP transports
@@ -12,4 +13,5 @@ import {WidgetStore} from'./WidgetStore.js';
 export default function Store(app, transport, config)
 {
   app.register('widgetStore', new WidgetStore(transport)).asInstance();
+  app.register('appStore', new AppStore(transport)).asInstance();
 }

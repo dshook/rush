@@ -1,8 +1,14 @@
 import React from 'react';
 import WidgetManager from './WidgetManager.jsx';
 import ModalTemplate from './ModalTemplate.jsx';
+import Results from './Results.jsx';
+import AppActions from '../actions/AppActions.js';
 
 export default class Layout extends React.Component {
+  startJob(){
+    AppActions.start();
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -12,7 +18,7 @@ export default class Layout extends React.Component {
               <h1><i className="fa fa-bolt"></i> Rush</h1>
             </div>
             <div className="actions">
-              <button className="button button--action" >
+              <button onClick={this.startJob} className="button button--action" >
                 <i className="fa fa-play"></i>
                 Start Job
               </button>
@@ -23,7 +29,7 @@ export default class Layout extends React.Component {
           <WidgetManager {...this.props} />
         </div>
         <div className="footer">
-          <p>Footer Content</p>
+          <Results {...this.props} />
         </div>
         <ModalTemplate />
       </div>
