@@ -24,17 +24,28 @@ body{
   @include flex(none);
   background-color: $base3;
 
-  .cozy{
+  .header-container{
     @include flexbox();
-    padding: $layout-padding;
 
-    h1{
+    .title{
       @include flexbox();
+      padding: $layout-padding;
       align-items: baseline;
-      margin: 0;
-    }
-  }
 
+      h1{
+        @include flexbox();
+        margin: 0;
+     
+      }
+    }
+    .actions{
+      @include flex(1);
+      @include flex-justify(flex-end);
+      padding: $layout-padding;
+      text-align: right;
+    }
+
+  }
 }
 
 .main{

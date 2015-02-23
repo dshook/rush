@@ -30,3 +30,9 @@
   order: $val;
 }
 
+@mixin flex-justify($value){
+  -webkit-justify-content: $value;
+  -ms-flex-pack: $value;
+  justify-content: $value; 
+}
+

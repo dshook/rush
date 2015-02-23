@@ -28,11 +28,8 @@ $widget-height: 25em;
 
     .remove{
       position: absolute;
-      bottom: 0;
+      top: 0;
       right: 0;
-      background: $red;
-
-      @extend %button-normal;
     }
   }
 }
