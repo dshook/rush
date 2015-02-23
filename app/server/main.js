@@ -3,6 +3,9 @@ var path          = require('path');
 var HttpService   = require('billy-http-express');
 var HttpTransport = require('http-transport');
 var Router        = require('./services/Router.js');
+var promise       = require('bluebird');
+
+global.Promise = promise;
 
 var app = new Application();
 
