@@ -2,32 +2,32 @@ import appActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
 
-export var change = 'AppStore: Change';
+export var change = 'WidgetTypeStore: Change';
 
-export class AppStore extends BaseStore{
-	constructor(transport){
+export class WidgetTypeStore extends BaseStore{
+  constructor(transport){
     super();
 
     this.change = change;
     this.messenger = messenger;    
     this.transport = transport;
 
-    this._results = [];
+    this._widgetTypes = [];
 
-    this.dataSource = '/api/sqlServer';
-  }
+    this.dataSource = '/api/widgetTypes';
 
-  get results(){
-    return this._results;
-  }
-
-  [messenger.ev(appActions.startAction)](){
     this.transport
       .get(this.dataSource)
       .then(result => {
-        this._results = result.body;
+        this._widgetTypes = result.body;
         this.emitChange();
       });
   }
+
+  get widgetTypes(){
+    return this._widgetTypes;
+  }
 }
+
+
 

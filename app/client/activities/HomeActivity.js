@@ -3,10 +3,9 @@ import layout from '../views/Layout.jsx';
 
 export default class HomeActivity
 {
-	constructor($root, widgetStore, appStore){
-		this.$root       = $root;
-		this.widgetStore = widgetStore;
-		this.appStore    = appStore;
+	constructor($root, stores){
+		this.$root  = $root;
+		this.stores = stores;
 	}
 
 	onStart(){
@@ -14,10 +13,7 @@ export default class HomeActivity
 	  //init layout with all deps passed down
 	  React.render(
 	    new Layout({
-	      stores: {
-	      	widgetStore: this.widgetStore,
-	      	appStore: this.appStore
-	      }
+	      stores: this.stores 
 	    })
 	    , this.$root[0]
 	  );

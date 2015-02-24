@@ -9,11 +9,11 @@ function widgets()
   router.get('/', function(req, res) {
     res.send(
       [
-        {
-          name: 'Sql Server',
-          provider: 'sqlServer',
-          key: 1
-        },
+        // {
+        //   name: 'Sql Server',
+        //   provider: 'sqlServer',
+        //   key: 1
+        // },
       ]
     );
   });

@@ -1,7 +1,7 @@
 import Application from 'billy';
 import ActivityService from 'activity-service';
 import Browser from './services/Browser.js';
-import Store from './stores/Store.js';
+import Store from './stores/Stores.js';
 
 // Root container
 var app = new Application();
