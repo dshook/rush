@@ -1,6 +1,6 @@
 module.exports = Browser;
 
-var HttpTransport = require('http-transport');
+var HttpTransport = require('./Http-Transport.js');
 var LocalStorage  = require('local-storage');
 var Promise       = require('bluebird');
 var $             = require('jquery');

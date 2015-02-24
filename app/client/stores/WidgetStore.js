@@ -33,17 +33,26 @@ export class WidgetStore extends BaseStore{
     return max;
   }
 
+  save(){
+    this.transport
+      .put(this.dataSource, this._widgets)
+      .then(result => {
+        this.emitChange();
+      })
+      .catch(e => console.log(e));
+  }
+
   [messenger.ev(widgetActions.add)](widget){
     var nextKey = this.maxKey + 1;
     widget.key = nextKey;
     this._widgets.push(widget);
 
-    this.emitChange();
+    this.save();
   }
 
   [messenger.ev(widgetActions.remove)](key){
     this._widgets = this._widgets.filter(x => x.key !== key);
-    this.emitChange();
+    this.save();
   }
 }
 

@@ -18,5 +18,11 @@ function widgets()
     );
   });
 
+  router.put('/', function(req, res) {
+    console.log(req.body);
+    res.json(req.body);
+    res.end();
+  });
+
   return router;
 }
