@@ -3,9 +3,21 @@ var sql    = require('mssql');
 
 module.exports = sqlServer;
 
+var config_local = {
+  user: 'test',
+  password: 'test',
+  server: 'localhost\\sqlserver',
+  database: 'ReloDotNet2',
+  //port: 1433,
+  //stream: true,
+  options: {
+    // localAddress: 'localhost',
+    //instanceName: 'sqlserver'
+  }
+};
 
 function sqlServer(config){
-  this._config = config;
+  this._config = config || config_local;
 } 
 
 sqlServer.prototype.connect = function(){

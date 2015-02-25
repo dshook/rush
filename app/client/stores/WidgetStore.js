@@ -1,6 +1,8 @@
 import widgetActions from '../actions/WidgetActions';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
+import Widget from '../../shared/models/widget.js';
+import Mapper from '../../shared/lib/mapper/';
 
 export var change = 'WidgetStore: Change';
 
@@ -15,10 +17,11 @@ export class WidgetStore extends BaseStore{
     this.dataSource = '/api/widgets';
     this._widgets = [];
 
+    let widgetMapper = new Mapper(Widget);
     this.transport
       .get(this.dataSource)
       .then(result => {
-      	this._widgets = result.body;
+      	this._widgets = widgetMapper.toMany(result.body);
         this.emitChange();
       });
   }
@@ -42,10 +45,12 @@ export class WidgetStore extends BaseStore{
       .catch(e => console.log(e));
   }
 
-  [messenger.ev(widgetActions.add)](widget){
-    var nextKey = this.maxKey + 1;
-    widget.key = nextKey;
-    this._widgets.push(widget);
+  [messenger.ev(widgetActions.add)](widgetType){
+    var w = new Widget();
+    w.name = widgetType;
+    w.provider = widgetType;
+    w.key =  this.maxKey + 1;
+    this._widgets.push(w);
 
     this.save();
   }

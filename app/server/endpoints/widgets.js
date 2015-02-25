@@ -1,19 +1,17 @@
-var fs = Promise.promisifyAll(require('fs'));
 module.exports = widgets;
 
 var Router = require('express').Router;
 
-function widgets()
+function widgets(widgetStorage)
 {
-  var filePath = './public/config/widgets.json';
   var router = new Router();
 
   router.get('/', function(req, res) {
-    fs.readFileAsync(filePath, 'utf8')
+    widgetStorage.get()
     .catch(function (err) {
+      console.log(err);
       res.json([]);
     })
-    .then(JSON.parse)
     .then(function(file){
       res.json(file);
     })
@@ -23,9 +21,9 @@ function widgets()
   });
 
   router.put('/', function(req, res) {
-    var stringData = JSON.stringify(req.body);
+    var widgets = req.body;
 
-    fs.writeFileAsync(filePath, stringData)
+    widgetStorage.set(widgets)
     .catch(function (err) {
       res.json(err);
     })

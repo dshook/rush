@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "repository": "https://bitbucket.org/dshook/rush",
   "scripts": {
-    "start": "node ./app/server/main.js",
-    "build": "grunt client"
+    "start": "nodemon ./app/server/main.js",
+    "build": "grunt client",
+    "debug": "node-debug -p=8081 ./app/server/main.js"
   },
   "devDependencies": {
     "babelify": "^5.0.3",

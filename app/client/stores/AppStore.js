@@ -14,7 +14,7 @@ export class AppStore extends BaseStore{
 
     this._results = [];
 
-    this.dataSource = '/api/sqlServer';
+    this.dataSource = '/api/job';
   }
 
   get results(){
@@ -23,7 +23,7 @@ export class AppStore extends BaseStore{
 
   [messenger.ev(appActions.startAction)](){
     this.transport
-      .get(this.dataSource)
+      .post(this.dataSource, {jobId: 1})
       .then(result => {
         this._results = result.body;
         this.emitChange();

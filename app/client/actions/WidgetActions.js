@@ -8,7 +8,7 @@ module.exports = {
   remove: remove,
 
   addWidget(widgetType) {
-    messenger.trigger(add, {name: widgetType});
+    messenger.trigger(add, widgetType);
   },
 
   removeWidget(id){
