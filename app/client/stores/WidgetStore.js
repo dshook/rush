@@ -55,6 +55,16 @@ export class WidgetStore extends BaseStore{
     this.save();
   }
 
+  [messenger.ev(widgetActions.update)](widget){
+    var widgetIndex = this._widgets.map(x => x.key).indexOf(widget.key);
+    if(widgetIndex < 0){
+      throw 'Cannot find widget to update.';
+    }
+    this._widgets[widgetIndex] = widget;
+
+    this.save();
+  }
+
   [messenger.ev(widgetActions.remove)](key){
     this._widgets = this._widgets.filter(x => x.key !== key);
     this.save();

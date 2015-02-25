@@ -8,33 +8,33 @@ var config_local = {
   password: 'test',
   server: 'localhost\\sqlserver',
   database: 'ReloDotNet2',
-  //port: 1433,
-  //stream: true,
-  options: {
-    // localAddress: 'localhost',
-    //instanceName: 'sqlserver'
-  }
+  //stream: true
 };
 
 function sqlServer(config){
-  this._config = config || config_local;
+  this._config = config;
 } 
 
 sqlServer.prototype.connect = function(){
   this._client = new sql.Connection(this._config);
 };
 
-sqlServer.prototype.testRead = function(res){
+sqlServer.prototype.read = function(res, query){
   var client = this._client;
   return client.connect().then(function() {
       var request = new sql.Request(client);
-      return request.query('select CURRENT_TIMESTAMP as t')
+      return request.query(query)
       .then(function(recordset) {
-        res.write(recordset[0].t.toString());
+        res.json(recordset);
       }).catch(function(err) {
         res.write('Request Error: ' + err.toString());
       });
   }).catch(function(err) {
       res.write('Connection Error: ' + err.toString());
   });
+};
+
+sqlServer.prototype.testRead = function(res){
+  var client = this._client;
+  return this.read(res, 'select CURRENT_TIMESTAMP as t');
 };

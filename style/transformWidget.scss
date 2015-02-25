@@ -50,5 +50,10 @@ $widget-height: 20em;
     background: $base4;
     cursor: pointer;
   }
+
+  label{
+    display: block;
+    width: 200px;
+  }
 }
 

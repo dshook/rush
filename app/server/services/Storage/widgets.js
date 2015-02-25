@@ -13,6 +13,7 @@ function widgets()
 widgets.prototype.get = function(){
   var mapper = this.widgetMapper;
   return fs.readFileAsync(this.filePath, 'utf8')
+  //TODO: handle exception here
   .then(JSON.parse)
   .then(function(file){
     return mapper.toMany(file);

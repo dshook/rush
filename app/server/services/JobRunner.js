@@ -21,7 +21,7 @@ JobRunner.prototype.startJob = function(output, config){
       var filePath = path.resolve(__dirname, '../providers/' + widget.provider + '.js');
       
       var Provider = require(filePath);
-      var provider = new Provider();
+      var provider = new Provider(widget.config);
       provider.connect();
       promiseArray.push(provider.testRead(output));
     });

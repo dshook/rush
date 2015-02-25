@@ -6,7 +6,11 @@ import WidgetActions from '../actions/WidgetActions';
 module.exports = React.createClass({
   mixins: [Modal],
   open(){
-    this.openModal(WidgetBodies.getView(this.props.provider));
+    var modalProps = {
+      onClose: this.onClose,
+      widget: this.props.widget
+    };
+    this.openModal(WidgetBodies.getView(this.props.widget.provider), modalProps);
   },
 
   remove(e){
@@ -14,10 +18,14 @@ module.exports = React.createClass({
     e.stopPropagation();
   },
 
+  onClose(){
+    this.closeModal();
+  },
+
   render() {
     return (
       <div className="transform-widget" onClick={this.open}>
-        <p>Name {this.props.name}</p>
+        <p>{this.props.widget.name}</p>
         <button className="remove button button--remove" onClick={this.remove}>
           <span>Remove</span>
         </button>
