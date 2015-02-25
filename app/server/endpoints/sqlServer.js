@@ -1,7 +1,7 @@
 var Router = require('express').Router;
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
-var sqlServerProvider = require('../providers/sqlServer.js');
+var sqlServerProvider = require('../providers/SqlServer.js');
 
 var config_local = {
   user: 'test',

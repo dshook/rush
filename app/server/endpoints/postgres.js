@@ -1,5 +1,5 @@
 module.exports = postgres;
-var pgTest  = require('../providers/postgres.js');
+var pgTest  = require('../providers/Postgres.js');
 
 var Router = require('express').Router;
 

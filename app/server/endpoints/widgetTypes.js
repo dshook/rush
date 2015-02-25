@@ -14,6 +14,9 @@ function widgetTypes()
     var providerPath = path.resolve(__dirname, '../providers/'); 
     fs.readdirAsync(providerPath)
     .then(function(files){
+      return files.map(function(f){ return f.replace('.js', '');});
+    })
+    .then(function(files){
       res.json(files);
     })
     .catch(function(e){

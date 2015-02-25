@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from './mixins/Modal.jsx';
-import ModalBody from './TransformWidgetBody.jsx';
+import WidgetBodies from './WidgetBodies.js';
 import WidgetActions from '../actions/WidgetActions';
 
 module.exports = React.createClass({
   mixins: [Modal],
   open(){
-    this.openModal(ModalBody);
+    this.openModal(WidgetBodies.getView(this.props.provider));
   },
 
   remove(e){

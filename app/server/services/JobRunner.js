@@ -18,7 +18,7 @@ JobRunner.prototype.startJob = function(output, config){
     var promiseArray = [];
     config.forEach(function(widget){
       debug('Loading provider %s', widget.provider);
-      var filePath = path.resolve(__dirname, '../providers/' + widget.provider);
+      var filePath = path.resolve(__dirname, '../providers/' + widget.provider + '.js');
       
       var Provider = require(filePath);
       var provider = new Provider();
