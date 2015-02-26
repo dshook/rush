@@ -1,9 +1,7 @@
-module.exports = postgres;
-var pgTest  = require('../providers/Postgres.js');
+import pgTest  from '../providers/Postgres.js';
+import {Router} from 'express';
 
-var Router = require('express').Router;
-
-function postgres()
+export default function postgres()
 {
   var router = new Router();
 

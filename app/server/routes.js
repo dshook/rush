@@ -1,13 +1,11 @@
-var bodyParser = require('body-parser');
-var fs = require('fs');
-var path = require('path');
-
-module.exports = routes;
+import bodyParser from 'body-parser';
+import fs from 'fs';
+import path from 'path';
 
 /**
  * Setup all HTTP routes in the application here
  */
-function routes(app, http)
+export default function routes(app, http)
 {
   http.use(bodyParser.json()); // for parsing application/json, no, this shouldn't be here
 

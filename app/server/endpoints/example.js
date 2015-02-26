@@ -1,8 +1,6 @@
-module.exports = example;
+import {Router} from 'express';
 
-var Router = require('express').Router;
-
-function example()
+export default function example()
 {
   var router = new Router();
 

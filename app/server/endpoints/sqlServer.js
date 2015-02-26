@@ -1,28 +1,18 @@
-var Router = require('express').Router;
-var Connection = require('tedious').Connection;
-var Request = require('tedious').Request;
-var sqlServerProvider = require('../providers/SqlServer.js');
+import {Router} from 'express';
+import SqlServerProvider from '../providers/SqlServer.js';
 
 var config_local = {
   user: 'test',
   password: 'test',
   server: 'localhost\\sqlserver',
   database: 'ReloDotNet2',
-  //port: 1433,
-  //stream: true,
-  options: {
-    // localAddress: 'localhost',
-    //instanceName: 'sqlserver'
-  }
 };
-
 
 function sqlServer(){
   var router = new Router();
 
   router.get('/', function(req, res){
-    res.setHeader('content-type', 'text/plain');
-    var db = new sqlServerProvider(config_local);
+    var db = new SqlServerProvider(config_local);
     db.connect();
 
     db.testRead(res)

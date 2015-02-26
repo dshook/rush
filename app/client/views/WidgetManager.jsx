@@ -40,7 +40,7 @@ export default class WidgetManager extends React.Component {
     return (
       <div className="widgets">
         {this.state.widgets.map(this.renderWidget)}
-        <CreateTransformWidget widgetTypeStore={this.props.stores.widgetTypeStore} />
+        <CreateTransformWidget widgetProviderStore={this.props.stores.widgetProviderStore} />
       </div>
     );
   }

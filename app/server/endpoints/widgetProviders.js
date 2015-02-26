@@ -1,26 +1,22 @@
 var fs = Promise.promisifyAll(require('fs'));
-var path = require('path');
+import path from 'path';
+import {Router} from 'express';
 
-module.exports = widgetTypes;
-
-var Router = require('express').Router;
-
-function widgetTypes()
+export default function widgetProviders()
 {
   var router = new Router();
 
-  //widget types are the available providers
   router.get('/', function(req, res) {
     var providerPath = path.resolve(__dirname, '../providers/'); 
     fs.readdirAsync(providerPath)
     .then(function(files){
       return files.map(function(f){ return f.replace('.js', '');});
     })
-    .then(function(files){
-      res.json(files);
-    })
     .catch(function(e){
       res.write(e.toString());
+    })
+    .then(function(files){
+      res.json(files);
     })
     .then(function(){
       res.end();

@@ -2,9 +2,9 @@ import appActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
 
-export var change = 'WidgetTypeStore: Change';
+export var change = 'WidgetProviderStore: Change';
 
-export class WidgetTypeStore extends BaseStore{
+export class WidgetProviderStore extends BaseStore{
   constructor(transport){
     super();
 
@@ -12,20 +12,20 @@ export class WidgetTypeStore extends BaseStore{
     this.messenger = messenger;    
     this.transport = transport;
 
-    this._widgetTypes = [];
+    this._widgetProviders = [];
 
-    this.dataSource = '/api/widgetTypes';
+    this.dataSource = '/api/widgetProviders';
 
     this.transport
       .get(this.dataSource)
       .then(result => {
-        this._widgetTypes = result.body;
+        this._widgetProviders = result.body;
         this.emitChange();
       });
   }
 
-  get widgetTypes(){
-    return this._widgetTypes;
+  get widgetProviders(){
+    return this._widgetProviders;
   }
 }
 

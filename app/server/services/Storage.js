@@ -1,9 +1,8 @@
-module.exports = StorageService;
-var WidgetStorage = require('./Storage/widgets.js');
+import WidgetStorage from './Storage/widgets.js';
 
 var debug = require('debug')('Storage Service');
 
-function StorageService(app)
+export default function StorageService(app)
 {
   app.register('widgetStorage', new WidgetStorage()).asInstance();
 }

@@ -1,8 +1,6 @@
-module.exports = Job;
+import {Router} from 'express';
 
-var Router = require('express').Router;
-
-function Job(jobRunner, widgetStorage)
+export default function Job(jobRunner, widgetStorage)
 {
   var router = new Router();
 

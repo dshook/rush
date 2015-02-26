@@ -1,8 +1,6 @@
-module.exports = widgets;
+import {Router} from 'express';
 
-var Router = require('express').Router;
-
-function widgets(widgetStorage)
+export default function widgets(widgetStorage)
 {
   var router = new Router();
 

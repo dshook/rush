@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from './mixins/Modal.jsx';
 import ModalBody from './CreateTransformWidgetBody.jsx';
-import {WidgetTypeStore, change} from '../stores/WidgetTypeStore.js';
+import {change} from '../stores/WidgetProviderStore.js';
 import messenger from '../messenger/AppMessenger';
 
 module.exports = React.createClass({
@@ -14,7 +14,7 @@ module.exports = React.createClass({
 
   getState() {
     return {
-        widgetTypes: this.props.widgetTypeStore.widgetTypes
+        widgetTypes: this.props.widgetProviderStore.widgetProviders
     };
   },
 

@@ -1,6 +1,8 @@
 var promise       = require('bluebird');
 global.Promise = promise;
 
+var babel = require("babel/register");
+
 var Application   = require('billy');
 var path          = require('path');
 var HttpService   = require('billy-http-express');
