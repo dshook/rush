@@ -53,7 +53,7 @@ HttpTransport.prototype.post = function(url, data)
       'Content-Type': 'application/json',
       'Cache-Control': 'no-cache'
     }
-  });
+  }).then(deserialize);
 
   return wrapResponse(abort);
 };
