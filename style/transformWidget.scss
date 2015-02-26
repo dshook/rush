@@ -30,6 +30,16 @@ $widget-height: 20em;
       position: absolute;
       top: 0;
       right: 0;
+      padding: 0;
+      background: #fff;
+      width: 25px;
+      height: 25px;
+      line-height: 25px;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      background: #fff;
+      border-radius: 0;
     }
   }
 }
