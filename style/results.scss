@@ -1,20 +1,20 @@
 .results{
-	max-height: 20em;
-	overflow-y: auto;
-	
-	table{
-		text-align: left;
+  max-height: 20em;
+  overflow-y: auto;
+  
+  table{
+    text-align: left;
 
-		thead{
-			border-bottom: 2px solid $base3;
-		}
+    thead{
+      border-bottom: 2px solid $base3;
+    }
 
-		tr{
-			border-bottom: 1px dotted $base3;
-		}
+    tr{
+      border-bottom: 1px dotted $base3;
+    }
 
-		th, td{
-			padding-right: 1em;
-		}
-	}
+    th, td{
+      padding-right: 1em;
+    }
+  }
 }
