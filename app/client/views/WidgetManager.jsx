@@ -32,7 +32,7 @@ export default class WidgetManager extends React.Component {
   
   renderWidget(widget){
     return (
-      <TransformWidget widget={widget} reactKey={widget.key} />
+      <TransformWidget widget={widget} key={widget.key} />
     );
   }
 
