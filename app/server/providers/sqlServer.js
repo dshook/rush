@@ -26,7 +26,6 @@ export default class SqlServer{
   }
 
   testRead(res){
-    var client = this._client;
     return this.read(res, 'select CURRENT_TIMESTAMP as t');
   }
 

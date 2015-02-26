@@ -9,12 +9,12 @@ export default class PostgresDriver{
     this._client = new pg.Client(this._conString);
   }
 
-  testRead(res){
+  read(res, query){
     var client = this._client;
     return client
     .connectAsync()
     .then(function() {
-      return client.queryAsync('SELECT NOW() AS "theTime"');
+      return client.queryAsync(query);
     })
     .then(function(result) {
       res.write(result.rows[0].theTime.toString());
@@ -23,5 +23,9 @@ export default class PostgresDriver{
     .catch(function(err){
         return res.write(err.toString());
     });
+  }
+
+  testRead(res){
+    return this.read(res, 'SELECT NOW() AS "theTime"');
   }
 }

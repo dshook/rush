@@ -13,7 +13,7 @@ class JobRunner{
         var Provider = require(filePath);
         var provider = new Provider(widget.config);
         provider.connect();
-        promiseArray.push(provider.testRead(output));
+        promiseArray.push(provider.read(output, widget.query));
       });
       return Promise.reduce(promiseArray, function(aggregator, item){
         return item;

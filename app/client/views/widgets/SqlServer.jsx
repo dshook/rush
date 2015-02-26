@@ -16,7 +16,8 @@ export default class SqlServer extends React.Component {
       server   : this.refs.server.getDOMNode().value,
       database : this.refs.database.getDOMNode().value,
     };
-    this.setState({config: data}, function(){
+    var query = this.refs.query.getDOMNode().value;
+    this.setState({config: data, query}, function(){
       WidgetActions.updateWidget(this.state);
       this.props.onClose();
     });
@@ -42,6 +43,10 @@ export default class SqlServer extends React.Component {
         <label>
           Database 
           <input type="text" ref="database" defaultValue={this.state.config.database} />
+        </label>
+        <label>
+          Query
+          <textarea ref="query" defaultValue={this.state.query} />
         </label>
         <button onClick={this.saveWidget} className="button button--action" >
           <i className="fa fa-save"></i>
