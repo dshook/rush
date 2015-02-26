@@ -1,5 +1,8 @@
 import React from 'react';
 import WidgetActions from '../../actions/WidgetActions.js';
+import forms from 'newforms';
+import ConnectionForm from './forms/Connection.jsx';
+import QueryForm from './forms/Query.jsx';
 
 export default class SqlServer extends React.Component {
   constructor(props){
@@ -9,14 +12,14 @@ export default class SqlServer extends React.Component {
     this.saveWidget = this.saveWidget.bind(this);
   }
 
-  saveWidget(){
-    var data = {
-      user     : this.refs.user.getDOMNode().value,
-      password : this.refs.password.getDOMNode().value,
-      server   : this.refs.server.getDOMNode().value,
-      database : this.refs.database.getDOMNode().value,
-    };
-    var query = this.refs.query.getDOMNode().value;
+  saveWidget(e){
+    e.preventDefault();
+
+    var form = this.refs.connectionForm.getForm();
+    var data = form.cleanedData;
+
+    var query = this.refs.queryForm.getForm().cleanedData.query;
+
     this.setState({config: data, query}, function(){
       WidgetActions.updateWidget(this.state);
       this.props.onClose();
@@ -28,30 +31,20 @@ export default class SqlServer extends React.Component {
     return (
       <div className="modal-widget">
         <h3>{this.props.name}</h3>
-        <label>
-          User 
-          <input type="text" ref="user" defaultValue={this.state.config.user} />
-        </label>
-        <label>
-          Password 
-          <input type="password" ref="password" defaultValue={this.state.config.password} />
-        </label>
-        <label>
-          Server 
-          <input type="text" ref="server" defaultValue={this.state.config.server} />
-        </label>
-        <label>
-          Database 
-          <input type="text" ref="database" defaultValue={this.state.config.database} />
-        </label>
-        <label>
-          Query
-          <textarea ref="query" defaultValue={this.state.query} />
-        </label>
-        <button onClick={this.saveWidget} className="button button--action" >
-          <i className="fa fa-save"></i>
-          Save
-        </button>
+        <form onSubmit={this.saveWidget}>
+          <forms.RenderForm 
+            data={this.state.config} 
+            form={ConnectionForm} 
+            ref="connectionForm" />
+          <forms.RenderForm 
+            data={{query: this.state.query}} 
+            form={QueryForm} 
+            ref="queryForm" />
+          <button type="submit" className="button button--action" >
+            <i className="fa fa-save"></i>
+            Save
+          </button>
+        </form>
       </div>
     );
   }
