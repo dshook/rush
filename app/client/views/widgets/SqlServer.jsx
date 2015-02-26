@@ -33,11 +33,11 @@ export default class SqlServer extends React.Component {
         <h3>{this.props.name}</h3>
         <form onSubmit={this.saveWidget}>
           <forms.RenderForm 
-            data={this.state.config} 
+            initial={this.state.config} 
             form={ConnectionForm} 
             ref="connectionForm" />
           <forms.RenderForm 
-            data={{query: this.state.query}} 
+            initial={{query: this.state.query}} 
             form={QueryForm} 
             ref="queryForm" />
           <button type="submit" className="button button--action" >

@@ -1,12 +1,16 @@
 var pg = Promise.promisifyAll(require('pg'));
 
 export default class PostgresDriver{
-  constructor(conString){
-    this._conString = conString;
+  constructor(config){
+    this._config = config;
+  }
+
+  formatConfig(c){
+    return `postgres://${c.user}:${c.password}@${c.server}/${c.database}`;
   }
 
   connect(){
-    this._client = new pg.Client(this._conString);
+    this._client = new pg.Client(this.formatConfig(this._config));
   }
 
   read(res, query){
@@ -18,10 +22,10 @@ export default class PostgresDriver{
     })
     .then(function(result) {
       res.write(result.rows[0].theTime.toString());
-      client.end();
+      return client.end();
     })
     .catch(function(err){
-        return res.write(err.toString());
+      return res.write(err.toString());
     });
   }
 
