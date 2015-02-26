@@ -14,7 +14,7 @@ module.exports = React.createClass({
   },
 
   remove(e){
-    WidgetActions.removeWidget(this.props.reactKey);
+    WidgetActions.removeWidget(this.props.widget.key);
     e.stopPropagation();
   },
 
