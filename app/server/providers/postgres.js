@@ -1,4 +1,5 @@
 var pg = Promise.promisifyAll(require('pg'));
+var QueryStream = require('pg-query-stream');
 
 export default class PostgresDriver{
   constructor(config){
@@ -13,23 +14,17 @@ export default class PostgresDriver{
     this._client = new pg.Client(this.formatConfig(this._config));
   }
 
-  read(res, query){
+  read(query){
     var client = this._client;
     return client
-    .connectAsync()
-    .then(function() {
-      return client.queryAsync(query);
-    })
-    .then(function(result) {
-      res.write(result.rows[0].theTime.toString());
-      return client.end();
-    })
-    .catch(function(err){
-      return res.write(err.toString());
-    });
+      .connectAsync()
+      .then(function() {
+        var queryStream = new QueryStream(query);
+        return client.query(queryStream);
+      });
   }
 
-  testRead(res){
-    return this.read(res, 'SELECT NOW() AS "theTime"');
+  testRead(){
+    return this.read('SELECT * from t_random');
   }
 }

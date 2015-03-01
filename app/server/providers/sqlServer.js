@@ -1,5 +1,4 @@
-var Router = require('express').Router;
-var sql    = require('mssql');
+import sql from 'mssql';
 
 export default class SqlServer{
   constructor(config){
@@ -7,26 +6,22 @@ export default class SqlServer{
   } 
 
   connect(){
+    this._config.requestTimeout = 60000;
     this._client = new sql.Connection(this._config);
   }
 
-  read(res, query){
+  read(query){
     var client = this._client;
-    return client.connect().then(function() {
+    return client.connect().then(function(err) {
         var request = new sql.Request(client);
-        return request.query(query)
-        .then(function(recordset) {
-          res.json(recordset);
-        }).catch(function(err) {
-          res.write('Request Error: ' + err.toString());
-        });
-    }).catch(function(err) {
-        res.write('Connection Error: ' + err.toString());
+        request.stream = true;
+
+        return request.query(query);
     });
   }
 
-  testRead(res){
-    return this.read(res, 'select CURRENT_TIMESTAMP as t');
+  testRead(){
+    return this.read('SELECT * FROM Employees');
   }
 
 }

@@ -9,6 +9,8 @@ module.exports = {
   webroot: path.resolve(path.join(__dirname, '../../../public')),
 
   // used for securing cookies etc
-  cookieSecret: 'shhhh'
+  cookieSecret: 'shhhh',
+
+  connectionTimeout: 30000,
 
 };

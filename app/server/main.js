@@ -5,7 +5,7 @@ var babel = require("babel/register");
 
 var Application   = require('billy');
 var path          = require('path');
-var HttpService   = require('billy-http-express');
+var HttpService   = require('./services/HttpServer.js');
 var HttpTransport = require('http-transport');
 var Storage       = require('./services/Storage.js');
 var Router        = require('./services/Router.js');

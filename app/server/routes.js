@@ -1,4 +1,3 @@
-import bodyParser from 'body-parser';
 import fs from 'fs';
 import path from 'path';
 
@@ -7,8 +6,6 @@ import path from 'path';
  */
 export default function routes(app, http)
 {
-  http.use(bodyParser.json()); // for parsing application/json, no, this shouldn't be here
-
   //set up dynamic routes to the endpoints folder
   var endpointPath = './endpoints/'; 
   fs.readdir(path.resolve(__dirname, endpointPath), function(err, files){
