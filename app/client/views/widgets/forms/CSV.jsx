@@ -2,10 +2,9 @@ import forms from 'newforms';
 
 var SignupForm = forms.Form.extend({
   delimiter: forms.CharField({initial: ','}),
-  endLine: forms.CharField({initial: '\n'}),
+  rowDelimiter: forms.ChoiceField({initial: 'auto', choices: ['auto', 'unix', 'mac', 'windows', 'unicode']}),
   //columns: forms.CharField(),
-  escapeChar: forms.CharField({required: false}),
-  enclosedChar: forms.CharField({required: false}),
+  escape: forms.CharField({required: false}),
 });
 
 module.exports = SignupForm;
