@@ -112,7 +112,11 @@ function deserialize(resp)
   if (!resp || !resp.headers) return resp;
   var type = resp.headers['content-type'];
   if (type && ~type.indexOf('application/json')){
-    resp.body = JSON.parse(resp.body);
+    try{
+      resp.body = JSON.parse(resp.body);
+    }catch(e){
+      debug('Unable to parse JSON response');
+    }
   }
   return resp;
 }
