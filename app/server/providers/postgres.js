@@ -10,11 +10,12 @@ export default class PostgresDriver{
     return `postgres://${c.user}:${c.password}@${c.server}/${c.database}`;
   }
 
-  connect(){
+  init(){
     this._client = new pg.Client(this.formatConfig(this._config));
   }
 
   read(query){
+    this.init();
     var client = this._client;
     return client
       .connectAsync()

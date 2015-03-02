@@ -5,12 +5,13 @@ export default class SqlServer{
     this._config = config;
   } 
 
-  connect(){
+  init(){
     this._config.requestTimeout = 60000;
     this._client = new sql.Connection(this._config);
   }
 
   read(query){
+    this.init();
     var client = this._client;
     return client.connect().then(function(err) {
         var request = new sql.Request(client);

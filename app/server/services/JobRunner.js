@@ -20,7 +20,6 @@ class JobRunner{
       
       var Provider = require(filePath);
       var provider = new Provider(widget.config);
-      provider.connect();
       promiseArray.push(provider.read(widget.query));
     });
 
