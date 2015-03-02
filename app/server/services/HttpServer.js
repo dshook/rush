@@ -81,7 +81,7 @@ HttpServer.prototype.start = function()
     });
   }
 
-  //http.use(compression());
+  http.use(compression());
 
   // for parsing application/json, no, this shouldn't be here
   http.use(bodyParser.json()); 
