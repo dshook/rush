@@ -28,19 +28,27 @@ class JobRunner{
     promiseArray.push(new JSONStringify());
     promiseArray.push(output);
 
-    //which then gets piped together
-    return Promise.reduce(promiseArray, function(aggregator, item){
-      if(aggregator === null){
-        return item;
-      }else{
-        return aggregator.on('error', function(e){
-          output.status(500).end(e.toString());
-        }).pipe(item);
-      }
-    }, null)
-    .catch(function(e){
-      output.status(500).write(e.toString());
-      output.end();
+    var nextToLast = promiseArray[promiseArray.length - 2];
+
+    //create a promise wrapper over all streams to find when the next to last one is done
+    return new Promise(function (resolve, reject) {
+      //which then gets piped together
+      Promise.reduce(promiseArray, function(aggregator, item){
+        if(aggregator === null){
+          return item;
+        }else{
+          if(item === nextToLast){
+            item.on('end', resolve);
+          }
+
+          return aggregator.on('error', function(e){
+            reject(e);
+          }).pipe(item);
+        }
+      }, null)
+      .catch(function(e){
+        reject(e);
+      });
     });
   }
 }

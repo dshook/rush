@@ -25,6 +25,6 @@ export default class PostgresDriver{
   }
 
   testRead(){
-    return this.read('SELECT * from t_random');
+    return this.read('SELECT CURRENT_TIMESTAMP as t');
   }
 }
