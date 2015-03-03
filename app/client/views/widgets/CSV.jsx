@@ -18,6 +18,10 @@ export default class DBBase extends React.Component {
     if(csvForm.validate()){
       var data = csvForm.cleanedData;
 
+      //hopefully a newform update will make this cleaner
+      var file = this.refs.fileUpload.getDOMNode();
+      data.file = file.files;
+
       this.setState({config: data}, function(){
         WidgetActions.updateWidget(this.state);
         this.props.onClose();
@@ -29,7 +33,15 @@ export default class DBBase extends React.Component {
     return (
       <div className="modal-widget">
         <h3>{this.state.name}</h3>
-        <form onSubmit={this.saveWidget}>
+        <form encType="multipart/form-data" action="/api/upload" method="post" >
+          <label>File:</label>
+          <input type="file" name="file" ref="fileUpload"  />
+          <button type="submit" className="button button--action" >
+            <i className="fa fa-save"></i>
+            Save
+          </button>
+        </form>
+        <form encType="multipart/form-data" onSubmit={this.saveWidget}>
           <forms.RenderForm 
             initial={this.state.config} 
             form={CSVForm} 

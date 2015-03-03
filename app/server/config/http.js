@@ -13,4 +13,6 @@ module.exports = {
 
   connectionTimeout: 30000,
 
+  uploadPath: './public/upload/',
+
 };

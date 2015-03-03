@@ -21,6 +21,10 @@ export default function widgets(widgetStorage)
   router.put('/', function(req, res) {
     var widgets = req.body;
 
+    if(req.files){
+      console.log(req.files);
+    }
+
     widgetStorage.set(widgets)
     .catch(function (err) {
       res.json(err);

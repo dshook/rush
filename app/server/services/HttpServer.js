@@ -5,6 +5,7 @@ var debug       = require('debug')('HttpServer');
 var auth        = require('http-auth');
 var bodyParser  = require('body-parser');
 var compression = require('compression');
+var multer      = require('multer');
 
 /**
  * Root HTTP server
@@ -86,10 +87,18 @@ HttpServer.prototype.start = function()
   // for parsing application/json, no, this shouldn't be here
   http.use(bodyParser.json()); 
 
+  //file uploads
+  http.use(multer({ 
+    dest: this.config.get('http.uploadPath'),
+    rename: function (fieldname, filename) {
+      return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
+    }
+  }));
+
   // error handling, maybe
   http.use(function(err, req, res, next) {
     res.status(500);
-    res.json({ wtf: err });
+    res.json({ httpServerError: err });
     res.end();
   }); 
 

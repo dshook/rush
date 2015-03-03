@@ -3,8 +3,8 @@ import Mapper from '../../../shared/lib/mapper/';
 import Widget from '../../../shared/models/widget.js';
 
 export default class Widgets{
-  constructor() {
-    this.filePath = './public/config/widgets.json';
+  constructor(config) {
+    this.filePath = config.get('http.uploadPath') + '/widgets.json';
     this.widgetMapper = new Mapper(Widget);
   }
 
