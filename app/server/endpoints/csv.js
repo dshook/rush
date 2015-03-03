@@ -7,14 +7,7 @@ export default function postgres()
   var router = new Router();
 
   router.get('/', function(req, res) {
-    var config = {
-      //delimiter : ',', // default is , 
-      endLine : '\r', // default is \n, 
-      //columns : ['columnName1', 'columnName2'], // by default read the first line and use values found as columns  
-      //escapeChar : '"', // default is an empty string 
-      //enclosedChar : '"' // default is an empty string 
-    };
-    var csv = new CSVProvider(config);
+    var csv = new CSVProvider();
     
     csv.read()
       .then(function(stream){
@@ -25,6 +18,19 @@ export default function postgres()
           })
           .pipe(new JSONStringify())
           .pipe(res);
+      })
+      .catch(function(e){
+        console.log(e);
+        res.end(e.toString());
+      });
+  });
+
+  router.post('/', function(req, res) {
+    var csv = new CSVProvider();
+    
+    csv.write()
+      .then(function(stream){
+        res.json({status: 'done!'});
       })
       .catch(function(e){
         console.log(e);

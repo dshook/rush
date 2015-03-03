@@ -19,9 +19,9 @@ export default class DBBase extends React.Component {
     var queryForm = this.refs.queryForm.getForm() ;
     if(connectionForm.validate() && queryForm.validate()){
       var data = connectionForm.cleanedData;
-      var query = queryForm.cleanedData.query;
+      data.query = queryForm.cleanedData.query;
 
-      this.setState({config: data, query}, function(){
+      this.setState({config: data}, function(){
         WidgetActions.updateWidget(this.state);
         this.props.onClose();
       });
@@ -38,7 +38,7 @@ export default class DBBase extends React.Component {
             form={ConnectionForm} 
             ref="connectionForm" />
           <forms.RenderForm 
-            initial={{query: this.state.query}} 
+            initial={{query: this.state.config.query}} 
             form={QueryForm} 
             ref="queryForm" />
           <button type="submit" className="button button--action" >

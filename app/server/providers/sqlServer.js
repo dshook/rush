@@ -10,8 +10,9 @@ export default class SqlServer{
     this._client = new sql.Connection(this._config);
   }
 
-  read(query){
+  read(){
     this.init();
+    var query = this._config.query;
     var client = this._client;
     return client.connect().then(function(err) {
         var request = new sql.Request(client);
@@ -22,7 +23,8 @@ export default class SqlServer{
   }
 
   testRead(){
-    return this.read('SELECT * FROM Employees');
+    this._config.query = 'SELECT * FROM Employees';
+    return this.read();
   }
 
 }

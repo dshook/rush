@@ -14,9 +14,10 @@ export default class PostgresDriver{
     this._client = new pg.Client(this.formatConfig(this._config));
   }
 
-  read(query){
+  read(){
     this.init();
     var client = this._client;
+    var query = this._config.query;
     return client
       .connectAsync()
       .then(function() {
@@ -26,6 +27,7 @@ export default class PostgresDriver{
   }
 
   testRead(){
-    return this.read('SELECT CURRENT_TIMESTAMP as t');
+    this._config.query = 'SELECT CURRENT_TIMESTAMP as t';
+    return this.read();
   }
 }

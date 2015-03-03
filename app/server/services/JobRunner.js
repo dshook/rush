@@ -14,18 +14,30 @@ class JobRunner{
     var promiseArray = [];
 
     //add each config item to the promise array
-    config.forEach(function(widget){
-      debug('Loading provider %s', widget.provider);
+    //for now, first provider is a read, last is a write
+    //everything in the middle is transform
+    for(let w = 0; w < config.length; w++){
+      let widget = config[w];
+      let providerFunc = '';
+      switch(w){
+        case 0:
+          providerFunc = 'read';
+          break;
+        case config.length - 1:
+          providerFunc = 'write';
+          break;
+        default:
+          providerFunc = 'transform';
+      }
+
+      debug('Loading provider %s for %s', widget.provider, providerFunc);
       var filePath = path.resolve(__dirname, '../providers/' + widget.provider + '.js');
       
       var Provider = require(filePath);
       var provider = new Provider(widget.config);
-      promiseArray.push(provider.read(widget.query));
-    });
+      promiseArray.push(provider[providerFunc]());
+    }
 
-    //add the JSON'd output as the final items of the pipe for now to return to client
-    promiseArray.push(new JSONStringify());
-    promiseArray.push(output);
 
     var nextToLast = promiseArray[promiseArray.length - 2];
 
@@ -34,7 +46,8 @@ class JobRunner{
       //which then gets piped together
       Promise.reduce(promiseArray, function(aggregator, item){
         if(aggregator === null){
-          return item;
+          //add the JSON'd output to the first stream which should be readable
+          return item.pipe(new JSONStringify()).pipe(output);
         }else{
           if(item === nextToLast){
             item.on('end', resolve);
