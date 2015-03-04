@@ -12,9 +12,15 @@ export default class CSVDriver{
   }
 
   read(){
-    var filePath = './public/config/example.csv';
+    if(!this._config.file){
+      return Promise.reject('No CSV File to read from');
+    }
+    var filePath = this._config.file.path;
     var readStream = fs.createReadStream(filePath);
 
+    if(this._config.rowDelimiter === 'auto'){
+      delete this._config.rowDelimiter;
+    }
     return Promise.resolve(
       readStream.pipe(csv.parse(this._config))
     );

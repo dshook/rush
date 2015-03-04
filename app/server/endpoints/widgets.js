@@ -22,9 +22,11 @@ export default function widgets(widgetStorage)
 
     if(req.files){
       console.log(req.files);
+      res.json(req.files);
+    }else{
+      res.status(500).json({message: 'No files to upload'});
     }
 
-    res.write('Configuration saved successfully.');
     res.end();
   });
 

@@ -75,14 +75,24 @@ HttpTransport.prototype.postFile = function(url, file)
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            resolve(xhr.responseText); // handle response.
+          var headers = {};
+          headers['content-type'] = this.getResponseHeader('content-type');
+          var resp = {
+            headers: headers, 
+            body: xhr.responseText
+          };
+          resolve(deserialize(resp)); // handle response.
         }
     };
     fd.append('file', file);
 
     //xhr.addEventListener("load", transferComplete, false);
-    xhr.addEventListener("error", reject('Upload Failed'), false);
-    xhr.addEventListener("abort", reject('Upload Cancelled'), false);
+    xhr.addEventListener("error", function(e){
+      reject('Upload Failed ' + e.toString());
+    } , false);
+    xhr.addEventListener("abort", function(e){
+      reject('Upload Cancelled ' + e.toString());
+    } , false);
     // Initiate a multipart/form-data upload
     xhr.send(fd);
 

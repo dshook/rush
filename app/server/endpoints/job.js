@@ -18,7 +18,7 @@ export default function Job(jobRunner, widgetStorage)
     })
     .catch(function(e){
       res.status(500);
-      res.json({error: 'Error Running Job', message: e.toString()});
+      res.json({error: 'Error Running Job ', message: e.toString()});
       res.end();
     })
     .finally(function(result){

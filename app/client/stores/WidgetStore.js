@@ -36,14 +36,18 @@ export class WidgetStore extends BaseStore{
   }
 
   save(){
-    var fileUploadWidgets = _(this.widgets).filter(w => w.config.file);
+    var fileUploadWidgets = _(this.widgets).filter(w => w.config.fileUpload);
     var fileUploads = [];
     if(fileUploadWidgets.any()){
       fileUploadWidgets.value().forEach(w => {
         fileUploads.push(
           this.transport
-            .postFile(this.dataSource, w.config.file)
+            .postFile(this.dataSource, w.config.fileUpload)
             .catch(e => console.log(e))
+            .then(uploadRes => {
+              w.config.file = uploadRes.body.file
+              delete w.config.fileUpload;
+            })
         );
       });
     }
