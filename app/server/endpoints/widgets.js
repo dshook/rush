@@ -7,7 +7,6 @@ export default function widgets(widgetStorage)
   router.get('/', function(req, res) {
     widgetStorage.get()
     .catch(function (err) {
-      console.log(err);
       res.json([]);
     })
     .then(function(file){

@@ -4,7 +4,7 @@ import Widget from '../../../shared/models/widget.js';
 
 export default class Widgets{
   constructor(config) {
-    this.filePath = config.get('http.uploadPath') + '/widgets.json';
+    this.filePath = config.get('http.uploadPath') + 'widgets.json';
     this.widgetMapper = new Mapper(Widget);
   }
 
