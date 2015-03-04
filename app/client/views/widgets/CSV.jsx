@@ -20,7 +20,7 @@ export default class DBBase extends React.Component {
 
       //hopefully a newform update will make this cleaner
       var file = this.refs.fileUpload.getDOMNode();
-      data.file = file.files;
+      data.file = file.files[0];
 
       this.setState({config: data}, function(){
         WidgetActions.updateWidget(this.state);
@@ -33,15 +33,9 @@ export default class DBBase extends React.Component {
     return (
       <div className="modal-widget">
         <h3>{this.state.name}</h3>
-        <form encType="multipart/form-data" action="/api/upload" method="post" >
-          <label>File:</label>
-          <input type="file" name="file" ref="fileUpload"  />
-          <button type="submit" className="button button--action" >
-            <i className="fa fa-save"></i>
-            Save
-          </button>
-        </form>
         <form encType="multipart/form-data" onSubmit={this.saveWidget}>
+          <label>File:</label>
+          <input type="file" name="file" className="lol" ref="fileUpload"  />
           <forms.RenderForm 
             initial={this.state.config} 
             form={CSVForm} 

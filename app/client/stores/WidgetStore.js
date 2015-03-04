@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import widgetActions from '../actions/WidgetActions';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
@@ -31,18 +32,28 @@ export class WidgetStore extends BaseStore{
   }
 
   get maxKey() {
-  	var max = 0;
-    this._widgets.forEach(x => x.key > max ? max = x.key : max = max);
-    return max;
+    return _(this._widgets).map(x => x.key).max();
   }
 
   save(){
-    this.transport
-      .put(this.dataSource, this._widgets)
+    var fileUploadWidgets = _(this.widgets).filter(w => w.config.file);
+    var fileUploads = [];
+    if(fileUploadWidgets.any()){
+      fileUploadWidgets.value().forEach(w => {
+        fileUploads.push(
+          this.transport
+            .postFile(this.dataSource, w.config.file)
+            .catch(e => console.log(e))
+        );
+      });
+    }
+    Promise.all(fileUploads)
+      .then(t => this.transport.put(this.dataSource, this._widgets))
       .then(result => {
         this.emitChange();
       })
       .catch(e => console.log(e));
+    
   }
 
   [messenger.ev(widgetActions.add)](widgetType){

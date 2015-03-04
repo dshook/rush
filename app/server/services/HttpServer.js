@@ -90,17 +90,14 @@ HttpServer.prototype.start = function()
   //file uploads
   http.use(multer({ 
     dest: this.config.get('http.uploadPath'),
-    rename: function (fieldname, filename) {
-      return filename.replace(/\W+/g, '-').toLowerCase() + Date.now();
-    }
   }));
 
   // error handling, maybe
-  http.use(function(err, req, res, next) {
-    res.status(500);
-    res.json({ httpServerError: err });
-    res.end();
-  }); 
+  // http.use(function(err, req, res, next) {
+  //   res.status(500);
+  //   res.json({ httpServerError: err });
+  //   res.end();
+  // }); 
 
   return new Promise(function(resolve, reject) {
     http.listen(port, function(err) {

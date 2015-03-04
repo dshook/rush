@@ -39,7 +39,6 @@ HttpTransport.prototype.get = function(url, params)
 /**
  * Execute a `POST` request
  *
- * Sends data as `content-type: application/x-www-form-urlencoded`.
  * @param {string} url
  * @param {object.<string,any>=} data
  * @return {Promise}
@@ -56,6 +55,39 @@ HttpTransport.prototype.post = function(url, data)
   }).then(deserialize);
 
   return wrapResponse(abort);
+};
+
+/**
+ * Execute a `POST` request with just a file
+ *
+ * @return {Promise}
+ */
+HttpTransport.prototype.postFile = function(url, file)
+{
+  debug('POST file %s', url);
+
+  //$5 to whoever can get httpInvoke working with an upload
+  return new Promise(function(resolve, reject) {
+
+    var xhr = new XMLHttpRequest();
+    var fd = new FormData();
+    
+    xhr.open("POST", url, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            resolve(xhr.responseText); // handle response.
+        }
+    };
+    fd.append('file', file);
+
+    //xhr.addEventListener("load", transferComplete, false);
+    xhr.addEventListener("error", reject('Upload Failed'), false);
+    xhr.addEventListener("abort", reject('Upload Cancelled'), false);
+    // Initiate a multipart/form-data upload
+    xhr.send(fd);
+
+  });
+
 };
 
 /**

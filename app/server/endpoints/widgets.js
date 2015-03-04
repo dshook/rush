@@ -17,6 +17,17 @@ export default function widgets(widgetStorage)
     });
   });
 
+  router.post('/', function(req, res) {
+    var widgets = req.body;
+
+    if(req.files){
+      console.log(req.files);
+    }
+
+    res.write('Configuration saved successfully.');
+    res.end();
+  });
+
   router.put('/', function(req, res) {
     var widgets = req.body;
 
