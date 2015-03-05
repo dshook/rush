@@ -38,6 +38,8 @@ export class WidgetStore extends BaseStore{
   save(){
     var fileUploadWidgets = _(this.widgets).filter(w => w.config.fileUpload);
     var fileUploads = [];
+
+    //upload any files necessary and then update the config with returned info
     if(fileUploadWidgets.any()){
       fileUploadWidgets.value().forEach(w => {
         fileUploads.push(

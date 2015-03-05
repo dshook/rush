@@ -1,6 +1,8 @@
 import CSVProvider from '../providers/CSV.js';
 import JSONStringify from 'streaming-json-stringify';
 import {Router} from 'express';
+import stream from 'stream';
+import {isReadable} from 'isstream';
 
 export default function postgres()
 {
@@ -25,17 +27,31 @@ export default function postgres()
       });
   });
 
-  router.post('/', function(req, res) {
+  router.get('/file', function(req, res) {
     var csv = new CSVProvider();
-    
-    csv.write()
-      .then(function(stream){
-        res.json({status: 'done!'});
-      })
-      .catch(function(e){
-        console.log(e);
-        res.end(e.toString());
-      });
+
+    var promiseArray = [csv.generate()];
+    Array.prototype.push.apply(promiseArray, csv.write());
+
+    Promise.reduce(promiseArray, function(aggregator, item){
+      if(aggregator === null){
+        return item;
+      }else{
+        if(isReadable(aggregator)){
+          return aggregator.pipe(item);
+        }else{
+          return item(aggregator);
+        }
+      }
+    }, null)
+    .then(function(filePath){
+      res.sendFile(filePath);
+      // res.send('done');
+    })
+    .catch(function(e){
+      console.log(e);
+      res.end(e.toString());
+    });
   });
 
   return router;

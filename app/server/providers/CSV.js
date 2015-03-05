@@ -1,5 +1,6 @@
 var fs = Promise.promisifyAll(require('fs'));
 import csv from 'csv';
+import path from 'path';
 import JSONStringify from 'streaming-json-stringify';
 
 export default class CSVDriver{
@@ -26,17 +27,24 @@ export default class CSVDriver{
     );
   }
 
-  write(){
-    var generator = csv.generate({objectMode: true, seed: 1, headers: 2, length: 10});
-    var filePath = './public/config/example-write.csv';
-    var writeStream = fs.createWriteStream(filePath);
-
-    return Promise.resolve(
-        generator
-        //.pipe(new JSONStringify())
-        .pipe(csv.stringify())
-        .pipe(writeStream)
-    );
+  generate(){
+    return csv.generate({objectMode: true, seed: 1, headers: 2, length: 100} );
   }
 
+  write(){
+    //TODO: use config
+    var filePath = path.resolve('./public/upload/output' + Date.now() + '.csv');
+    var writeStream = fs.createWriteStream(filePath);
+
+    return [ 
+      csv.stringify()
+      , writeStream
+      , function(writeStream){
+        return new Promise(function(resolve, reject){
+          writeStream.on('finish', w => resolve(filePath));
+          writeStream.on('error', e => reject(e));
+        });
+      }
+    ];
+   }
 }

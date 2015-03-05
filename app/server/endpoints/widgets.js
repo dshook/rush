@@ -17,6 +17,7 @@ export default function widgets(widgetStorage)
     });
   });
 
+  //post endpoint for uploading widget files
   router.post('/', function(req, res) {
     var widgets = req.body;
 
