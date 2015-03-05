@@ -13,7 +13,6 @@ export default function Job(jobRunner, widgetStorage)
       res.json(err);
     })
     .then(function(widgets){
-      res.setHeader('Content-Type', 'application/json');
       return jobRunner.startJob(res, widgets);
     })
     .catch(function(e){

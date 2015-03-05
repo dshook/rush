@@ -33,7 +33,7 @@ export default class CSVDriver{
 
   write(){
     //TODO: use config
-    var filePath = path.resolve('./public/upload/output' + Date.now() + '.csv');
+    var filePath = './public/upload/output' + Date.now() + '.csv';
     var writeStream = fs.createWriteStream(filePath);
 
     return [ 

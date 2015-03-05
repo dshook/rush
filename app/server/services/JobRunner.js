@@ -1,5 +1,6 @@
 import path from 'path';
 import JSONStringify from 'streaming-json-stringify';
+import {isReadable} from 'isstream';
 var debug = require('debug')('Job Runner');
 
 class JobRunner{
@@ -35,31 +36,42 @@ class JobRunner{
       
       var Provider = require(filePath);
       var provider = new Provider(widget.config);
-      promiseArray.push(provider[providerFunc]());
+
+      promiseArray = promiseArray.concat(provider[providerFunc]());
     }
-
-
-    var nextToLast = promiseArray[promiseArray.length - 2];
 
     //create a promise wrapper over all streams to find when the next to last one is done
     return new Promise(function (resolve, reject) {
       //which then gets piped together
       Promise.reduce(promiseArray, function(aggregator, item){
         if(aggregator === null){
-          //add the JSON'd output to the first stream which should be readable
-          return item.pipe(new JSONStringify()).pipe(output);
+          return item;
         }else{
-          if(item === nextToLast){
-            item.on('end', resolve);
+          if(isReadable(aggregator)){
+            return aggregator
+              .on('error', function(e){
+                reject(e);
+              })
+              .pipe(item);
+          }else{
+            return item(aggregator);
           }
-
-          return aggregator.on('error', function(e){
-            reject(e);
-          }).pipe(item);
         }
       }, null)
       .catch(function(e){
         reject(e);
+      })
+      .then(function(jobResult){
+        //decide what to do with the output based on its value
+        if(isReadable(jobResult)){
+          jobResult.on('end', resolve);
+          jobResult.pipe(new JSONStringify()).pipe(output);
+        }else if(typeof(jobResult) === 'string' && jobResult.indexOf('/') > -1){
+          //file download
+          output.json({fileLink: jobResult});
+        }else{
+          output.json(jobResult);
+        }
       });
     });
   }

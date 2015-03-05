@@ -36,6 +36,14 @@ export default class Results extends React.Component {
     );
   }
 
+  renderDownloadLink(link){
+    return (
+      <div className="results">
+        <a target="_blank" href={link}>Download Results</a>
+      </div>
+    );
+  }
+
   renderTable(){
     var columns = Object.keys(this.state.results[0]);
     return (
@@ -77,6 +85,8 @@ export default class Results extends React.Component {
     var results = this.state.results;
     if(results instanceof Array && results.length > 0){
       return this.renderTable();
+    }else if(results instanceof Object && results.fileLink){
+      return this.renderDownloadLink(results.fileLink);
     }else{
       return this.renderPlain();
     }

@@ -1,6 +1,10 @@
 .results{
   max-height: 20em;
   overflow-y: auto;
+
+  a{
+    color: $text-color;
+  }
   
   table{
     text-align: left;

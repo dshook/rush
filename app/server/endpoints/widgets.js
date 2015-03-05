@@ -22,7 +22,6 @@ export default function widgets(widgetStorage)
     var widgets = req.body;
 
     if(req.files){
-      console.log(req.files);
       res.json(req.files);
     }else{
       res.status(500).json({message: 'No files to upload'});
@@ -33,10 +32,6 @@ export default function widgets(widgetStorage)
 
   router.put('/', function(req, res) {
     var widgets = req.body;
-
-    if(req.files){
-      console.log(req.files);
-    }
 
     widgetStorage.set(widgets)
     .catch(function (err) {

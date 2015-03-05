@@ -70,6 +70,20 @@ HttpServer.prototype.start = function()
   // Ensure default secret for anybody eles that needs it
   this.config.get('http.secret', 'supersecret');
 
+  http.use(compression());
+
+  // for parsing application/json, no, this shouldn't be here
+  http.use(bodyParser.json()); 
+
+  //file uploads
+  var uploadPath = this.config.get('http.uploadPath');
+  http.use(multer({ 
+    dest: uploadPath,
+  }));
+
+  //serve up the upload path too
+  http.use('/public/upload', express.static(uploadPath));
+
   // Mount static server last
   var webroot = this.config.get('http.webroot', null);
   if (webroot) {
@@ -82,15 +96,6 @@ HttpServer.prototype.start = function()
     });
   }
 
-  http.use(compression());
-
-  // for parsing application/json, no, this shouldn't be here
-  http.use(bodyParser.json()); 
-
-  //file uploads
-  http.use(multer({ 
-    dest: this.config.get('http.uploadPath'),
-  }));
 
   // error handling, maybe
   // http.use(function(err, req, res, next) {
