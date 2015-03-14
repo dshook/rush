@@ -21,7 +21,7 @@ var VENDOR_LIBS = [
   'debug',
   'httpinvoke',
   'typedef',
-  'underscore',
+  'lodash',
   'vanilla-modal',
 
   // local libs
