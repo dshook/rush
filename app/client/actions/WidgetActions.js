@@ -1,8 +1,8 @@
 import messenger from '../messenger/AppMessenger';
 
-var add = 'Widget: Add';
-var update = 'Widget: Update';
-var remove = 'Widget: Remove';
+const add = 'Widget: Add';
+const update = 'Widget: Update';
+const remove = 'Widget: Remove';
 
 module.exports = {
   add,

@@ -1,6 +1,6 @@
 import messenger from '../messenger/AppMessenger';
 
-var startAction = 'App: Start';
+const startAction = 'App: Start';
 
 module.exports = {
 	startAction,

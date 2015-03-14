@@ -2,7 +2,7 @@ import appActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
 
-export var change = 'WidgetProviderStore: Change';
+export const change = 'WidgetProviderStore: Change';
 
 export class WidgetProviderStore extends BaseStore{
   constructor(transport){

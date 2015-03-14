@@ -5,7 +5,7 @@ import BaseStore from './BaseStore';
 import Widget from '../../shared/models/widget.js';
 import Mapper from '../../shared/lib/mapper/';
 
-export var change = 'WidgetStore: Change';
+export const change = 'WidgetStore: Change';
 
 export class WidgetStore extends BaseStore{
 	constructor(transport){

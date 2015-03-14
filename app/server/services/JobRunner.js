@@ -65,6 +65,7 @@ class JobRunner{
         //decide what to do with the output based on its value
         if(isReadable(jobResult)){
           jobResult.on('end', resolve);
+          output.setHeader('Content-Type', 'application/json');
           jobResult.pipe(new JSONStringify()).pipe(output);
         }else if(typeof(jobResult) === 'string' && jobResult.indexOf('/') > -1){
           //file download

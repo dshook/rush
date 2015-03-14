@@ -1,4 +1,4 @@
-# Project Template
+# Rush
 
 ## Requirements
 
@@ -10,6 +10,8 @@ Install local deps
 
 ```
 $ npm install
+
+$ npm install -g gulp
 ```
 
 Build the client app
@@ -30,25 +32,21 @@ Run automated testing
 $ npm test
 ```
 
+Debug server
+
+```
+$ npm run debug
+```
+
 ## Project Structure
 
 * `app/client` All client-side code
 * `app/server` All server code
+* `app/shared` Code shared between client and server
 * `app/node_modules` Local libraries and shared code
 * `public` Web root of the node app
 * `public/dist` Output directory for client artifacts
-* `style` LESS style sheets
-
-## What ya got
-
-* Browserify v5 compiler
-* NodeJS server app
-* Grunt task runner
-* LESS css pre-procesor
-* Bootstrap 3 style framework
-* Activities state management
-* billy application harness
-* tape testing library
+* `style` SCSS style sheets
 
 ## Server
 

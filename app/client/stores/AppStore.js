@@ -2,7 +2,7 @@ import appActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
 
-export var change = 'AppStore: Change';
+export const change = 'AppStore: Change';
 
 export class AppStore extends BaseStore{
 	constructor(transport){
