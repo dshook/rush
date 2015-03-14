@@ -10,7 +10,7 @@ export default function postgres()
 
   router.get('/', function(req, res) {
     var csv = new CSVProvider();
-    
+
     csv.read()
       .then(function(stream){
         res.setHeader('Content-Type', 'application/json');

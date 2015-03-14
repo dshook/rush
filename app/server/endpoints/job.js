@@ -6,8 +6,8 @@ export default function Job(jobRunner, widgetStorage)
   var router = new Router();
 
   router.post('/', function(req, res) {
-    var jobId = req.body.jobId;
-    
+    //var jobId = req.body.jobId;
+
     widgetStorage.get()
     .catch(function (err) {
       res.json(err);
@@ -20,7 +20,7 @@ export default function Job(jobRunner, widgetStorage)
       res.json({error: 'Error Running Job ', message: e.toString()});
       res.end();
     })
-    .finally(function(result){
+    .finally(function(){
       debug('job done');
     });
   });

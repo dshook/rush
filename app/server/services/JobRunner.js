@@ -33,7 +33,7 @@ class JobRunner{
 
       debug('Loading provider %s for %s', widget.provider, providerFunc);
       var filePath = path.resolve(__dirname, '../providers/' + widget.provider + '.js');
-      
+
       var Provider = require(filePath);
       var provider = new Provider(widget.config);
 
@@ -67,7 +67,7 @@ class JobRunner{
           jobResult.on('end', resolve);
           output.setHeader('Content-Type', 'application/json');
           jobResult.pipe(new JSONStringify()).pipe(output);
-        }else if(typeof(jobResult) === 'string' && jobResult.indexOf('/') > -1){
+        }else if(typeof jobResult  === 'string' && jobResult.indexOf('/') > -1){
           //file download
           output.json({fileLink: jobResult});
         }else{

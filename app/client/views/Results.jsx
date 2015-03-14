@@ -8,14 +8,14 @@ export default class Results extends React.Component {
 
     this.appStore = props.stores.appStore;
     this.state = this.getState();
-  } 
+  }
 
   getState() {
     return {
         results: this.appStore.results
     };
   }
-  
+
   [messenger.ev(change)](){
     this.setState(this.getState());
   }

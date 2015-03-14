@@ -13,7 +13,7 @@ export default class HomeActivity
     //init layout with all deps passed down
     React.render(
       new Layout({
-        stores: this.stores 
+        stores: this.stores
       })
       , this.$root[0]
     );

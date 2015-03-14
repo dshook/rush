@@ -30,11 +30,11 @@ module.exports = React.createClass({
     messenger.unbindInstance(this);
   },
 
-  onAdd(name){
+  onAdd(){
     this.closeModal();
   },
   addClick(){
-    this.openModal(ModalBody, 
+    this.openModal(ModalBody,
       {widgetTypes: this.state.widgetTypes, onAdd: this.onAdd}
     );
   },

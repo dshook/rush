@@ -3,14 +3,14 @@ import SqlServerProvider from '../providers/SqlServer.js';
 import JSONStringify from 'streaming-json-stringify';
 import promisePipe from 'promisepipe';
 
-var config_local = {
+var configLocal = {
   user: 'test',
   password: 'test',
   server: 'localhost\\sqlserver',
-  database: 'ReloDotNet2',
+  database: 'ReloDotNet2'
 };
 
-function handleError(er){
+function handleError(){
   this.end();
 }
 
@@ -19,7 +19,7 @@ export default function sqlServer(){
   var router = new Router();
 
   router.get('/', function(req, res){
-    var db = new SqlServerProvider(config_local);
+    var db = new SqlServerProvider(configLocal);
     db.connect();
 
     var toJSON = new JSONStringify();

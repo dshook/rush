@@ -17,7 +17,7 @@ export default class WidgetManager extends React.Component {
         widgets: this.widgetStore.widgets
     };
   }
-  
+
   [messenger.ev(change)](){
     this.setState(this.getState());
   }
@@ -29,7 +29,7 @@ export default class WidgetManager extends React.Component {
   componentWillUnmount() {
     messenger.unbindInstance(this);
   }
-  
+
   renderWidget(widget){
     return (
       <TransformWidget widget={widget} key={widget.key} />

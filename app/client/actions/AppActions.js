@@ -6,5 +6,5 @@ module.exports = {
 	startAction,
   start() {
     messenger.trigger(startAction);
-  },
+  }
 };

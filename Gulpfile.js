@@ -2,13 +2,12 @@ var gulp        = require('gulp');
 var browserify  = require('browserify');
 var babelify    = require('babelify');
 var del         = require('del');
-var jshint      = require('gulp-jshint');
+var lint        = require('gulp-eslint');
 var rename      = require('gulp-rename');
 var sass        = require('gulp-sass');
 var sourcemaps  = require('gulp-sourcemaps');
 var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
-var uglify      = require('gulp-uglify');
 var sequence    = require('run-sequence');
 
 // Add more libs to this array to push more stuff out to the vendor bundle
@@ -42,9 +41,9 @@ gulp.task('clean', function() {
 });
 
 gulp.task('lint', function() {
-  return gulp.src(['./app/server/**/*.js', './app/client/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+  return gulp.src(['./app/server/**/*.js', './app/client/**/*.{js,jsx}'])
+    .pipe(lint())
+    .pipe(lint.format());
 });
 
 // vendor libraries
@@ -72,7 +71,7 @@ gulp.task('browserify-vendor', function() {
 gulp.task('browserify-client', function() {
   var bundleStream = browserify({
     entries: ['./app/client/main.js'],
-    debug: true,
+    debug: true
   })
   .external(VENDOR_LIBS)
   .transform(babelify.configure({
@@ -101,7 +100,7 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./public/dist/'));
 });
 
-/* 
+/*
  * Top-level Tasks
  */
 

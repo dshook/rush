@@ -6,7 +6,7 @@ export default function widgets(widgetStorage)
 
   router.get('/', function(req, res) {
     widgetStorage.get()
-    .catch(function (err) {
+    .catch(function () {
       res.json([]);
     })
     .then(function(file){
@@ -19,8 +19,6 @@ export default function widgets(widgetStorage)
 
   //post endpoint for uploading widget files
   router.post('/', function(req, res) {
-    var widgets = req.body;
-
     if(req.files){
       res.json(req.files);
     }else{
@@ -31,9 +29,9 @@ export default function widgets(widgetStorage)
   });
 
   router.put('/', function(req, res) {
-    var widgets = req.body;
+    var widgetsToUpload = req.body;
 
-    widgetStorage.set(widgets)
+    widgetStorage.set(widgetsToUpload)
     .catch(function (err) {
       res.json(err);
     })

@@ -3,7 +3,7 @@ import sql from 'mssql';
 export default class SqlServer{
   constructor(config){
     this._config = config;
-  } 
+  }
 
   init(){
     this._config.requestTimeout = 60000;
@@ -14,12 +14,13 @@ export default class SqlServer{
     this.init();
     var query = this._config.query;
     var client = this._client;
-    return client.connect().then(function(err) {
+    return client.connect()
+      .then(function() {
         var request = new sql.Request(client);
         request.stream = true;
 
         return request.query(query);
-    });
+      });
   }
 
   testRead(){

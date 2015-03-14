@@ -5,12 +5,12 @@ import $ from 'jquery';
 module.exports = {
   componentWillMount: function() {
     this._modal = null;
-    this._id ='temp-modal'; 
-    this._reactId ='temp-react-modal'; 
+    this._id = 'temp-modal';
+    this._reactId = 'temp-react-modal';
   },
   openModal: function(component, props = {}) {
     //create new div on the page
-    var $modalDiv = $('.wrapper')
+    $('.wrapper')
       .append(`<div class="modal-container" id="${this._id}"><div id="${this._reactId}"></div></div>`);
 
     //then throw it into the modal
@@ -19,8 +19,7 @@ module.exports = {
 
     //the react it up
     var modalComponent = React.createFactory(component);
-    var modalContent 
-      = React.render(modalComponent(props), document.getElementById(this._reactId));
+    React.render(modalComponent(props), document.getElementById(this._reactId));
 
   },
   closeModal: function() {

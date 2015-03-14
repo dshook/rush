@@ -40,16 +40,13 @@ HttpServer.prototype.basicAuth = function()
   var password = this.config.get('http.password',
     process.env.HTTP_PASSWORD || null);
 
-  if (!username && !password)
-    return;
+  if (!username && !password) return;
 
   debug('using http basic auth: %s:%s', username || '*', password || '*');
 
   var basic = auth.basic({}, function(u, pw, done) {
-    if (username && username !== u)
-      done(false);
-    if (password && password !== pw)
-      done(false);
+    if (username && username !== u) done(false);
+    if (password && password !== pw) done(false);
     done(true);
   });
 
@@ -73,12 +70,12 @@ HttpServer.prototype.start = function()
   http.use(compression());
 
   // for parsing application/json, no, this shouldn't be here
-  http.use(bodyParser.json()); 
+  http.use(bodyParser.json());
 
   //file uploads
   var uploadPath = this.config.get('http.uploadPath');
-  http.use(multer({ 
-    dest: uploadPath,
+  http.use(multer({
+    dest: uploadPath
   }));
 
   //serve up the upload path too
@@ -87,8 +84,7 @@ HttpServer.prototype.start = function()
   // Mount static server last
   var webroot = this.config.get('http.webroot', null);
   if (webroot) {
-    if (!Array.isArray(webroot))
-      webroot = [webroot];
+    if (!Array.isArray(webroot)) webroot = [webroot];
 
     webroot.forEach(function(p) {
       http.use(express.static(p));
@@ -102,7 +98,7 @@ HttpServer.prototype.start = function()
   //   res.status(500);
   //   res.json({ httpServerError: err });
   //   res.end();
-  // }); 
+  // });
 
   return new Promise(function(resolve, reject) {
     http.listen(port, function(err) {

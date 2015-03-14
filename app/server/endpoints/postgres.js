@@ -13,11 +13,11 @@ export default function postgres()
       server: 'localhost',
       database: 'testdb'
     };
-  	var pg = new PostgresProvider(config);
-  	pg.connect();
-  	
-  	pg.testRead()
-	  	.then(function(stream){
+    var pg = new PostgresProvider(config);
+    pg.connect();
+
+    pg.testRead()
+      .then(function(stream){
         res.setHeader('Content-Type', 'application/json');
         return stream
           .on('error', function(e){
@@ -27,7 +27,7 @@ export default function postgres()
           })
           .pipe(new JSONStringify())
           .pipe(res);
-	  	})
+      })
       .catch(function(e){
         console.log(e);
         res.end(e.toString());

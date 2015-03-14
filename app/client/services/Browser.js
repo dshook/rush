@@ -30,7 +30,7 @@ function Browser(app, config)
  */
 Browser.prototype.start = function()
 {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(resolve) {
     $(function() {
       debug('page ready');
       resolve();

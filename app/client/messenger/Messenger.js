@@ -191,7 +191,7 @@ Messenger.prototype.unbindInstance = function(instance)
 
   for (var n; !(n = iter.next()).done; ) {
     var item = n.value;
-    var eventSymbol = item[0];
+    //var eventSymbol = item[0];
     var bindings = item[1];
 
     for (var m = bindings.length - 1; m >= 0; m--) {

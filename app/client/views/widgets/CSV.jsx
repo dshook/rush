@@ -47,9 +47,9 @@ export default class DBBase extends React.Component {
         <form encType="multipart/form-data" onSubmit={this.saveWidget}>
           <label>File:</label>
           {fileUpload}
-          <forms.RenderForm 
-            initial={this.state.config} 
-            form={CSVForm} 
+          <forms.RenderForm
+            initial={this.state.config}
+            form={CSVForm}
             ref="csvForm" />
           <button type="submit" className="button button--action" >
             <i className="fa fa-save"></i>

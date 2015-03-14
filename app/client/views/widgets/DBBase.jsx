@@ -16,7 +16,7 @@ export default class DBBase extends React.Component {
     e.preventDefault();
 
     var connectionForm = this.refs.connectionForm.getForm();
-    var queryForm = this.refs.queryForm.getForm() ;
+    var queryForm = this.refs.queryForm.getForm();
     if(connectionForm.validate() && queryForm.validate()){
       var data = connectionForm.cleanedData;
       data.query = queryForm.cleanedData.query;
@@ -33,13 +33,13 @@ export default class DBBase extends React.Component {
       <div className="modal-widget">
         <h3>{this.state.name}</h3>
         <form onSubmit={this.saveWidget}>
-          <forms.RenderForm 
-            initial={this.state.config} 
-            form={ConnectionForm} 
+          <forms.RenderForm
+            initial={this.state.config}
+            form={ConnectionForm}
             ref="connectionForm" />
-          <forms.RenderForm 
-            initial={{query: this.state.config.query}} 
-            form={QueryForm} 
+          <forms.RenderForm
+            initial={{query: this.state.config.query}}
+            form={QueryForm}
             ref="queryForm" />
           <button type="submit" className="button button--action" >
             <i className="fa fa-save"></i>

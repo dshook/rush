@@ -36,13 +36,13 @@ export default class CSVDriver{
     var filePath = './public/upload/output' + Date.now() + '.csv';
     var writeStream = fs.createWriteStream(filePath);
 
-    return [ 
+    return [
       csv.stringify()
       , writeStream
-      , function(writeStream){
+      , function(outputStream){
         return new Promise(function(resolve, reject){
-          writeStream.on('finish', w => resolve(filePath));
-          writeStream.on('error', e => reject(e));
+          outputStream.on('finish', () => resolve(filePath));
+          outputStream.on('error', e => reject(e));
         });
       }
     ];

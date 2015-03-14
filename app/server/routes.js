@@ -7,7 +7,7 @@ import path from 'path';
 export default function routes(app, http)
 {
   //set up dynamic routes to the endpoints folder
-  var endpointPath = './endpoints/'; 
+  var endpointPath = './endpoints/';
   fs.readdir(path.resolve(__dirname, endpointPath), function(err, files){
     if(err){
       throw 'Could not find endpoint path';

@@ -18,6 +18,39 @@ function HttpTransport()
 }
 
 /**
+ * @private
+ */
+function wrapResponse(thenable)
+{
+  return Promise.resolve(thenable);
+}
+
+/**
+ * @private
+ */
+function deserialize(resp)
+{
+  if (!resp || !resp.headers) return resp;
+  var type = resp.headers['content-type'];
+  if(type && ~type.indexOf('application/json')){
+    try{
+      resp.body = JSON.parse(resp.body);
+    }catch(e){
+      debug('Unable to parse JSON response');
+    }
+  }
+  return resp;
+}
+
+/**
+ * @private
+ */
+function serialize(data)
+{
+  return JSON.stringify(data);
+}
+
+/**
  * Execute a `GET` request.
  *
  * Will parse JSON data if the `content-type: application/json` response header
@@ -71,14 +104,14 @@ HttpTransport.prototype.postFile = function(url, file)
 
     var xhr = new XMLHttpRequest();
     var fd = new FormData();
-    
+
     xhr.open("POST", url, true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4 && xhr.status === 200) {
           var headers = {};
           headers['content-type'] = this.getResponseHeader('content-type');
           var resp = {
-            headers: headers, 
+            headers: headers,
             body: xhr.responseText
           };
           resolve(deserialize(resp)); // handle response.
@@ -89,10 +122,10 @@ HttpTransport.prototype.postFile = function(url, file)
     //xhr.addEventListener("load", transferComplete, false);
     xhr.addEventListener("error", function(e){
       reject('Upload Failed ' + e.toString());
-    } , false);
+    }, false);
     xhr.addEventListener("abort", function(e){
       reject('Upload Cancelled ' + e.toString());
-    } , false);
+    }, false);
     // Initiate a multipart/form-data upload
     xhr.send(fd);
 
@@ -137,37 +170,4 @@ HttpTransport.prototype.del = function(url, params)
 
   return wrapResponse(abort);
 };
-
-/**
- * @private
- */
-function wrapResponse(thenable)
-{
-  return Promise.resolve(thenable);
-}
-
-/**
- * @private
- */
-function deserialize(resp)
-{
-  if (!resp || !resp.headers) return resp;
-  var type = resp.headers['content-type'];
-  if (type && ~type.indexOf('application/json')){
-    try{
-      resp.body = JSON.parse(resp.body);
-    }catch(e){
-      debug('Unable to parse JSON response');
-    }
-  }
-  return resp;
-}
-
-/**
- * @private
- */
-function serialize(data)
-{
-  return JSON.stringify(data);
-}
 

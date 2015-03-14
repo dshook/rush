@@ -11,7 +11,7 @@ export default class Widgets{
   get(){
     var mapper = this.widgetMapper;
     return fs.readFileAsync(this.filePath, 'utf8')
-    .catch(function(e){
+    .catch(function(){
       //it's fine if there's not a file ATM
       return Promise.resolve([]);
     })

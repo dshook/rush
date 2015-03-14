@@ -8,7 +8,7 @@ export default class BaseStore {
   }
 
   emitChange(a, b) {
-  	this.messenger.trigger(this.change, a, b);
+    this.messenger.trigger(this.change, a, b);
   }
 
 }
