@@ -1,10 +1,11 @@
 import React from 'react';
+import BaseView from './BaseView.js';
 import CreateTransformWidget from './CreateTransformWidget.jsx';
 import TransformWidget from './TransformWidget.jsx';
 import {WidgetStore, change} from '../stores/WidgetStore';
 import messenger from '../messenger/AppMessenger.js';
 
-export default class WidgetManager extends React.Component {
+export default class WidgetManager extends BaseView {
   constructor(props) {
     super(props);
 
@@ -20,14 +21,6 @@ export default class WidgetManager extends React.Component {
 
   [messenger.ev(change)](){
     this.setState(this.getState());
-  }
-
-  componentDidMount() {
-    messenger.bindInstance(this);
-  }
-
-  componentWillUnmount() {
-    messenger.unbindInstance(this);
   }
 
   renderWidget(widget){

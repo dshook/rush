@@ -1,8 +1,9 @@
 import React from 'react';
+import BaseView from './BaseView.js';
 import {AppStore, change} from '../stores/AppStore.js';
 import messenger from '../messenger/AppMessenger.js';
 
-export default class Results extends React.Component {
+export default class Results extends BaseView {
   constructor(props) {
     super(props);
 
@@ -18,14 +19,6 @@ export default class Results extends React.Component {
 
   [messenger.ev(change)](){
     this.setState(this.getState());
-  }
-
-  componentDidMount() {
-    messenger.bindInstance(this);
-  }
-
-  componentWillUnmount() {
-    messenger.unbindInstance(this);
   }
 
   renderPlain(){
