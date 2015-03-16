@@ -1,6 +1,7 @@
 import TransformWidgetBody from './widgets/TransformWidgetBody.jsx';
 import SqlServer from './widgets/SqlServer.jsx';
 import Postgres from './widgets/Postgres.jsx';
+import Limit from './widgets/Limit.jsx';
 import CSV from './widgets/CSV.jsx';
 
 module.exports.getView = function(view){
@@ -8,6 +9,7 @@ module.exports.getView = function(view){
     TransformWidgetBody,
     SqlServer,
     Postgres,
+    Limit,
     CSV
   };
 

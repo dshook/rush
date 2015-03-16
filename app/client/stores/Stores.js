@@ -4,6 +4,7 @@ import {WidgetProviderStore} from'./WidgetProviderStore.js';
 
 export default function Stores(app, transport, config)
 {
+  //TODO: app.make eh?
   app.register('stores', {
     widgetStore: new WidgetStore(transport),
     appStore: new AppStore(transport),

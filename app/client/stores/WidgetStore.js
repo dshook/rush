@@ -32,6 +32,7 @@ export class WidgetStore extends BaseStore{
   }
 
   get maxKey() {
+    if(this._widgets.length == 0) return 0;
     return _(this._widgets).map(x => x.key).max();
   }
 

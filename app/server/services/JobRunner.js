@@ -1,6 +1,6 @@
 import path from 'path';
 import JSONStringify from 'streaming-json-stringify';
-import {isReadable} from 'isstream';
+import {isReadable, isDuplex, isWritable} from 'isstream';
 var debug = require('debug')('Job Runner');
 
 class JobRunner{
@@ -37,7 +37,10 @@ class JobRunner{
       var Provider = require(filePath);
       var provider = new Provider(widget.config);
 
-      promiseArray = promiseArray.concat(provider[providerFunc]());
+      //fall back to a transform function to allow for a transform function in the last place
+      var providerFunction = provider[providerFunc] || provider.transform;
+      //promiseArray = promiseArray.concat(provider[providerFunc]());
+      promiseArray = promiseArray.concat(providerFunction.bind(provider)());
     }
 
     //create a promise wrapper over all streams to find when the next to last one is done
@@ -53,8 +56,10 @@ class JobRunner{
                 reject(e);
               })
               .pipe(item);
-          }else{
+          }else if(isWritable(aggregator)){
             return item(aggregator);
+          }else{
+            reject('Widget is neither readable or writable');
           }
         }
       }, null)
@@ -65,6 +70,7 @@ class JobRunner{
         //decide what to do with the output based on its value
         if(isReadable(jobResult)){
           jobResult.on('end', resolve);
+          //TODO: clean up how errors are handled, ideally no header set here
           output.setHeader('Content-Type', 'application/json');
           jobResult.pipe(new JSONStringify()).pipe(output);
         }else if(typeof jobResult  === 'string' && jobResult.indexOf('/') > -1){
