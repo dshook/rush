@@ -1,14 +1,13 @@
 import path from 'path';
 import JSONStringify from 'streaming-json-stringify';
-import {isReadable, isDuplex, isWritable} from 'isstream';
+import {isReadable, isWritable} from 'isstream';
 var debug = require('debug')('Job Runner');
 
 class JobRunner{
-  startJob(output, config){
+  startJob(config){
     if(!config || config.length === 0){
       debug('No Config for Job Runner');
-      output.status(500).write('No Config to Run');
-      return Promise.resolve([]);
+      return Promise.reject('No Config to read from');
     }
 
     debug('Starting Job');
@@ -39,7 +38,6 @@ class JobRunner{
 
       //fall back to a transform function to allow for a transform function in the last place
       var providerFunction = provider[providerFunc] || provider.transform;
-      //promiseArray = promiseArray.concat(provider[providerFunc]());
       promiseArray = promiseArray.concat(providerFunction.bind(provider)());
     }
 
@@ -57,7 +55,10 @@ class JobRunner{
               })
               .pipe(item);
           }else if(isWritable(aggregator)){
-            return item(aggregator);
+            return item(aggregator)
+              .on('error', function(e){
+                reject(e);
+              });
           }else{
             reject('Widget is neither readable or writable');
           }
@@ -67,18 +68,7 @@ class JobRunner{
         reject(e);
       })
       .then(function(jobResult){
-        //decide what to do with the output based on its value
-        if(isReadable(jobResult)){
-          jobResult.on('end', resolve);
-          //TODO: clean up how errors are handled, ideally no header set here
-          output.setHeader('Content-Type', 'application/json');
-          jobResult.pipe(new JSONStringify()).pipe(output);
-        }else if(typeof jobResult  === 'string' && jobResult.indexOf('/') > -1){
-          //file download
-          output.json({fileLink: jobResult});
-        }else{
-          output.json(jobResult);
-        }
+        return resolve(jobResult);
       });
     });
   }

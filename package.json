@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./app/server/main.js",
     "build": "gulp watch",
-    "debug": "node-debug -p=8081 ./app/server/main.js"
+    "debug": "node-debug -p=8081 -d=5858 ./app/server/main.js"
   },
   "devDependencies": {
     "babel-eslint": "^2.0.0",

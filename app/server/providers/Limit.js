@@ -12,14 +12,19 @@ export default class Limit{
     var timesCalled = 0;
 
     limitTransform._transform = function (chunk, encoding, done) {
-      if(timesCalled++ < limit) limitTransform.push(chunk);
-      done();
+      try{
+        if(timesCalled++ < limit) this.push(chunk);
+        //TODO: catch errors in here properly
+        //chunk.nuts.soup = 4;
+        done();
+      }catch(e){
+        return Promise.reject('Error In Limit Transform: ' + e.toString());
+      }
     };
 
-    // limitTransform._flush = function (done) {
-    //   if(timesCalled++ < limit) limitTransform.push(chunk);
-    //   done();
-    // };
+    limitTransform._flush = function (done) {
+      done();
+    };
 
     return limitTransform;
   }

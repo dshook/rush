@@ -3,7 +3,12 @@ global.Promise = promise;
 
 /*eslint-disable */
 //Enable es6 for node code
-var babel = require("babel/register");
+var babel = require("babel/register")({
+  sourceMap: 'inline',
+
+  // include superfluous whitespace characters and line terminators
+  compact: false 
+});
 /*eslint-enable */
 
 var Application   = require('billy');
