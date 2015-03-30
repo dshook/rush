@@ -9,7 +9,7 @@ export class AppStore extends BaseStore{
     super();
 
     this.change = change;
-    this.messenger = messenger;    
+    this.messenger = messenger;
     this.transport = transport;
 
     this._results = [];

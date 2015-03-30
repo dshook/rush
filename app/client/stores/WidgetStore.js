@@ -12,7 +12,7 @@ export class WidgetStore extends BaseStore{
     super();
 
     this.change = change;
-    this.messenger = messenger;    
+    this.messenger = messenger;
     this.transport = transport;
 
     this.dataSource = '/api/widgets';
@@ -22,7 +22,7 @@ export class WidgetStore extends BaseStore{
     this.transport
       .get(this.dataSource)
       .then(result => {
-      	this._widgets = widgetMapper.toMany(result.body);
+        this._widgets = widgetMapper.toMany(result.body);
         this.emitChange();
       });
   }
@@ -32,7 +32,7 @@ export class WidgetStore extends BaseStore{
   }
 
   get maxKey() {
-    if(this._widgets.length == 0) return 0;
+    if(this._widgets.length === 0) return 0;
     return _(this._widgets).map(x => x.key).max();
   }
 
@@ -48,19 +48,18 @@ export class WidgetStore extends BaseStore{
             .postFile(this.dataSource, w.config.fileUpload)
             .catch(e => console.log(e))
             .then(uploadRes => {
-              w.config.file = uploadRes.body.file
+              w.config.file = uploadRes.body.file;
               delete w.config.fileUpload;
             })
         );
       });
     }
     Promise.all(fileUploads)
-      .then(t => this.transport.put(this.dataSource, this._widgets))
-      .then(result => {
+      .then(() => this.transport.put(this.dataSource, this._widgets))
+      .then(() => {
         this.emitChange();
       })
       .catch(e => console.log(e));
-    
   }
 
   [messenger.ev(widgetActions.add)](widgetType){
