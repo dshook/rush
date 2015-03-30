@@ -21,7 +21,7 @@ $widget-height: 20em;
       border: 1px $base6 dashed;
     }
 
-    p{
+    .content{
       margin: 0;
       @extend %vertical-align;
     }

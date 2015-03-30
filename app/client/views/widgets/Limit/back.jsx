@@ -1,7 +1,7 @@
 import React from 'react';
-import WidgetActions from '../../actions/WidgetActions.js';
+import WidgetActions from '../../../actions/WidgetActions.js';
 import forms from 'newforms';
-import LimitForm from './forms/Limit.jsx';
+import LimitForm from './form.jsx';
 
 export default class Limit extends React.Component {
   constructor(props){

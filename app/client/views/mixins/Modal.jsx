@@ -17,7 +17,7 @@ module.exports = {
     this._modal = new VanillaModal({onClose: this.closeModal});
     this._modal.open('#' + this._id);
 
-    //the react it up
+    //then react it up
     var modalComponent = React.createFactory(component);
     React.render(modalComponent(props), document.getElementById(this._reactId));
 

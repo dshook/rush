@@ -1,4 +1,4 @@
-import DBBase from './DBBase.jsx';
+import DBBase from '../DBBase.jsx';
 
 export default class Postgres extends DBBase {
   constructor(props){
