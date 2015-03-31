@@ -48,7 +48,7 @@ export default class Limit extends React.Component {
     return (
       <div className="modal-widget">
         <h3>{this.state.name}</h3>
-        <form onSubmit={this.saveWidget} onChange={this.previewWidget}>
+        <form onSubmit={this.submit} onChange={this.previewWidget}>
           <forms.RenderForm
             initial={this.state.config}
             form={LimitForm}

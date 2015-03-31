@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView.js';
 import {AppStore, previewChange} from '../stores/AppStore.js';
+import AppActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger.js';
 
 //TODO: evaluate a better way to combine with the results view
@@ -20,6 +21,7 @@ export default class Preview extends BaseView {
 
   [messenger.ev(previewChange)](){
     this.setState(this.getState());
+    AppActions.clearPreview();
   }
 
   renderPlain(){

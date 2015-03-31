@@ -38,14 +38,16 @@ export class AppStore extends BaseStore{
   }
 
   [messenger.ev(appActions.previewAction)](widgetKey){
-    //clear and refresh to make sure old results aren't cached
-    this._preview = [];
-    this.messenger.trigger(this.previewChange);
     this.transport
       .post(this.dataSource + '/preview', {jobId: 1, widgetKey: widgetKey})
       .then(result => {
         this._preview = result.body;
         this.messenger.trigger(this.previewChange);
       });
+  }
+
+  [messenger.ev(appActions.clearPreviewAction)](){
+    //clear and refresh to make sure old results aren't cached
+    this._preview = [];
   }
 }
