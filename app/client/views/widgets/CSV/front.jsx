@@ -8,7 +8,7 @@ export default class CSVFront extends React.Component {
           {this.props.name}
         </p>
         <p>
-          {this.props.config.file.originalname}
+          {this.props.config.file ? this.props.config.file.originalname : ''}
         </p>
       </div>
     );

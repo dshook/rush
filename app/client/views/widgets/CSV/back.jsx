@@ -1,19 +1,26 @@
 import React from 'react';
 import WidgetActions from '../../../actions/WidgetActions.js';
+import AppActions from '../../../actions/AppActions.js';
 import forms from 'newforms';
 import CSVForm from './form.jsx';
+import Preview from '../../Preview.jsx';
+import _ from 'lodash';
 
-export default class DBBase extends React.Component {
+export default class CSVBack extends React.Component {
   constructor(props){
     super(props);
     this.state = props.widget;
 
-    this.saveWidget = this.saveWidget.bind(this);
+    this.saveConfig = this.saveConfig.bind(this);
+    this.previewWidget = this.previewWidget.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
-  saveWidget(e){
-    e.preventDefault();
+  componentDidMount() {
+    this.previewWidget();
+  }
 
+  saveConfig(){
     var csvForm = this.refs.csvForm.getForm();
     if(csvForm.validate()){
       var data = csvForm.cleanedData;
@@ -26,11 +33,24 @@ export default class DBBase extends React.Component {
         data.file = this.state.config.file;
       }
 
-      this.setState({config: data}, function(){
-        WidgetActions.updateWidget(this.state);
-        this.props.onClose();
+      return new Promise((resolve) => {
+        this.setState({config: data}, function(){
+          WidgetActions.updateWidget(this.state);
+          resolve();
+        });
       });
     }
+  }
+
+  previewWidget(){
+    this.saveConfig()
+      .then(() => AppActions.preview(this.props.widget.key));
+  }
+
+  submit(e){
+    e.preventDefault();
+    this.saveConfig()
+      .then(() => this.props.onClose());
   }
 
   render() {
@@ -38,13 +58,13 @@ export default class DBBase extends React.Component {
     if(this.state.config.file){
       fileUpload = <p>{this.state.config.file.originalname}</p>;
     }else{
-      fileUpload = <input type="file" ref="fileUpload"  />;
+      fileUpload = <input type="file" ref="fileUpload"/>;
     }
 
     return (
       <div className="modal-widget">
         <h3>{this.state.name}</h3>
-        <form encType="multipart/form-data" onSubmit={this.saveWidget}>
+        <form encType="multipart/form-data" onChange={this.previewWidget} onSubmit={this.submit}>
           <label>File:</label>
           {fileUpload}
           <forms.RenderForm
@@ -56,6 +76,7 @@ export default class DBBase extends React.Component {
             Save
           </button>
         </form>
+        <Preview {...this.props} />
       </div>
     );
   }

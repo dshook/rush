@@ -25,14 +25,14 @@ export default class WidgetManager extends BaseView {
 
   renderWidget(widget){
     return (
-      <TransformWidget widget={widget} key={widget.key} />
+      <TransformWidget widget={widget} key={widget.key} stores={this.props.stores} />
     );
   }
 
   render() {
     return (
       <div className="widgets">
-        {this.state.widgets.map(this.renderWidget)}
+        {this.state.widgets.map(this.renderWidget.bind(this))}
         <CreateTransformWidget widgetProviderStore={this.props.stores.widgetProviderStore} />
       </div>
     );
