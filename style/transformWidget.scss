@@ -10,15 +10,16 @@ $widget-height: 20em;
     width: $widget-width;
     height: $widget-height;
     position: relative;
+    opacity: 0.8;
 
-    border: 1px $base6 solid;
+    border: 1px $blue solid;
     margin: 1em;
     text-align: center;
 
     float: left;
 
     &.add{
-      border: 1px $base6 dashed;
+      border: 1px $blue dashed;
     }
 
     .content{
@@ -35,7 +36,7 @@ $widget-height: 20em;
       top: 0;
       right: 0;
       left: 0;
-      background-color: $base3;
+      background-color: $neutral-blue2;
 
       >span{
         float: left;
@@ -67,14 +68,14 @@ $widget-height: 20em;
 
 .modal-widget{
   @extend %clearfix;
-  background: $base3;
+  background: $neutral-blue;
   padding: 2em;
 
   //widget selection
   .widget-type{
     padding: 1em;
     margin: 1em;
-    background: $base4;
+    background: $cyan;
     cursor: pointer;
   }
 
