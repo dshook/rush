@@ -26,20 +26,37 @@ $widget-height: 20em;
       @extend %vertical-align;
     }
 
-    .remove{
+    $header-height: 25px;
+
+    .header{
+      height: $header-height;
+      padding: 5px;
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0;
-      background: #fff;
-      width: 25px;
-      height: 25px;
-      line-height: 25px;
-      font-size: 13px;
-      cursor: pointer;
-      text-align: center;
-      background: #fff;
-      border-radius: 0;
+      left: 0;
+      background-color: $base3;
+
+      >span{
+        float: left;
+      }
+      
+      .remove{
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 0;
+        background: #fff;
+        width: $header-height;
+        height: $header-height;
+        margin: 5px;
+        line-height: 25px;
+        font-size: 13px;
+        cursor: pointer;
+        text-align: center;
+        background: #fff;
+        border-radius: 0;
+      }
     }
   }
 }

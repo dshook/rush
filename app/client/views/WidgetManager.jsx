@@ -23,9 +23,9 @@ export default class WidgetManager extends BaseView {
     this.setState(this.getState());
   }
 
-  renderWidget(widget){
+  renderWidget(widget, index){
     return (
-      <TransformWidget widget={widget} key={widget.key} />
+      <TransformWidget widget={widget} key={widget.key} index={index + 1} />
     );
   }
 

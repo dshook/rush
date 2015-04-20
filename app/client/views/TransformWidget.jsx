@@ -25,10 +25,13 @@ module.exports = React.createClass({
   render() {
     return (
       <div className="transform-widget" onClick={this.open}>
+        <div className="header">
+          <span>{this.props.index}</span>
+          <button className="remove button" onClick={this.remove}>
+            <span>X</span>
+          </button>
+        </div>
         <p>{this.props.widget.name}</p>
-        <button className="remove button" onClick={this.remove}>
-          <span>X</span>
-        </button>
       </div>
     );
   }
