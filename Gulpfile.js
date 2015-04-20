@@ -4,6 +4,7 @@ var babelify    = require('babelify');
 var del         = require('del');
 var lint        = require('gulp-eslint');
 var rename      = require('gulp-rename');
+var livereload  = require('gulp-livereload');
 var sass        = require('gulp-sass');
 var sourcemaps  = require('gulp-sourcemaps');
 var vinylSource = require('vinyl-source-stream');
@@ -73,7 +74,8 @@ gulp.task('browserify-vendor', function() {
       .on('error', handleError)
       .pipe(vinylSource('noop.js'))
       .pipe(rename('vendor.js'))
-      .pipe(gulp.dest('./public/dist/'));
+      .pipe(gulp.dest('./public/dist/'))
+      .pipe(livereload());
   };
 
   return bundle();
@@ -100,7 +102,8 @@ gulp.task('browserify-client', function() {
       .pipe(sourcemaps.init({loadMaps: true}))
       //.pipe(uglify())
       .pipe(sourcemaps.write('./maps/'))
-      .pipe(gulp.dest('./public/dist/'));
+      .pipe(gulp.dest('./public/dist/'))
+      .pipe(livereload());
   };
 
   return bundle();
@@ -109,7 +112,8 @@ gulp.task('browserify-client', function() {
 gulp.task('sass', function () {
   return gulp.src('./style/site.scss')
     .pipe(sass({errLogToConsole: true}))
-    .pipe(gulp.dest('./public/dist/'));
+    .pipe(gulp.dest('./public/dist/'))
+    .pipe(livereload());
 });
 
 /*
@@ -125,6 +129,7 @@ gulp.task('client', function() {
 });
 
 gulp.task('watch', function() {
+  livereload.listen();
   sequence('client');
   gulp.watch('./style/**/*.scss', ['sass']);
   gulp.watch('./app/client/**/*.js', ['lint-client', 'browserify-client']);
