@@ -41,7 +41,19 @@ gulp.task('clean', function() {
 });
 
 gulp.task('lint', function() {
-  return gulp.src(['./app/server/**/*.js', './app/client/**/*.{js,jsx}'])
+  return sequence(
+    ['lint-client', 'lint-server']
+  );
+});
+
+gulp.task('lint-client', function() {
+  return gulp.src('./app/client/**/*.{js,jsx}')
+    .pipe(lint())
+    .pipe(lint.format());
+});
+
+gulp.task('lint-server', function() {
+  return gulp.src('./app/server/**/*.js')
     .pipe(lint())
     .pipe(lint.format());
 });
@@ -115,8 +127,8 @@ gulp.task('client', function() {
 gulp.task('watch', function() {
   sequence('client');
   gulp.watch('./style/**/*.scss', ['sass']);
-  gulp.watch('./app/client/**/*.js', ['browserify-client']);
-  gulp.watch('./app/client/**/*.jsx', ['browserify-client']);
+  gulp.watch('./app/client/**/*.js', ['lint-client', 'browserify-client']);
+  gulp.watch('./app/client/**/*.jsx', ['lint-client', 'browserify-client']);
 });
 
 gulp.task('default', ['client']);

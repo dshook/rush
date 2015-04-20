@@ -4,7 +4,7 @@ import {Router} from 'express';
 import stream from 'stream';
 import {isReadable} from 'isstream';
 
-export default function postgres()
+export default function csvEndpoint()
 {
   var router = new Router();
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import WidgetActions from '../../actions/WidgetActions.js';
 import forms from 'newforms';
-import ConnectionForm from './forms/Connection.jsx';
-import QueryForm from './forms/Query.jsx';
+import ConnectionForm from './ConnectionForm.jsx';
+import QueryForm from './QueryForm.jsx';
 
 export default class DBBase extends React.Component {
   constructor(props){

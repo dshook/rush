@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from './mixins/Modal.jsx';
-import WidgetBodies from './WidgetBodies.js';
+import WidgetBacks from './WidgetBacks.js';
+import WidgetFronts from './WidgetFronts.js';
 import WidgetActions from '../actions/WidgetActions';
 
 module.exports = React.createClass({
@@ -8,9 +9,10 @@ module.exports = React.createClass({
   open(){
     var modalProps = {
       onClose: this.onClose,
-      widget: this.props.widget
+      widget: this.props.widget,
+      stores: this.props.stores
     };
-    this.openModal(WidgetBodies.getView(this.props.widget.provider), modalProps);
+    this.openModal(WidgetBacks.getView(this.props.widget.provider), modalProps);
   },
 
   remove(e){
@@ -23,6 +25,7 @@ module.exports = React.createClass({
   },
 
   render() {
+    var widgetFront = WidgetFronts.getView(this.props.widget.provider);
     return (
       <div className="transform-widget" onClick={this.open}>
         <div className="header">
@@ -31,7 +34,7 @@ module.exports = React.createClass({
             <span>X</span>
           </button>
         </div>
-        <p>{this.props.widget.name}</p>
+        {React.createElement(widgetFront, this.props.widget)}
       </div>
     );
   }

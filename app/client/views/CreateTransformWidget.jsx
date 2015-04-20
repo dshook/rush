@@ -42,7 +42,9 @@ module.exports = React.createClass({
   render() {
     return (
       <div onClick={this.addClick} className="transform-widget add">
-        <p><i className="fa fa-plus"></i> Add</p>
+        <div className="content">
+          <p><i className="fa fa-plus"></i> Add</p>
+        </div>
       </div>
     );
   }

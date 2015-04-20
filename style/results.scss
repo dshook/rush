@@ -1,6 +1,7 @@
 .results{
   max-height: 20em;
   overflow-y: auto;
+  min-width: 500px;
 
   a{
     color: $text-color;
