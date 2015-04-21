@@ -27,7 +27,9 @@ module.exports = React.createClass({
   render() {
     var widgetFront = WidgetFronts.getView(this.props.widget.provider);
     return (
-      <div className="transform-widget" onClick={this.open}>
+      <div
+        className="transform-widget"
+        onClick={this.open}>
         <div className="header">
           <span>{this.props.index}</span>
           <button className="remove button" onClick={this.remove}>

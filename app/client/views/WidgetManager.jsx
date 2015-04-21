@@ -23,16 +23,66 @@ export default class WidgetManager extends BaseView {
     this.setState(this.getState());
   }
 
-  renderWidget(widget, index){
+
+  dragStart(e){
+    console.log(e);
+    e.dataTransfer.effectAllowed = 'move';
+
+    // Firefox requires calling dataTransfer.setData
+    // for the drag to properly work
+    e.dataTransfer.setData("text/html", null);
+  }
+
+  dragEnd(e){
+    console.log(e);
+  }
+
+  renderWidget(widget, index, widgetArrayLength){
+    var widgetTemplate =
+        <TransformWidget
+          widget={widget}
+          key={widget.key}
+          index={index + 1}
+          stores={this.props.stores}
+        />;
+    var widgetType;
+    switch(index){
+      case 0:
+        widgetType = "source";
+        break;
+      case widgetArrayLength - 1:
+        widgetType = "destination";
+        break;
+      default:
+        widgetType = "transform";
+    }
+
     return (
-      <TransformWidget widget={widget} key={widget.key} index={index + 1} stores={this.props.stores} />
+      <div className={'widget-type ' + widgetType}>
+        <span>{widgetType}</span>
+        <div
+          className="widget-container"
+          draggable="true"
+          onDragStart={this.dragStart}
+          onDragEnd={this.dragEnd}
+        >
+          {widgetTemplate}
+        </div>
+      </div>
     );
   }
 
   render() {
+    var renderedWidgets = [];
+
+    for(let i = 0; i < this.state.widgets.length; i++){
+      renderedWidgets.push(
+        this.renderWidget(this.state.widgets[i], i, this.state.widgets.length)
+      );
+    }
     return (
       <div className="widgets">
-        {this.state.widgets.map(this.renderWidget.bind(this))}
+        {renderedWidgets}
         <CreateTransformWidget widgetProviderStore={this.props.stores.widgetProviderStore} />
       </div>
     );

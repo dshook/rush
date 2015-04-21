@@ -6,17 +6,43 @@ $widget-height: 20em;
 
   height: 100%;
 
+  > div{
+    float: left;
+    margin-right: 10px;
+  }
+
+  .widget-type{
+    >span{
+      text-transform: capitalize;
+      text-align: center;
+      display: block;
+      width: 100%;
+      color: white;
+      margin-top: 5px;
+    }
+    &.source{
+      background-color: $widget-source-color;
+    }
+    &.transform{
+      background-color: $widget-transform-color;
+    }
+    &.destination{
+      background-color: $widget-dest-color;
+    }
+  }
+
   .transform-widget{
     width: $widget-width;
     height: $widget-height;
     position: relative;
+    background-color: $neutral-blue;
     opacity: 0.8;
 
     border: 1px $blue solid;
     margin: 1em;
     text-align: center;
-
     float: left;
+
 
     &.add{
       border: 1px $blue dashed;
@@ -75,7 +101,7 @@ $widget-height: 20em;
   .widget-type{
     padding: 1em;
     margin: 1em;
-    background: $cyan;
+    background: $neutral-blue2;
     cursor: pointer;
   }
 

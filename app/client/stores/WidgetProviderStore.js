@@ -28,6 +28,3 @@ export class WidgetProviderStore extends BaseStore{
     return this._widgetProviders;
   }
 }
-
-
-
