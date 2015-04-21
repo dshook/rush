@@ -11,7 +11,7 @@ $widget-height: 20em;
     margin-right: 10px;
   }
 
-  .widget-type{
+  .widget-role{
     >span{
       text-transform: capitalize;
       text-align: center;
@@ -26,7 +26,7 @@ $widget-height: 20em;
     &.transform{
       background-color: $widget-transform-color;
     }
-    &.destination{
+    &.dest{
       background-color: $widget-dest-color;
     }
   }

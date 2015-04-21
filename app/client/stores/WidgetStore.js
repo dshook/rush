@@ -62,11 +62,12 @@ export class WidgetStore extends BaseStore{
       .catch(e => console.log(e));
   }
 
-  [messenger.ev(widgetActions.add)](widgetType){
+  [messenger.ev(widgetActions.add)](widgetType, widgetRole){
     var w = new Widget();
-    w.name = widgetType;
-    w.provider = widgetType;
-    w.key =  this.maxKey + 1;
+    w.name        = widgetType.name;
+    w.provider    = widgetType.name;
+    w.role        = widgetRole;
+    w.key         =  this.maxKey + 1;
     this._widgets.push(w);
 
     this.save();

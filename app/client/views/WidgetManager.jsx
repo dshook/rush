@@ -4,6 +4,7 @@ import CreateTransformWidget from './CreateTransformWidget.jsx';
 import TransformWidget from './TransformWidget.jsx';
 import {WidgetStore, change} from '../stores/WidgetStore';
 import messenger from '../messenger/AppMessenger.js';
+import _ from 'lodash';
 
 export default class WidgetManager extends BaseView {
   constructor(props) {
@@ -37,53 +38,83 @@ export default class WidgetManager extends BaseView {
     console.log(e);
   }
 
-  renderWidget(widget, index, widgetArrayLength){
-    var widgetTemplate =
-        <TransformWidget
-          widget={widget}
-          key={widget.key}
-          index={index + 1}
-          stores={this.props.stores}
-        />;
-    var widgetType;
-    switch(index){
-      case 0:
-        widgetType = "source";
-        break;
-      case widgetArrayLength - 1:
-        widgetType = "destination";
-        break;
-      default:
-        widgetType = "transform";
-    }
-
+  renderWidget(widget, index){
     return (
-      <div className={'widget-type ' + widgetType}>
-        <span>{widgetType}</span>
+      <div className={'widget-role ' + widget.role}>
+        <span>{widget.role}</span>
         <div
           className="widget-container"
           draggable="true"
           onDragStart={this.dragStart}
           onDragEnd={this.dragEnd}
         >
-          {widgetTemplate}
+          <TransformWidget
+            widget={widget}
+            key={widget.key}
+            index={index + 1}
+            stores={this.props.stores}
+          />
         </div>
       </div>
     );
   }
 
+  renderTransformAdd(){
+    return (
+      <CreateTransformWidget
+        widgetProviderStore={this.props.stores.widgetProviderStore}
+        widgetRole="transform"
+      />
+    );
+  }
+
   render() {
+    var hasSource = _.any(this.state.widgets, w => w.role === 'source');
+    var hasDest   = _.any(this.state.widgets, w => w.role === 'dest');
+
+    //Add a create transform for source if needed
+    if(!hasSource){
+      var createSource =
+        <div className='widget-role source'>
+          <span>Source</span>
+          <CreateTransformWidget
+            widgetProviderStore={this.props.stores.widgetProviderStore}
+            widgetRole="source"
+          />
+        </div>;
+    }
+
+    //Add a create destination if needed
+    if(!hasDest){
+      var destSource =
+        <div className='widget-role dest'>
+          <span>Destination</span>
+          <CreateTransformWidget
+            widgetProviderStore={this.props.stores.widgetProviderStore}
+            widgetRole="dest"
+          />
+        </div>;
+    }
+
     var renderedWidgets = [];
 
     for(let i = 0; i < this.state.widgets.length; i++){
+      var widget = this.state.widgets[i];
       renderedWidgets.push(
-        this.renderWidget(this.state.widgets[i], i, this.state.widgets.length)
+        this.renderWidget(widget, i)
       );
+      if(widget.role !== 'dest'){
+        renderedWidgets.push(
+          this.renderTransformAdd()
+        );
+      }
     }
+
     return (
       <div className="widgets">
-        {renderedWidgets}
-        <CreateTransformWidget widgetProviderStore={this.props.stores.widgetProviderStore} />
+        {createSource}
+        {renderedWidgets.map( item => ({item}) )}
+        {destSource}
       </div>
     );
   }

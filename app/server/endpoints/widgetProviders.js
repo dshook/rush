@@ -6,14 +6,15 @@ export default function widgetProviders()
 
   router.get('/', function(req, res) {
     var providerIndex = require('../providers/');
-    var providers = {};
+    var providers = [];
     for(let key in providerIndex){
       let provider = new providerIndex[key]();
-      providers[key] = {
-        source: !!provider.read,
-        transform: !!provider.transform,
-        dest: !!provider.write
-      };
+      providers.push({
+        name: key,
+        isSource: !!provider.read,
+        isTransform: !!provider.transform,
+        isDest: !!provider.write
+      });
     }
 
     res.json(providers);

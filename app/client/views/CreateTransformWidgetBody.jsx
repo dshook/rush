@@ -2,19 +2,19 @@ import React from 'react';
 import WidgetActions from '../actions/WidgetActions';
 
 export default class CreateTransformWidgetBody extends React.Component {
-  handleAdd(name){
-    WidgetActions.addWidget(name);
-    this.props.onAdd(name);
+  handleAdd(widgetType){
+    WidgetActions.addWidget(widgetType, this.props.widgetRole);
+    this.props.onAdd();
   }
 
   render() {
     return (
       <div className="modal-widget">
-        {Object.keys(this.props.widgetTypes).map(function(item) {
+        {this.props.widgetProviders.map(function(item) {
           var boundClick = this.handleAdd.bind(this, item);
           return (
-            <div onClick={boundClick} key={item} className="widget-type">
-              <span>{item}</span>
+            <div onClick={boundClick} key={item.name} className="widget-type">
+              <span>{item.name}</span>
             </div>
           );
         }, this)}
