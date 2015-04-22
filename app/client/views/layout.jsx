@@ -26,10 +26,10 @@ export default class Layout extends React.Component {
           </div>
         </div>
         <div className="main">
-          <WidgetManager {...this.props} />
+          <WidgetManager />
         </div>
         <div className="footer">
-          <Results {...this.props} />
+          <Results />
         </div>
         <ModalTemplate />
       </div>

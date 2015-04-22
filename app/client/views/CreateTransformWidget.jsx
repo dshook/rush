@@ -14,7 +14,7 @@ module.exports = React.createClass({
   },
 
   getState() {
-    var widgetProviders = this.props.widgetProviderStore.widgetProviders;
+    var widgetProviders = this.props.di('stores').widgetProviderStore.widgetProviders;
     switch(this.props.widgetRole){
       case 'source':
         widgetProviders = _.filter(widgetProviders, p => p.isSource);

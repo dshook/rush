@@ -50,6 +50,7 @@
     "pg-query-stream": "^0.7.0",
     "promisepipe": "^1.0.1",
     "react": "0.13.0",
+    "react-di": "^0.2.3",
     "streaming-json-stringify": "^2.1.0",
     "tedious": "^1.10.0",
     "typedef": "^1.1.0",

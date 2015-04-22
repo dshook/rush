@@ -1,5 +1,6 @@
 import React from 'react';
 import layout from '../views/Layout.jsx';
+import ReactDI from 'react-di';
 
 export default class HomeActivity
 {
@@ -9,12 +10,14 @@ export default class HomeActivity
   }
 
   onStart(){
+    var container = new ReactDI({
+      stores: this.stores
+    });
+    container.inject(React);
+
     var Layout = React.createFactory(layout);
-    //init layout with all deps passed down
     React.render(
-      new Layout({
-        stores: this.stores
-      })
+      new Layout()
       , this.$root[0]
     );
   }

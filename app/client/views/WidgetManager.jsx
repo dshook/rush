@@ -10,7 +10,7 @@ export default class WidgetManager extends BaseView {
   constructor(props) {
     super(props);
 
-    this.widgetStore = props.stores.widgetStore;
+    this.widgetStore = props.di('stores').widgetStore;
     this.state = this.getState();
   }
 
@@ -52,7 +52,6 @@ export default class WidgetManager extends BaseView {
             widget={widget}
             key={widget.key}
             index={index + 1}
-            stores={this.props.stores}
           />
         </div>
       </div>
@@ -64,7 +63,6 @@ export default class WidgetManager extends BaseView {
       <div className='widget-role create'>
         <span></span>
         <CreateTransformWidget
-          widgetProviderStore={this.props.stores.widgetProviderStore}
           widgetRole="transform"
           widgetPosition={position}
         />
@@ -82,7 +80,6 @@ export default class WidgetManager extends BaseView {
         <div className='widget-role source'>
           <span>Source</span>
           <CreateTransformWidget
-            widgetProviderStore={this.props.stores.widgetProviderStore}
             widgetRole="source"
             widgetPosition={0}
           />
@@ -95,7 +92,6 @@ export default class WidgetManager extends BaseView {
         <div className='widget-role dest'>
           <span>Destination</span>
           <CreateTransformWidget
-            widgetProviderStore={this.props.stores.widgetProviderStore}
             widgetRole="dest"
             widgetPosition={this.state.widgets.length}
           />

@@ -7,7 +7,7 @@ export default class Results extends BaseView {
   constructor(props) {
     super(props);
 
-    this.appStore = props.stores.appStore;
+    this.appStore = props.di('stores').appStore;
     this.state = this.getState();
   }
 
