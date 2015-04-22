@@ -3,7 +3,7 @@ import WidgetActions from '../actions/WidgetActions';
 
 export default class CreateTransformWidgetBody extends React.Component {
   handleAdd(widgetType){
-    WidgetActions.addWidget(widgetType, this.props.widgetRole);
+    WidgetActions.addWidget(widgetType, this.props.widgetRole, this.props.widgetPosition);
     this.props.onAdd();
   }
 

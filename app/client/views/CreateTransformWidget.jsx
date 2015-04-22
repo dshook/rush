@@ -51,6 +51,7 @@ module.exports = React.createClass({
       {
         widgetProviders: this.state.widgetProviders,
         widgetRole: this.props.widgetRole,
+        widgetPosition: this.props.widgetPosition,
         onAdd: this.onAdd
       }
     );
@@ -58,9 +59,11 @@ module.exports = React.createClass({
 
   render() {
     return (
-      <div onClick={this.addClick} className="transform-widget add">
+      <div onClick={this.addClick} className={'transform-widget add ' +this.props.widgetRole}>
         <div className="content">
-          <p><i className="fa fa-plus"></i> Add {this.props.widgetRole}</p>
+          <p title={'Add ' +this.props.widgetRole}><i className="fa fa-plus"></i>
+            <span>Add {this.props.widgetRole}</span>
+          </p>
         </div>
       </div>
     );

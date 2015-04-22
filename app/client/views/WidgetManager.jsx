@@ -59,12 +59,16 @@ export default class WidgetManager extends BaseView {
     );
   }
 
-  renderTransformAdd(){
+  renderTransformAdd(position){
     return (
-      <CreateTransformWidget
-        widgetProviderStore={this.props.stores.widgetProviderStore}
-        widgetRole="transform"
-      />
+      <div className='widget-role create'>
+        <span></span>
+        <CreateTransformWidget
+          widgetProviderStore={this.props.stores.widgetProviderStore}
+          widgetRole="transform"
+          widgetPosition={position}
+        />
+      </div>
     );
   }
 
@@ -80,6 +84,7 @@ export default class WidgetManager extends BaseView {
           <CreateTransformWidget
             widgetProviderStore={this.props.stores.widgetProviderStore}
             widgetRole="source"
+            widgetPosition={0}
           />
         </div>;
     }
@@ -92,6 +97,7 @@ export default class WidgetManager extends BaseView {
           <CreateTransformWidget
             widgetProviderStore={this.props.stores.widgetProviderStore}
             widgetRole="dest"
+            widgetPosition={this.state.widgets.length}
           />
         </div>;
     }
@@ -105,7 +111,7 @@ export default class WidgetManager extends BaseView {
       );
       if(widget.role !== 'dest'){
         renderedWidgets.push(
-          this.renderTransformAdd()
+          this.renderTransformAdd(i + 1)
         );
       }
     }
