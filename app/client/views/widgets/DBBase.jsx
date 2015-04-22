@@ -3,6 +3,7 @@ import WidgetActions from '../../actions/WidgetActions.js';
 import forms from 'newforms';
 import ConnectionForm from './ConnectionForm.jsx';
 import QueryForm from './QueryForm.jsx';
+import SaveButton from '../SaveButton.jsx';
 
 export default class DBBase extends React.Component {
   constructor(props){
@@ -41,10 +42,7 @@ export default class DBBase extends React.Component {
             initial={{query: this.state.config.query}}
             form={QueryForm}
             ref="queryForm" />
-          <button type="submit" className="button button--action" >
-            <i className="fa fa-save"></i>
-            Save
-          </button>
+          <SaveButton />
         </form>
       </div>
     );

@@ -4,6 +4,7 @@ import AppActions from '../../../actions/AppActions.js';
 import forms from 'newforms';
 import CSVForm from './form.jsx';
 import Preview from '../../Preview.jsx';
+import SaveButton from '../../SaveButton.jsx';
 import _ from 'lodash';
 
 export default class CSVBack extends React.Component {
@@ -72,10 +73,7 @@ export default class CSVBack extends React.Component {
             initial={this.state.config}
             form={CSVForm}
             ref="csvForm" />
-          <button type="submit" className="button button--action" >
-            <i className="fa fa-save"></i>
-            Save
-          </button>
+          <SaveButton />
         </form>
         <Preview {...this.props} />
       </div>

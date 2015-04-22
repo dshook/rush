@@ -4,6 +4,7 @@ import AppActions from '../../../actions/AppActions.js';
 import forms from 'newforms';
 import LimitForm from './form.jsx';
 import Preview from '../../Preview.jsx';
+import SaveButton from '../../SaveButton.jsx';
 
 export default class Limit extends React.Component {
   constructor(props){
@@ -54,10 +55,7 @@ export default class Limit extends React.Component {
             initial={this.state.config}
             form={LimitForm}
             ref="limitForm" />
-          <button type="submit" className="button button--action" >
-            <i className="fa fa-save"></i>
-            Save
-          </button>
+          <SaveButton />
         </form>
         <Preview {...this.props} />
       </div>
