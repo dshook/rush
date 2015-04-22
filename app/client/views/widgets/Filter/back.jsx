@@ -2,10 +2,10 @@ import React from 'react';
 import WidgetActions from '../../../actions/WidgetActions.js';
 import AppActions from '../../../actions/AppActions.js';
 import forms from 'newforms';
-import LimitForm from './form.jsx';
+import FilterForm from './form.jsx';
 import Preview from '../../Preview.jsx';
 
-export default class Limit extends React.Component {
+export default class Filter extends React.Component {
   constructor(props){
     super(props);
     this.state = props.widget;
@@ -20,9 +20,9 @@ export default class Limit extends React.Component {
   }
 
   saveConfig(){
-    var limitForm = this.refs.limitForm.getForm();
-    if(limitForm.validate()){
-      var data = limitForm.cleanedData;
+    var FilterForm = this.refs.FilterForm.getForm();
+    if(FilterForm.validate()){
+      var data = FilterForm.cleanedData;
 
       return new Promise((resolve) => {
         this.setState({config: data}, function(){
@@ -52,8 +52,8 @@ export default class Limit extends React.Component {
         <form onSubmit={this.submit} onChange={this.previewWidget}>
           <forms.RenderForm
             initial={this.state.config}
-            form={LimitForm}
-            ref="limitForm" />
+            form={FilterForm}
+            ref="FilterForm" />
           <button type="submit" className="button button--action" >
             <i className="fa fa-save"></i>
             Save

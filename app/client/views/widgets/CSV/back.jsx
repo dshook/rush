@@ -40,6 +40,7 @@ export default class CSVBack extends React.Component {
         });
       });
     }
+    return Promise.resolve();
   }
 
   previewWidget(){
