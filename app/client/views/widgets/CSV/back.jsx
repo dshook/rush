@@ -1,13 +1,18 @@
 import React from 'react';
+import Widget from '../../../../shared/models/widget.js';
 import WidgetActions from '../../../actions/WidgetActions.js';
 import AppActions from '../../../actions/AppActions.js';
 import forms from 'newforms';
 import CSVForm from './form.jsx';
 import Preview from '../../Preview.jsx';
 import SaveButton from '../../SaveButton.jsx';
-import _ from 'lodash';
 
 export default class CSVBack extends React.Component {
+  static propTypes = {
+    widget: React.PropTypes.instanceOf(Widget),
+    onClose: React.PropTypes.func
+  }
+
   constructor(props){
     super(props);
     this.state = props.widget;
@@ -75,7 +80,7 @@ export default class CSVBack extends React.Component {
             ref="csvForm" />
           <SaveButton />
         </form>
-        <Preview {...this.props} />
+        <Preview />
       </div>
     );
   }

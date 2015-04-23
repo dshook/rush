@@ -89,8 +89,7 @@ gulp.task('browserify-client', function() {
   })
   .external(VENDOR_LIBS)
   .transform(babelify.configure({
-    experimental: true,
-    playground: true
+    stage: 0
   }))
   .bundle();
 

@@ -1,5 +1,4 @@
 import path from 'path';
-import JSONStringify from 'streaming-json-stringify';
 import {isReadable, isWritable} from 'isstream';
 var debug = require('debug')('Job Runner');
 

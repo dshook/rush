@@ -2,7 +2,7 @@ import React from 'react';
 import BaseView from './BaseView.js';
 import CreateTransformWidget from './CreateTransformWidget.jsx';
 import TransformWidget from './TransformWidget.jsx';
-import {WidgetStore, change} from '../stores/WidgetStore';
+import {change} from '../stores/WidgetStore';
 import messenger from '../messenger/AppMessenger.js';
 import _ from 'lodash';
 
@@ -76,26 +76,26 @@ export default class WidgetManager extends BaseView {
 
     //Add a create transform for source if needed
     if(!hasSource){
-      var createSource =
+      var createSource = (
         <div className='widget-role source'>
           <span>Source</span>
           <CreateTransformWidget
             widgetRole="source"
             widgetPosition={0}
           />
-        </div>;
+        </div>);
     }
 
     //Add a create destination if needed
     if(!hasDest){
-      var destSource =
+      var destSource = (
         <div className='widget-role dest'>
           <span>Destination</span>
           <CreateTransformWidget
             widgetRole="dest"
             widgetPosition={this.state.widgets.length}
           />
-        </div>;
+        </div>);
     }
 
     var renderedWidgets = [];

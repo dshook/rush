@@ -1,7 +1,6 @@
 import {Router} from 'express';
 import SqlServerProvider from '../providers/SqlServer.js';
 import JSONStringify from 'streaming-json-stringify';
-import promisePipe from 'promisepipe';
 
 var configLocal = {
   user: 'test',

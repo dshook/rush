@@ -1,4 +1,5 @@
 import React from 'react';
+import Widget from '../../../../shared/models/widget.js';
 import WidgetActions from '../../../actions/WidgetActions.js';
 import AppActions from '../../../actions/AppActions.js';
 import forms from 'newforms';
@@ -7,6 +8,11 @@ import Preview from '../../Preview.jsx';
 import SaveButton from '../../SaveButton.jsx';
 
 export default class Filter extends React.Component {
+  static propTypes = {
+    widget: React.PropTypes.instanceOf(Widget),
+    onClose: React.PropTypes.func
+  }
+
   constructor(props){
     super(props);
     this.state = props.widget;
@@ -21,9 +27,9 @@ export default class Filter extends React.Component {
   }
 
   saveConfig(){
-    var FilterForm = this.refs.FilterForm.getForm();
-    if(FilterForm.validate()){
-      var data = FilterForm.cleanedData;
+    var filterForm = this.refs.filterForm.getForm();
+    if(filterForm.validate()){
+      var data = filterForm.cleanedData;
 
       return new Promise((resolve) => {
         this.setState({config: data}, function(){
@@ -54,7 +60,7 @@ export default class Filter extends React.Component {
           <forms.RenderForm
             initial={this.state.config}
             form={FilterForm}
-            ref="FilterForm" />
+            ref="filterForm" />
           <SaveButton />
         </form>
         <Preview {...this.props} />

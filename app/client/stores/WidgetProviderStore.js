@@ -1,4 +1,3 @@
-import appActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger';
 import BaseStore from './BaseStore';
 

@@ -4,7 +4,8 @@ export default class DefaultWidgetBack extends React.Component {
   render() {
     return (
       <div className="modal-widget">
-        <p>Modal content here!</p>
+        <p>Default Widget Back</p>
+        <p>Add Back List to WidgetBacks.js</p>
       </div>
     );
   }

@@ -8,6 +8,12 @@ import _ from 'lodash';
 module.exports = React.createClass({
   mixins: [Modal],
 
+  propTypes: {
+    di: React.PropTypes.func,
+    widgetRole: React.PropTypes.string,
+    widgetPosition: React.PropTypes.number,
+    onAdd: React.PropTypes.func
+  },
 
   getInitialState() {
     return this.getState();

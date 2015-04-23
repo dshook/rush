@@ -1,10 +1,17 @@
 import React from 'react';
+import Widget from '../../shared/models/widget.js';
 import Modal from './mixins/Modal.jsx';
 import WidgetBacks from './WidgetBacks.js';
 import WidgetFronts from './WidgetFronts.js';
 import WidgetActions from '../actions/WidgetActions';
 
 module.exports = React.createClass({
+  propTypes: {
+    widget: React.PropTypes.instanceOf(Widget),
+    onClose: React.PropTypes.func,
+    index: React.PropTypes.number
+  },
+
   mixins: [Modal],
   open(){
     var modalProps = {

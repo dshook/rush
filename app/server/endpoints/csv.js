@@ -1,7 +1,6 @@
 import CSVProvider from '../providers/CSV.js';
 import JSONStringify from 'streaming-json-stringify';
 import {Router} from 'express';
-import stream from 'stream';
 import {isReadable} from 'isstream';
 
 export default function csvEndpoint()

@@ -1,6 +1,6 @@
 import React from 'react';
 import BaseView from './BaseView.js';
-import {AppStore, previewChange} from '../stores/AppStore.js';
+import {previewChange} from '../stores/AppStore.js';
 import AppActions from '../actions/AppActions.js';
 import messenger from '../messenger/AppMessenger.js';
 
@@ -50,21 +50,21 @@ export default class Preview extends BaseView {
         <table>
           <thead>
             <tr>
-              {columns.map(function(column){
-                return <th>{column}</th>;
+              {columns.map(function(column, index){
+                return <th key={index}>{column}</th>;
               })}
             </tr>
           </thead>
           <tbody>
             {
-              this.state.results.map(function(rows){
+              this.state.results.map(function(rows, rowIndex){
                 var values = Object.keys(rows).map(x => rows[x]);
                 return (
-                  <tr>
+                  <tr key={rowIndex}>
                     {
-                      values.map(function(cell){
+                      values.map(function(cell, cellIndex){
                         return (
-                        <td>
+                        <td key={cellIndex}>
                           {cell}
                         </td>
                         );

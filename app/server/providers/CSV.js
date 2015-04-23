@@ -1,7 +1,5 @@
 var fs = Promise.promisifyAll(require('fs'));
 import csv from 'csv';
-import path from 'path';
-import JSONStringify from 'streaming-json-stringify';
 
 export default class CSVDriver{
   constructor(config){
