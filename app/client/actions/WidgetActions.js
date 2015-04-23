@@ -1,4 +1,4 @@
-import messenger from '../messenger/AppMessenger';
+import messenger from 'client/messenger/AppMessenger';
 
 const add = 'Widget: Add';
 const update = 'Widget: Update';

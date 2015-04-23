@@ -1,4 +1,5 @@
 var gulp        = require('gulp');
+var aliasify    = require('aliasify');
 var browserify  = require('browserify');
 var babelify    = require('babelify');
 var del         = require('del');
@@ -10,6 +11,7 @@ var sourcemaps  = require('gulp-sourcemaps');
 var vinylSource = require('vinyl-source-stream');
 var vinylBuffer = require('vinyl-buffer');
 var sequence    = require('run-sequence');
+var config      = require('./package.json');
 
 // Add more libs to this array to push more stuff out to the vendor bundle
 var VENDOR_LIBS = [
@@ -91,6 +93,7 @@ gulp.task('browserify-client', function() {
   .transform(babelify.configure({
     stage: 0
   }))
+  .transform(aliasify, config.aliases)
   .bundle();
 
   var bundle = function() {

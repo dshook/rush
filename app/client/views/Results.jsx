@@ -1,7 +1,7 @@
 import React from 'react';
 import BaseView from './BaseView.js';
-import {change} from '../stores/AppStore.js';
-import messenger from '../messenger/AppMessenger.js';
+import {change} from 'client/stores/AppStore.js';
+import messenger from 'client/messenger/AppMessenger.js';
 
 export default class Results extends BaseView {
   constructor(props) {

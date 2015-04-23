@@ -1,5 +1,5 @@
 import React from 'react';
-import messenger from '../messenger/AppMessenger.js';
+import messenger from 'client/messenger/AppMessenger.js';
 
 export default class BaseView extends React.Component {
   constructor(props) {

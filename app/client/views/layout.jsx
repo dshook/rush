@@ -2,7 +2,7 @@ import React from 'react';
 import WidgetManager from './WidgetManager.jsx';
 import ModalTemplate from './ModalTemplate.jsx';
 import Results from './Results.jsx';
-import AppActions from '../actions/AppActions.js';
+import AppActions from 'client/actions/AppActions.js';
 
 export default class Layout extends React.Component {
   startJob(){

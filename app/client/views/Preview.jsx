@@ -1,8 +1,8 @@
 import React from 'react';
 import BaseView from './BaseView.js';
-import {previewChange} from '../stores/AppStore.js';
-import AppActions from '../actions/AppActions.js';
-import messenger from '../messenger/AppMessenger.js';
+import {previewChange} from 'client/stores/AppStore.js';
+import AppActions from 'client/actions/AppActions.js';
+import messenger from 'client/messenger/AppMessenger.js';
 
 //TODO: evaluate a better way to combine with the results view
 export default class Preview extends BaseView {

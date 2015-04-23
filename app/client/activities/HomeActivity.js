@@ -1,5 +1,5 @@
 import React from 'react';
-import layout from '../views/Layout.jsx';
+import layout from 'client/views/Layout.jsx';
 import ReactDI from 'react-di';
 
 export default class HomeActivity

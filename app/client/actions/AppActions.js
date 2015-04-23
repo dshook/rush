@@ -1,4 +1,4 @@
-import messenger from '../messenger/AppMessenger';
+import messenger from 'client/messenger/AppMessenger';
 import _ from 'lodash';
 
 const startAction = 'App: Start';

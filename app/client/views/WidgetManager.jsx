@@ -2,8 +2,8 @@ import React from 'react';
 import BaseView from './BaseView.js';
 import CreateTransformWidget from './CreateTransformWidget.jsx';
 import TransformWidget from './TransformWidget.jsx';
-import {change} from '../stores/WidgetStore';
-import messenger from '../messenger/AppMessenger.js';
+import {change} from 'client/stores/WidgetStore';
+import messenger from 'client/messenger/AppMessenger.js';
 import _ from 'lodash';
 
 export default class WidgetManager extends BaseView {

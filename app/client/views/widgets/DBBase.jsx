@@ -1,10 +1,10 @@
 import React from 'react';
-import Widget from '../../../shared/models/widget.js';
-import WidgetActions from '../../actions/WidgetActions.js';
+import Widget from 'shared/models/widget.js';
+import WidgetActions from 'client/actions/WidgetActions.js';
 import forms from 'newforms';
 import ConnectionForm from './ConnectionForm.jsx';
 import QueryForm from './QueryForm.jsx';
-import SaveButton from '../SaveButton.jsx';
+import SaveButton from 'client/views/SaveButton.jsx';
 
 export default class DBBase extends React.Component {
   static propTypes = {

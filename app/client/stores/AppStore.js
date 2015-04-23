@@ -1,5 +1,5 @@
-import appActions from '../actions/AppActions.js';
-import messenger from '../messenger/AppMessenger';
+import appActions from 'client/actions/AppActions.js';
+import messenger from 'client/messenger/AppMessenger';
 import BaseStore from './BaseStore';
 
 export const change = 'AppStore: Change';

@@ -1,13 +1,21 @@
 {
   "name": "Rush",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": "https://bitbucket.org/dshook/rush",
   "scripts": {
     "start": "nodemon ./app/server/main.js",
     "build": "gulp watch",
     "debug": "node-debug -p=8081 -d=5858 ./app/server/main.js"
   },
+  "aliases": {
+    "aliases": {
+      "client": "./app/client/",
+      "shared": "./app/shared/"
+    },
+    "appliesTo": {"includeExtensions": [".js", ".jsx"]}
+  },
   "devDependencies": {
+    "aliasify": "^1.7.2",
     "babel-eslint": "^3.0.1",
     "babelify": "^6.0.2",
     "browserify": "^9.0.8",

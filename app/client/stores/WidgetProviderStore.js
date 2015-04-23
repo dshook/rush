@@ -1,4 +1,4 @@
-import messenger from '../messenger/AppMessenger';
+import messenger from 'client/messenger/AppMessenger';
 import BaseStore from './BaseStore';
 
 export const change = 'WidgetProviderStore: Change';

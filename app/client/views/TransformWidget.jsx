@@ -1,5 +1,5 @@
 import React from 'react';
-import Widget from '../../shared/models/widget.js';
+import Widget from 'shared/models/widget.js';
 import Modal from './mixins/Modal.jsx';
 import WidgetBacks from './WidgetBacks.js';
 import WidgetFronts from './WidgetFronts.js';

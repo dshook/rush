@@ -1,11 +1,11 @@
 import React from 'react';
-import Widget from '../../../../shared/models/widget.js';
-import WidgetActions from '../../../actions/WidgetActions.js';
-import AppActions from '../../../actions/AppActions.js';
+import Widget from 'shared/models/widget.js';
+import WidgetActions from 'client/actions/WidgetActions.js';
+import AppActions from 'client/actions/AppActions.js';
 import forms from 'newforms';
 import FilterForm from './form.jsx';
-import Preview from '../../Preview.jsx';
-import SaveButton from '../../SaveButton.jsx';
+import Preview from 'client/views/Preview.jsx';
+import SaveButton from 'client/views/SaveButton.jsx';
 
 export default class Filter extends React.Component {
   static propTypes = {

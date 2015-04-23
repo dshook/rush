@@ -1,9 +1,9 @@
 import _ from 'lodash';
-import widgetActions from '../actions/WidgetActions';
-import messenger from '../messenger/AppMessenger';
+import widgetActions from 'client/actions/WidgetActions';
+import messenger from 'client/messenger/AppMessenger';
 import BaseStore from './BaseStore';
-import Widget from '../../shared/models/widget.js';
-import Mapper from '../../shared/lib/mapper/';
+import Widget from 'shared/models/widget.js';
+import Mapper from 'shared/lib/mapper/';
 
 export const change = 'WidgetStore: Change';
 
