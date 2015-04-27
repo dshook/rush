@@ -33,6 +33,15 @@ export default class Preview extends BaseView {
     );
   }
 
+  renderNoResults(){
+    return (
+      <div className="results">
+        <h3>Preview</h3>
+        <p>No Results</p>
+      </div>
+    );
+  }
+
   renderDownloadLink(link){
     return (
       <div className="results">
@@ -82,8 +91,12 @@ export default class Preview extends BaseView {
 
   render() {
     var results = this.state.results;
-    if(results instanceof Array && results.length > 0){
-      return this.renderTable();
+    if(results instanceof Array){
+      if(results.length > 0){
+        return this.renderTable();
+      }else{
+        return this.renderNoResults();
+      }
     }else if(results instanceof Object && results.fileLink){
       return this.renderDownloadLink(results.fileLink);
     }else{

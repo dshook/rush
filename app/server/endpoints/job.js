@@ -65,6 +65,9 @@ export default function Job(jobRunner, widgetStorage)
       //and stick a limit on
       widgets.push({name: "Limit", provider: "Limit"});
       return runJob(res, jobRunner, widgets);
+    })
+    .catch(function (err) {
+      res.json(err);
     });
   });
 

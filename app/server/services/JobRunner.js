@@ -33,7 +33,11 @@ class JobRunner{
       var filePath = path.resolve(__dirname, '../providers/' + widget.provider + '.js');
 
       var Provider = require(filePath);
-      var provider = new Provider(widget.config);
+      try{
+        var provider = new Provider(widget.config);
+      }catch(e){
+        return Promise.reject(e)
+      }
 
       //fall back to a transform function to allow for a transform function in the last place
       var providerFunction = provider[providerFunc] || provider.transform;

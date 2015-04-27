@@ -6,10 +6,17 @@ export default class FilterFront extends React.Component {
     config: React.PropTypes.object
   }
   render() {
+    var filterName = '';
+    if(this.props.config.filter){
+      filterName = '"'+ this.props.config.filter +'"';
+      if(this.props.config.searchKeys){
+        filterName += ' in ' + this.props.config.searchKeys;
+      }
+    }
     return (
       <div className="content">
         <p>
-          {this.props.name} &quot;{this.props.config.filter}&quot;
+          {this.props.name} {filterName}
         </p>
       </div>
     );
