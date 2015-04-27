@@ -1,4 +1,5 @@
 import stream from 'stream';
+import searchStream from 'search-stream';
 
 export default class Filter{
   constructor(config){
@@ -8,29 +9,9 @@ export default class Filter{
   }
 
   transform(){
-    var transform = new stream.Transform( { objectMode: true } );
+    var search = searchStream();
     var filter = this._config.filter;
-    //var useRegex = this._config.useRegex;
 
-    transform._transform = function (chunk, encoding, done) {
-      try{
-        //very naieve implementation for the moment, needs to recurse, support regex etc
-        for(var key in chunk){
-            if(('' + chunk[key]).indexOf(filter) > -1){
-              this.push(chunk);
-              break;
-            }
-        }
-        done();
-      }catch(e){
-        return Promise.reject('Error In Filter Transform: ' + e.toString());
-      }
-    };
-
-    transform._flush = function (done) {
-      done();
-    };
-
-    return transform;
+    return search(filter);
   }
 }

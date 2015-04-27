@@ -12,7 +12,12 @@
       "client": "./app/client/",
       "shared": "./app/shared/"
     },
-    "appliesTo": {"includeExtensions": [".js", ".jsx"]}
+    "appliesTo": {
+      "includeExtensions": [
+        ".js",
+        ".jsx"
+      ]
+    }
   },
   "devDependencies": {
     "aliasify": "^1.7.2",
@@ -60,6 +65,7 @@
     "promisepipe": "^1.0.1",
     "react": "0.13.2",
     "react-di": "^0.2.3",
+    "search-stream": "^0.2.0",
     "streaming-json-stringify": "^2.1.0",
     "tedious": "^1.11.0",
     "typedef": "^1.1.0",
