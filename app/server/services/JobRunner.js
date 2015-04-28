@@ -1,6 +1,6 @@
 import path from 'path';
 import {isReadable, isWritable} from 'isstream';
-var debug = require('debug')('Job Runner');
+var debug = require('debug')('rush:Job Runner');
 
 class JobRunner{
   startJob(config){
@@ -29,39 +29,42 @@ class JobRunner{
           providerFunc = 'transform';
       }
 
-      debug('Loading provider %s for %s', widget.provider, providerFunc);
       var filePath = path.resolve(__dirname, '../providers/' + widget.provider + '.js');
 
       var Provider = require(filePath);
       try{
         var provider = new Provider(widget.config);
       }catch(e){
-        return Promise.reject(e)
+        return Promise.reject(e);
       }
 
       //fall back to a transform function to allow for a transform function in the last place
       var providerFunction = provider[providerFunc] || provider.transform;
       promiseArray = promiseArray.concat(providerFunction.bind(provider)());
+      debug('Loaded provider %s for %s', widget.provider, providerFunc);
     }
 
     //create a promise wrapper over all streams to find when the next to last one is done
     return new Promise(function (resolve, reject) {
       //which then gets piped together
       Promise.reduce(promiseArray, function(aggregator, item){
+        debug('item: ' + item.toString());
         if(aggregator === null){
           return item;
         }else{
-          if(isReadable(aggregator)){
+          if(isWritable(aggregator)){
+            debug('writable');
+            return item(aggregator)
+              .on('error', function(e){
+                reject(e);
+              });
+          }else if(isReadable(aggregator)){
+            debug('readable');
             return aggregator
               .on('error', function(e){
                 reject(e);
               })
               .pipe(item);
-          }else if(isWritable(aggregator)){
-            return item(aggregator)
-              .on('error', function(e){
-                reject(e);
-              });
           }else{
             reject('Widget is neither readable or writable');
           }
@@ -71,6 +74,7 @@ class JobRunner{
         reject(e);
       })
       .then(function(jobResult){
+        debug('job runner result ' + jobResult);
         return resolve(jobResult);
       });
     });

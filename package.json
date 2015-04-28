@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon ./app/server/main.js",
     "build": "gulp watch",
-    "debug": "node-debug -p=8081 -d=5858 ./app/server/main.js"
+    "debug": "node-debug -p=8081 ./app/server/main.js"
   },
   "aliases": {
     "aliases": {
@@ -25,7 +25,7 @@
     "babelify": "^6.0.2",
     "browserify": "^9.0.8",
     "del": "^1.1.1",
-    "eslint": "^0.19.0",
+    "eslint": "^0.20.0",
     "eslint-plugin-react": "^2.2.0",
     "gulp": "^3.8.11",
     "gulp-eslint": "^0.9.0",

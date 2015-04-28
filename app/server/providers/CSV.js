@@ -1,5 +1,7 @@
 var fs = Promise.promisifyAll(require('fs'));
 import csv from 'csv';
+import debugLib from 'debug';
+var debug = debugLib('rush:CSV');
 
 export default class CSVDriver{
   constructor(config){
@@ -32,17 +34,23 @@ export default class CSVDriver{
   write(){
     //TODO: use config
     var filePath = './public/upload/output' + Date.now() + '.csv';
-    var writeStream = fs.createWriteStream(filePath);
+    var writeStream = fs.createWriteStreamAsync(filePath);
 
     return [
       csv.stringify()
       , writeStream
-      , function(outputStream){
-        return new Promise(function(resolve, reject){
-          outputStream.on('finish', () => resolve(filePath));
-          outputStream.on('error', e => reject(e));
-        });
-      }
+      , function doneWriting(outputStream){
+          return new Promise(function(resolve, reject){
+            outputStream.on('finish', () => {
+              debug('write finished');
+              resolve(filePath);
+           });
+            outputStream.on('error', e => {
+              debug('write error ' + e.toString());
+              reject(e);
+            });
+          });
+        }
     ];
    }
 }
