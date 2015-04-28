@@ -1,3 +1,4 @@
+import promise from 'bluebird';
 import path from 'path';
 import {isReadable, isWritable} from 'isstream';
 var debug = require('debug')('rush:Job Runner');
@@ -6,7 +7,7 @@ class JobRunner{
   startJob(config){
     if(!config || config.length === 0){
       debug('No Config for Job Runner');
-      return Promise.reject('No Config to read from');
+      return promise.reject('No Config to read from');
     }
 
     debug('Starting Job');
@@ -35,7 +36,7 @@ class JobRunner{
       try{
         var provider = new Provider(widget.config);
       }catch(e){
-        return Promise.reject(e);
+        return promise.reject(e);
       }
 
       //fall back to a transform function to allow for a transform function in the last place
@@ -43,41 +44,32 @@ class JobRunner{
       promiseArray = promiseArray.concat(providerFunction.bind(provider)());
       debug('Loaded provider %s for %s', widget.provider, providerFunc);
     }
-
-    //create a promise wrapper over all streams to find when the next to last one is done
-    return new Promise(function (resolve, reject) {
-      //which then gets piped together
-      Promise.reduce(promiseArray, function(aggregator, item){
-        debug('item: ' + item.toString());
-        if(aggregator === null){
-          return item;
+    return promise.reduce(promiseArray, function(aggregator, item){
+      if(aggregator === null){
+        return item;
+      }else{
+        if(isReadable(aggregator)){
+          return aggregator.pipe(item);
+        }else if(isWritable(aggregator)){
+          return item(aggregator);
         }else{
-          if(isWritable(aggregator)){
-            debug('writable');
-            return item(aggregator)
-              .on('error', function(e){
-                reject(e);
-              });
-          }else if(isReadable(aggregator)){
-            debug('readable');
-            return aggregator
-              .on('error', function(e){
-                reject(e);
-              })
-              .pipe(item);
-          }else{
-            reject('Widget is neither readable or writable');
-          }
+          debug('Aggregator is neither readable or writable');
+          return null;
         }
-      }, null)
-      .catch(function(e){
-        reject(e);
-      })
-      .then(function(jobResult){
-        debug('job runner result ' + jobResult);
-        return resolve(jobResult);
-      });
-    });
+      }
+    }, null);
+
+    // //create a promise wrapper over all streams to find when the next to last one is done
+    // return new promise(function (resolve, reject) {
+    //   //which then gets piped together
+    //   .then(function(jobResult){
+    //     debug('job runner result ' + jobResult);
+    //     return resolve(jobResult);
+    //   })
+    //   .catch(function(e){
+    //     reject(e);
+    //   });
+    // });
   }
 }
 

@@ -1,15 +1,21 @@
+import Promise from 'bluebird';
 import {Router} from 'express';
 import JSONStringify from 'streaming-json-stringify';
 import {isReadable} from 'isstream';
 import dbg from 'debug';
 import _ from 'lodash';
 
-var debug = dbg('Job Endpoint');
+var debug = dbg('rush:Job Endpoint');
 
 function runJob(res, jobRunner, widgets){
-  return jobRunner.startJob(widgets)
+  return jobRunner
+    .startJob(widgets)
     .then(function(jobResult){
+      debug('job result %j', jobResult);
       return new Promise(function(resolve, reject){
+        if(!jobResult){
+          return reject('No Job Result');
+        }
         //decide what to do with the output based on its value
         if(isReadable(jobResult)){
           res.setHeader('Content-Type', 'application/json');
@@ -27,7 +33,7 @@ function runJob(res, jobRunner, widgets){
     })
     .catch(function(e){
       res.status(500);
-      console.log(e);
+      debug('%s', e.stack);
       res.json({error: 'Error Running Job ', message: e.toString()});
     })
     .finally(function(){

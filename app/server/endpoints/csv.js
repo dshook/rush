@@ -1,7 +1,10 @@
+import Promise from 'bluebird';
 import CSVProvider from '../providers/CSV.js';
 import JSONStringify from 'streaming-json-stringify';
 import {Router} from 'express';
-import {isReadable} from 'isstream';
+import {isReadable, isWritable} from 'isstream';
+import debugLib from 'debug';
+var debug = debugLib('rush:csv Endpoint');
 
 export default function csvEndpoint()
 {
@@ -38,18 +41,24 @@ export default function csvEndpoint()
       }else{
         if(isReadable(aggregator)){
           return aggregator.pipe(item);
-        }else{
+        }else if(isWritable(aggregator)){
           return item(aggregator);
+        }else{
+          reject('Widget is neither readable or writable');
         }
       }
     }, null)
     .then(function(filePath){
-      res.sendFile(filePath);
+      debug('Job Aggregated');
+      res.write(filePath);
       // res.send('done');
     })
     .catch(function(e){
       console.log(e);
-      res.end(e.toString());
+      res.write(e.toString());
+    })
+    .finally(function(){
+      res.end();
     });
   });
 

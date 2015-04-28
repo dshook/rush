@@ -1,4 +1,6 @@
-var fs = Promise.promisifyAll(require('fs'));
+import Promise from 'bluebird';
+import promise from 'bluebird';
+import fs from 'fs';
 import csv from 'csv';
 import debugLib from 'debug';
 var debug = debugLib('rush:CSV');
@@ -34,17 +36,17 @@ export default class CSVDriver{
   write(){
     //TODO: use config
     var filePath = './public/upload/output' + Date.now() + '.csv';
-    var writeStream = fs.createWriteStreamAsync(filePath);
+    var writeStream = fs.createWriteStream(filePath);
 
     return [
       csv.stringify()
       , writeStream
       , function doneWriting(outputStream){
-          return new Promise(function(resolve, reject){
+          return new promise(function(resolve, reject){
             outputStream.on('finish', () => {
               debug('write finished');
               resolve(filePath);
-           });
+            });
             outputStream.on('error', e => {
               debug('write error ' + e.toString());
               reject(e);

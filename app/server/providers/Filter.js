@@ -1,4 +1,3 @@
-import stream from 'stream';
 import searchStream from 'search-stream';
 
 export default class Filter{
@@ -10,7 +9,7 @@ export default class Filter{
     if(this._config.useRegex){
       var splitFilter = this._config.filter.split('/');
       if(splitFilter.length !== 3){
-        throw new Error('Filter Regex must be specified in /pattern/ form')
+        throw new Error('Filter Regex must be specified in /pattern/ form');
       }
       this._config.filter = new RegExp(splitFilter[1], splitFilter[2]);
     }

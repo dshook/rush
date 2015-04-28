@@ -1,5 +1,5 @@
 module.exports = HttpServer;
-
+var Promise     = require('bluebird');
 var express     = require('express');
 var debug       = require('debug')('HttpServer');
 var auth        = require('http-auth');

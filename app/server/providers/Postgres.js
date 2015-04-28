@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 var pg = Promise.promisifyAll(require('pg'));
 var QueryStream = require('pg-query-stream');
 

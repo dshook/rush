@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import stream from 'stream';
 
 export default class Limit{

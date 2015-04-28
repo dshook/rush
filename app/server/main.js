@@ -1,5 +1,6 @@
-var promise       = require('bluebird');
+var promise = require('bluebird');
 global.Promise = promise;
+Promise.longStackTraces();
 
 /*eslint-disable */
 //Enable es6 for node code

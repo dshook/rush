@@ -1,6 +1,9 @@
-var fs = Promise.promisifyAll(require('fs'));
+import Promise from 'bluebird';
+import fsImport from 'fs';
 import Mapper from '../../../shared/lib/mapper/';
 import Widget from '../../../shared/models/widget.js';
+
+var fs = Promise.promisifyAll(fsImport);
 
 export default class Widgets{
   constructor(config) {
