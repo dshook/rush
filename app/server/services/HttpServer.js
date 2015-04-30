@@ -1,5 +1,5 @@
 module.exports = HttpServer;
-var Promise     = require('bluebird');
+var promise     = require('bluebird');
 var express     = require('express');
 var debug       = require('debug')('HttpServer');
 var auth        = require('http-auth');
@@ -55,7 +55,7 @@ HttpServer.prototype.basicAuth = function()
 
 /**
  * Start listener
- * @return {Promise}
+ * @return {promise}
  */
 HttpServer.prototype.start = function()
 {
@@ -100,7 +100,7 @@ HttpServer.prototype.start = function()
   //   res.end();
   // });
 
-  return new Promise(function(resolve, reject) {
+  return new promise(function(resolve, reject) {
     http.listen(port, function(err) {
       if (err) return reject(err);
       debug('http server is listening on port %s', port);

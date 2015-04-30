@@ -1,5 +1,4 @@
-import Promise from 'bluebird';
-var pg = Promise.promisifyAll(require('pg'));
+var pg = promise.promisifyAll(require('pg'));
 var QueryStream = require('pg-query-stream');
 
 export default class PostgresDriver{

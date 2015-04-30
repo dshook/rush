@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import {Router} from 'express';
 import JSONStringify from 'streaming-json-stringify';
 import {isReadable} from 'isstream';
@@ -12,7 +11,7 @@ function runJob(res, jobRunner, widgets){
     .startJob(widgets)
     .then(function(jobResult){
       debug('job result %j', jobResult);
-      return new Promise(function(resolve, reject){
+      return new promise(function(resolve, reject){
         if(!jobResult){
           return reject('No Job Result');
         }

@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import stream from 'stream';
 
 export default class Limit{
@@ -19,7 +18,7 @@ export default class Limit{
         //chunk.nuts.soup = 4;
         done();
       }catch(e){
-        return Promise.reject('Error In Limit Transform: ' + e.toString());
+        return promise.reject('Error In Limit Transform: ' + e.toString());
       }
     };
 

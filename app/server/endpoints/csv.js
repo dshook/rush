@@ -1,4 +1,3 @@
-import Promise from 'bluebird';
 import CSVProvider from '../providers/CSV.js';
 import JSONStringify from 'streaming-json-stringify';
 import {Router} from 'express';
@@ -35,7 +34,7 @@ export default function csvEndpoint()
     var promiseArray = [csv.generate()];
     Array.prototype.push.apply(promiseArray, csv.write());
 
-    Promise.reduce(promiseArray, function(aggregator, item){
+    promise.reduce(promiseArray, function(aggregator, item){
       if(aggregator === null){
         return item;
       }else{

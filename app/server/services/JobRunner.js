@@ -1,7 +1,7 @@
-import promise from 'bluebird';
 import path from 'path';
 import {isReadable, isWritable} from 'isstream';
-var debug = require('debug')('rush:Job Runner');
+import debugLib from 'debug';
+var debug = debugLib('rush:Job Runner');
 
 class JobRunner{
   startJob(config){

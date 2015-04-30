@@ -1,5 +1,3 @@
-import Promise from 'bluebird';
-import promise from 'bluebird';
 import fs from 'fs';
 import csv from 'csv';
 import debugLib from 'debug';
@@ -16,7 +14,7 @@ export default class CSVDriver{
 
   read(){
     if(!this._config.file){
-      return Promise.reject('No CSV File to read from');
+      return promise.reject('No CSV File to read from');
     }
     var filePath = this._config.file.path;
     var readStream = fs.createReadStream(filePath);
@@ -24,7 +22,7 @@ export default class CSVDriver{
     if(this._config.rowDelimiter === 'auto'){
       delete this._config.rowDelimiter;
     }
-    return Promise.resolve(
+    return promise.resolve(
       readStream.pipe(csv.parse(this._config))
     );
   }

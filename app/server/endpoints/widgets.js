@@ -1,4 +1,6 @@
 import {Router} from 'express';
+import debugLib from 'debug';
+var debug = debugLib('rush:Widget Endpoint');
 
 export default function widgets(widgetStorage)
 {
@@ -6,11 +8,12 @@ export default function widgets(widgetStorage)
 
   router.get('/', function(req, res) {
     widgetStorage.get()
-    .catch(function () {
-      res.json([]);
-    })
     .then(function(file){
       res.json(file);
+    })
+    .catch(function (e) {
+      debug('Error getting widgets %j', e);
+      res.json([]);
     })
     .finally(function(){
       res.end();
@@ -30,13 +33,21 @@ export default function widgets(widgetStorage)
 
   router.put('/', function(req, res) {
     var widgetsToUpload = req.body;
+    if(!widgetsToUpload){
+      console.log(req);
+      debug('No widgets to upload, req: %j', req);
+
+      res.status(500).json({message: 'Nothing to upload'});
+      res.end();
+      return;
+    }
 
     widgetStorage.set(widgetsToUpload)
+    .then(function(){
+      res.json({message: 'Configuration saved successfully.'});
+    })
     .catch(function (err) {
       res.json(err);
-    })
-    .then(function(){
-      res.write('Configuration saved successfully.');
     })
     .finally(function(){
       res.end();
