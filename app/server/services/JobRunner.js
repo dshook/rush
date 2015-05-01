@@ -58,18 +58,6 @@ class JobRunner{
         }
       }
     }, null);
-
-    // //create a promise wrapper over all streams to find when the next to last one is done
-    // return new promise(function (resolve, reject) {
-    //   //which then gets piped together
-    //   .then(function(jobResult){
-    //     debug('job runner result ' + jobResult);
-    //     return resolve(jobResult);
-    //   })
-    //   .catch(function(e){
-    //     reject(e);
-    //   });
-    // });
   }
 }
 
