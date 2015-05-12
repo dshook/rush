@@ -1,18 +1,13 @@
-import DefaultWidgetFront from './widgets/DefaultWidgetFront.jsx';
-//import SqlServer from './widgets/SqlServer/front.jsx';
-//import Postgres from './widgets/Postgres/front.jsx';
-import Limit from './widgets/Limit/front.jsx';
-import CSV from './widgets/CSV/front.jsx';
-import Filter from './widgets/Filter/front.jsx';
+var bulk = require('bulk-require');
 
 module.exports.getView = function(view){
-  var bodies = {
-    //SqlServer,
-    //Postgres,
-    Limit,
-    Filter,
-    CSV
-  };
+  var includes = bulk(__dirname, ['widgets/**/*.jsx']);
+  var widgets = includes.widgets;
 
-  return bodies[view] || DefaultWidgetFront;
+  //try to return the most appropriate thing from the very specific widget role
+  //to the very generic default
+  var widget = widgets[view];
+  if(!widget) return widgets.DefaultWidgetFront;
+
+  return widget.front ? widget.front : widgets.DefaultWidgetFront;
 };

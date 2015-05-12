@@ -18,7 +18,10 @@ module.exports = React.createClass({
       onClose: this.onClose,
       widget: this.props.widget
     };
-    this.openModal(WidgetBacks.getView(this.props.widget.provider), modalProps);
+    this.openModal(
+      WidgetBacks.getView(this.props.widget.provider, this.props.widget.role)
+      , modalProps
+    );
   },
 
   remove(e){

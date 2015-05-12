@@ -1,5 +1,6 @@
 var pg = promise.promisifyAll(require('pg'));
 var QueryStream = require('pg-query-stream');
+var copyStream = require('pg-copy-streams');
 
 export default class PostgresDriver{
   constructor(config){
@@ -23,6 +24,17 @@ export default class PostgresDriver{
       .then(function() {
         var queryStream = new QueryStream(query);
         return client.query(queryStream);
+      });
+  }
+
+  write(){
+    this.init();
+    var client = this._client;
+    return client
+      .connectAsync()
+      .then(function() {
+        var queryStream = client.query(copyStream('COPY dest FROM STDIN'));
+        return queryStream;
       });
   }
 

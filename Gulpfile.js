@@ -6,6 +6,7 @@ var del         = require('del');
 var lint        = require('gulp-eslint');
 var rename      = require('gulp-rename');
 var livereload  = require('gulp-livereload');
+var bulkify     = require('bulkify');
 var sass        = require('gulp-sass');
 var sourcemaps  = require('gulp-sourcemaps');
 var vinylSource = require('vinyl-source-stream');
@@ -93,6 +94,7 @@ gulp.task('browserify-client', function() {
   .transform(babelify.configure({
     stage: 0
   }))
+  .transform(bulkify)
   .transform(aliasify, config.aliases)
   .bundle();
 

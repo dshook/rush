@@ -1,18 +1,15 @@
-import DefaultWidgetBack from './widgets/DefaultWidgetBack.jsx';
-import SqlServer from './widgets/SqlServer/back.jsx';
-import Postgres from './widgets/Postgres/back.jsx';
-import Limit from './widgets/Limit/back.jsx';
-import CSV from './widgets/CSV/back.jsx';
-import Filter from './widgets/Filter/back.jsx';
+var bulk = require('bulk-require');
 
-module.exports.getView = function(view){
-  var bodies = {
-    SqlServer,
-    Postgres,
-    Limit,
-    Filter,
-    CSV
-  };
+module.exports.getView = function(view, role){
+  var includes = bulk(__dirname, ['widgets/**/*.jsx']);
+  var widgets = includes.widgets;
 
-  return bodies[view] || DefaultWidgetBack;
+  //try to return the most appropriate thing from the very specific widget role
+  //to the very generic default
+  var widget = widgets[view];
+  if(!widget) return widgets.DefaultWidgetBack;
+
+  if(role && widget[role]) return widget[role];
+
+  return widget.back ? widget.back : widgets.DefaultWidgetBack;
 };

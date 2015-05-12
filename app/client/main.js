@@ -16,7 +16,7 @@ app.service(ActivityService);
 app.service(Store);
 
 // Configs
-app.config('package', require('../../package.json'));
+//app.config('package', require('../../package.json'));
 app.config('navigator', require('./config/navigator.js'));
 
 // Boot
