@@ -1,6 +1,9 @@
 var pg = promise.promisifyAll(require('pg'));
-var QueryStream = require('pg-query-stream');
-var copyStream = require('pg-copy-streams');
+import QueryStream from 'pg-query-stream';
+import stream from 'stream';
+import sqlBricks from 'sql-bricks';
+import debugLib from 'debug';
+var debug = debugLib('rush:PostgresDriver');
 
 export default class PostgresDriver{
   constructor(config){
@@ -19,23 +22,53 @@ export default class PostgresDriver{
     this.init();
     var client = this._client;
     var query = this._config.query;
-    return client
-      .connectAsync()
-      .then(function() {
-        var queryStream = new QueryStream(query);
-        return client.query(queryStream);
-      });
+    return {
+      action: 'pipe',
+      data: client.connectAsync()
+        .then(function() {
+          var queryStream = new QueryStream(query);
+          return client.query(queryStream);
+        })
+    };
   }
 
   write(){
     this.init();
     var client = this._client;
-    return client
-      .connectAsync()
-      .then(function() {
-        var queryStream = client.query(copyStream('COPY dest FROM STDIN'));
-        return queryStream;
+    var destTable = this._config.destTable;
+    if(!destTable) throw new Error('Must Specifiy Destination Table');
+
+    var insert = sqlBricks.insert;
+    var writeStream = new stream.Writable({objectMode: true});
+    writeStream._write = function(chunk, encoding, done){
+      var insString = insert(destTable, chunk).toString();
+      debug(insString);
+      client.query(insString, function(err, result){
+        if(err) throw new Error(err);
+        debug('query result %j', result);
       });
+      done();
+    };
+
+    return [
+      client.connectAsync()
+        .then(function() {
+          return writeStream;
+        })
+      ,
+      function doneWriting(outputStream){
+        return new promise(function(resolve, reject){
+          outputStream.on('finish', () => {
+            debug('write finished');
+            resolve('write finished');
+          });
+          outputStream.on('error', e => {
+            debug('write error ' + e.toString());
+            reject(e);
+          });
+        });
+      }
+    ];
   }
 
   testRead(){

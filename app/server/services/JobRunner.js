@@ -49,8 +49,10 @@ class JobRunner{
         return item;
       }else{
         if(isReadable(aggregator)){
+          debug('readable');
           return aggregator.pipe(item);
         }else if(isWritable(aggregator)){
+          debug('writable');
           return item(aggregator);
         }else{
           debug('Aggregator is neither readable or writable');
