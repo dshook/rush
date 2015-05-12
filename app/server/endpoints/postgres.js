@@ -1,6 +1,6 @@
-import PostgresProvider from '../providers/Postgres.js';
-import JSONStringify from 'streaming-json-stringify';
 import {Router} from 'express';
+import JSONStringify from 'streaming-json-stringify';
+import PostgresProvider from '../providers/Postgres.js';
 
 export default function postgres()
 {
@@ -14,7 +14,6 @@ export default function postgres()
       database: 'testdb'
     };
     var pg = new PostgresProvider(config);
-    pg.connect();
 
     pg.testRead()
       .then(function(stream){

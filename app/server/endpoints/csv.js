@@ -43,7 +43,7 @@ export default function csvEndpoint()
         }else if(isWritable(aggregator)){
           return item(aggregator);
         }else{
-          reject('Widget is neither readable or writable');
+          throw new Error('Widget is neither readable or writable');
         }
       }
     }, null)

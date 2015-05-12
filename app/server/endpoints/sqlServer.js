@@ -1,39 +1,37 @@
 import {Router} from 'express';
-import SqlServerProvider from '../providers/SqlServer.js';
 import JSONStringify from 'streaming-json-stringify';
+import SqlServerProvider from '../providers/SqlServer.js';
+import debugLib from 'debug';
+var debug = debugLib('rush:SqlServer Endpoint');
 
-var configLocal = {
-  user: 'test',
-  password: 'test',
-  server: 'localhost\\sqlserver',
-  database: 'ReloDotNet2'
-};
-
-function handleError(){
-  this.end();
-}
-
-
-export default function sqlServer(){
+export default function sqlServer()
+{
   var router = new Router();
 
   router.get('/', function(req, res){
-    var db = new SqlServerProvider(configLocal);
-    db.connect();
-
-    var toJSON = new JSONStringify();
+    var config = {
+      user: 'test',
+      password: 'test',
+      server: 'localhost\\sqlserver',
+      database: 'ReloDotNet2'
+    };
+    var db = new SqlServerProvider(config);
 
     db.testRead()
       .then(function(stream){
+        debug('stream res %j', stream);
+        res.setHeader('Content-Type', 'application/json');
         return stream
           .on('error', function(e){
-            stream.unpipe();
-            return res.end(e.toString());
+            res.end(e.toString());
           })
-          .pipe(toJSON)
+          .pipe(new JSONStringify())
           .pipe(res);
       })
-      .catch(handleError.bind(res));
+      .catch(function(e){
+        console.log(e);
+        res.end(e.toString());
+      });
   });
 
   return router;

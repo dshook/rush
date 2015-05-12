@@ -3,6 +3,7 @@ import JSONStringify from 'streaming-json-stringify';
 import {isReadable} from 'isstream';
 import dbg from 'debug';
 import _ from 'lodash';
+import stream from 'stream';
 
 var debug = dbg('rush:Job Endpoint');
 
@@ -17,15 +18,19 @@ function runJob(res, jobRunner, widgets){
         }
         //decide what to do with the output based on its value
         if(isReadable(jobResult)){
+          debug('Readable Stream Result');
           res.setHeader('Content-Type', 'application/json');
           var resultStream = jobResult.pipe(new JSONStringify()).pipe(res);
 
           resultStream.on('end', resolve);
           resultStream.on('error', e => reject(e));
         }else if(typeof jobResult  === 'string' && jobResult.indexOf('/') > -1){
+          debug('File Result');
           //file download
           res.json({fileLink: jobResult});
         }else{
+          debug('Flat Result');
+          debug( jobResult instanceof stream.Stream ? 'Is stream' : 'No stream');
           res.json(jobResult);
         }
       });
