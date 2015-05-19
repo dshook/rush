@@ -8,7 +8,7 @@ export default class FilterFront extends React.Component {
   render() {
     var filterName = '';
     if(this.props.config.filter){
-      filterName = '"'+ this.props.config.filter +'"';
+      filterName = '"' + this.props.config.filter + '"';
       if(this.props.config.searchKeys){
         filterName += ' in ' + this.props.config.searchKeys;
       }

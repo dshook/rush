@@ -10,7 +10,7 @@ var _scopeId = 0;
  */
 function EventMethodType()
 {
-  this.id = ''+(_id++);
+  this.id = '' + (_id++);
 
   this.methodSymbol = null;
 

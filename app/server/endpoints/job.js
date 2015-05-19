@@ -11,7 +11,7 @@ function runJob(res, jobRunner, widgets){
   return jobRunner
     .startJob(widgets)
     .then(function(jobResult){
-      debug('job result %j', jobResult);
+      //debug('job result %j', jobResult);
       return new promise(function(resolve, reject){
         if(!jobResult){
           return reject('No Job Result');

@@ -7,6 +7,7 @@
     "no-multi-spaces": false,
     "no-console": false,
     "no-underscore-dangle": false,
+    "no-use-before-define": "nofunc",
     "curly": [2, "multi-line"],
     "quotes": "single",
 

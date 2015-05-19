@@ -65,15 +65,15 @@ module.exports = React.createClass({
 
   render() {
     var destMessage = '';
-    if(this.props.widgetRole ==='dest'){
+    if(this.props.widgetRole === 'dest'){
       destMessage = <p>Browser Preview</p>;
     }
 
     return (
-      <div onClick={this.addClick} className={'transform-widget add ' +this.props.widgetRole}>
+      <div onClick={this.addClick} className={'transform-widget add ' + this.props.widgetRole}>
         <div className="content">
           {destMessage}
-          <p title={'Add ' +this.props.widgetRole}><i className="fa fa-plus"></i>
+          <p title={'Add ' + this.props.widgetRole}><i className="fa fa-plus"></i>
             <span>Add {this.props.widgetRole}</span>
           </p>
         </div>

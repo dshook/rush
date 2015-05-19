@@ -44,7 +44,7 @@ export default class PostgresDriver{
       var insString = insert(destTable, chunk).toString();
       debug(insString);
       client.query(insString, function(err, result){
-        if(err) throw new Error(err);
+        if(err) writeStream.emit('error', new Error(err));
         debug('query result %j', result);
       });
       done();
@@ -63,7 +63,7 @@ export default class PostgresDriver{
             resolve('write finished');
           });
           outputStream.on('error', e => {
-            debug('write error ' + e.toString());
+            debug('Error Writing to postgres ' + e.toString());
             reject(e);
           });
         });
