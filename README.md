@@ -1,5 +1,7 @@
 # Rush
 
+The premise of this project is to create an interface that makes it easy to get data from one place to another.  A modern SSIS if you will.  Theoretically this should be fairly straightforward using node streams to connect data sources, transforms, and destinations.  However, the maturity of database integrations, and node debugging pushed this project out of the scope of feasibility for me.  Nevertheless, it was a great project to work on and experience React, the gulp build process, babel transforms, streams, and more node.  Feel free to adapt and learn.
+
 ## Requirements
 
 * NodeJS
@@ -52,3 +54,5 @@ $ npm run debug
 
 Port is `12345` or `PORT` environment variable (or use a local `.env` file)
 
+## License
+MIT
